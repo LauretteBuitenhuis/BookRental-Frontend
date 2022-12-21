@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function createUser() {
+export default function NewUser() {
   return (
     <div>
     </div>
