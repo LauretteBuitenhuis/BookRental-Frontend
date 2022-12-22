@@ -4,7 +4,7 @@ import Login from "./components/Login"
 import Main from "./components/Main"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
-import NewUser from "./components/newUser"
+import { NewUser } from "./components/newUser"
 
 function App() {
   return (
