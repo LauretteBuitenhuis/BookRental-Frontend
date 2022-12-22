@@ -1,22 +1,22 @@
 import React from 'react'
-import "../styles/createAccount.css" // TODO - this somehow impacts the login page ... 
+import "../styles/createAccount.css"
 
 export function CreateAccount() {
     return (
-      <div className="container">
+      <div className="createaccount-container">
         <h2>Nieuwe gebruiker</h2>
 
-      <form>
-        <input type="text" placeholder="Voornaam"></input>
-        <input type="text" placeholder="Achternaam"></input>
-        <input type="text" placeholder="Email"></input>
-        <input type="text" placeholder="Wachtwoord"></input>
+      <form className="createaccount-form">
+        <input className="createacccount-input" type="text" placeholder="Voornaam"></input>
+        <input className="createacccount-input" type="text" placeholder="Achternaam"></input>
+        <input className="createacccount-input" type="text" placeholder="Email"></input>
+        <input className="createacccount-input" type="text" placeholder="Wachtwoord"></input>
 
-        <label htmlFor="is-admin-checkbox">
-        <input id="is-admin-checkbox" type="checkbox" placeholder="Admin"></input>
+        <label htmlFor="is-admin-checkbox" className="createaccount-label">
+        <input id="is-admin-checkbox" type="checkbox" className="createacccount-input"></input>
           Admin</label>
 
-        <button type="submit" className="button">Aanmaken</button>
+        <button type="submit" className="createaccount-button">Aanmaken</button>
       </form>
 
       </div>
