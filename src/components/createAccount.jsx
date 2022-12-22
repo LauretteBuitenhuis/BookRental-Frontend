@@ -1,7 +1,7 @@
 import React from 'react'
-import "../styles/newUser.css"
+// import "./styles/createAccount.css"
 
-export function NewUser() {
+export function createAccount() {
     return (
       <div class="container">
         <h2>Nieuwe gebruiker</h2>
@@ -15,9 +15,8 @@ export function NewUser() {
         <label for="is-admin-checkbox">
         <input id="is-admin-checkbox" type="checkbox" placeholder="Admin"></input>
           Admin</label>
-        
 
-        <button type="submit" class="button">Toevoegen</button>
+        <button type="submit" class="button">Aanmaken</button>
       </form>
 
       </div>

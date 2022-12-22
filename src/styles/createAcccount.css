@@ -21,7 +21,7 @@ label {
   align-items: center;
 }
 
-label > input[type=checkbox] {
+label > input[type="checkbox"] {
   flex: none;
   margin-right: 10px;
 }
