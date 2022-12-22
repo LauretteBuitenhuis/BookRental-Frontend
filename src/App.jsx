@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom"
-import './styles/index.css';
+import './styles/index.css'
 import Login from "./components/Login"
 import Main from "./components/Main"
 import Header from "./components/Header"
