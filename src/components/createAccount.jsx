@@ -1,7 +1,7 @@
 import React from 'react'
 // import "./styles/createAccount.css"
 
-export function createAccount() {
+export function CreateAccount() {
     return (
       <div class="container">
         <h2>Nieuwe gebruiker</h2>

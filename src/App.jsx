@@ -4,7 +4,7 @@ import Login from "./components/Login"
 import Main from "./components/Main"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
-import { createAccount } from "./components/createAccount"
+import { CreateAccount } from "./components/CreateAccount"
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <Login/> }/>
         <Route path="main" element={ <Main/> }/>
-        <Route path="/register" element={ <createAccount/> }/>
+        <Route path="/register" element={ <CreateAccount/> }/>
       </Routes>
       <Footer/>
     </div>
