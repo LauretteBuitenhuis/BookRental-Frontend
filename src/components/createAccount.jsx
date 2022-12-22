@@ -1,9 +1,9 @@
 import React from 'react'
-import "../styles/createAccount.css"
+import "../styles/createAccount.css" // TODO - this somehow impacts the login page ... 
 
 export function CreateAccount() {
     return (
-      <div class="container">
+      <div className="container">
         <h2>Nieuwe gebruiker</h2>
 
       <form>
@@ -12,11 +12,11 @@ export function CreateAccount() {
         <input type="text" placeholder="Email"></input>
         <input type="text" placeholder="Wachtwoord"></input>
 
-        <label for="is-admin-checkbox">
+        <label htmlFor="is-admin-checkbox">
         <input id="is-admin-checkbox" type="checkbox" placeholder="Admin"></input>
           Admin</label>
 
-        <button type="submit" class="button">Aanmaken</button>
+        <button type="submit" className="button">Aanmaken</button>
       </form>
 
       </div>
