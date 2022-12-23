@@ -29,17 +29,17 @@ export function CreateAccount() {
       <div className="createaccount-container">
         <h2>Nieuwe gebruiker</h2>
 
-      <form className="createaccount-form">
-        <input className="createacccount-input" type="text" placeholder="Voornaam" value={firstName} onChange={(e)=>setFirstName(e.target.value)} required></input>
-        <input className="createacccount-input" type="text" placeholder="Achternaam" value={lastName} onChange={(e)=>setLastName(e.target.value)}  required></input>
-        <input className="createacccount-input" type="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}  required></input>
-        <input className="createacccount-input" type="password" placeholder="Wachtwoord" autoComplete="off" value={password} onChange={(e)=>setPassword(e.target.value)} required></input>
+      <form>
+        <input type="text" placeholder="Voornaam" value={firstName} onChange={(e)=>setFirstName(e.target.value)} required></input>
+        <input type="text" placeholder="Achternaam" value={lastName} onChange={(e)=>setLastName(e.target.value)}  required></input>
+        <input type="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}  required></input>
+        <input type="password" placeholder="Wachtwoord" autoComplete="off" value={password} onChange={(e)=>setPassword(e.target.value)} required></input>
 
-        <label htmlFor="is-admin-checkbox" className="createaccount-label">
-        <input id="is-admin-checkbox" type="checkbox" className="createacccount-input"></input>
+        <label htmlFor="is-admin-checkbox">
+        <input id="is-admin-checkbox" type="checkbox"></input>
           Admin</label>
 
-        <button type="submit" onClick={handleClick} className="createaccount-button">Aanmaken</button>
+        <button type="submit" onClick={handleClick}>Aanmaken</button>
       </form>
       </div>
     )

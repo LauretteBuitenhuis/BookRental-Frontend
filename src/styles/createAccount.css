@@ -1,8 +1,7 @@
-h2 {
+.createaccount-container h2 {
   text-transform: uppercase;
   letter-spacing: 0.15rem;
   text-align: center;
-  margin-top: 50px;
 }
 
 .createaccount-container {
@@ -11,23 +10,22 @@ h2 {
   align-items: center;
 }
 
-.createaccount-form {
+.createaccount-container form {
   margin-top: 30px;
-  display: contents;
 }
 
-.createaccount-label {
+.createaccount-container label {
   font-size: small;
   display: flex;
   align-items: center;
 }
 
-.createaccount-label > input[type="checkbox"] {
+.createaccount-container label > input[type="checkbox"] {
   flex: none;
   margin-right: 10px;
 }
 
-.createaccount-button {
+.createaccount-container button {
   background-color: #00e600;
   padding: 5px;
   margin: 15px;
@@ -35,12 +33,13 @@ h2 {
   color: black;
 }
 
-.createaccount-button:hover {
+.createaccount-container button:hover {
   background-color: #4fca4f;
   cursor: pointer;
 }
 
-.createaccount-input[type="text"] {
+.createaccount-container input[type="text"],
+.createaccount-container input[type="password"] {
   display: block;
   width: 100%;
 }
