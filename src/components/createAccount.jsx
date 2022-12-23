@@ -8,6 +8,23 @@ export function CreateAccount() {
   const [password, setPassword] = useState('');
   const [admin, setAdmin] = useState('');
 
+  const handleClick=(e) => {
+    const user = {
+      firstName,
+      lastName,
+      email,
+      password,
+      admin
+    };
+    console.log(user);
+    fetch("http://localhost:8082/user/create", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(user)
+    }).then(() => {
+      console.log("New user added")
+  });
+};  
     return (
       <div className="createaccount-container">
         <h2>Nieuwe gebruiker</h2>
@@ -22,7 +39,7 @@ export function CreateAccount() {
         <input id="is-admin-checkbox" type="checkbox" className="createacccount-input"></input>
           Admin</label>
 
-        <button type="submit" className="createaccount-button">Aanmaken</button>
+        <button type="submit" onClick={handleClick} className="createaccount-button">Aanmaken</button>
       </form>
       </div>
     )
