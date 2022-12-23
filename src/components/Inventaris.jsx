@@ -96,7 +96,7 @@ function leaveScreen () {
 
   useEffect(() => {
     getAllBooks()
-  }, [bookData])
+  }, [])
 
   const listItemsTable =
     bookData &&
