@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "../styles/createAccount.css"
+import { TextInput } from './FormInput';
 
 export function CreateAccount() {
   const [firstName, setFirstName] = useState('');
@@ -9,13 +10,7 @@ export function CreateAccount() {
   const [admin, setAdmin] = useState('');
 
   const handleClick=(e) => {
-    const user = {
-      firstName,
-      lastName,
-      email,
-      password,
-      admin
-    };
+    const user = { firstName, lastName, email, password, admin };
     console.log(user);
     fetch("http://localhost:8082/user/create", {
       method: "POST",
@@ -30,9 +25,10 @@ export function CreateAccount() {
         <h2>Nieuwe gebruiker</h2>
 
       <form>
-        <input type="text" placeholder="Voornaam" value={firstName} onChange={(e)=>setFirstName(e.target.value)} required></input>
-        <input type="text" placeholder="Achternaam" value={lastName} onChange={(e)=>setLastName(e.target.value)}  required></input>
-        <input type="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}  required></input>
+        <TextInput placeholder = "Voornaam" value={firstName}/>
+        <TextInput placeholder = "Achternaam" value={lastName}/>
+        <TextInput placeholder = "Email" value={email}/>  
+        
         <input type="password" placeholder="Wachtwoord" autoComplete="off" value={password} onChange={(e)=>setPassword(e.target.value)} required></input>
 
         <label htmlFor="is-admin-checkbox">
