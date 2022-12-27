@@ -1,5 +1,4 @@
-import React, {useRef} from 'react'
-import { Link } from "react-router-dom";
+import React, { useRef } from 'react'
 
 function Login() {
 
@@ -7,7 +6,7 @@ function Login() {
     const passwordInputRef = useRef();
 
 
-    function logInHandler(event){
+    function logInHandler(event) {
         event.preventDefault();
 
         const enteredEmail = emailInputRef.current.value;
@@ -15,20 +14,38 @@ function Login() {
 
         const options = {
             method: 'Post',
-            Body: JSON.stringify({
-                email: enteredEmail,
-                password: enteredPassword,
-        }),
+            body: JSON.stringify({
+                enteredEmail,
+                enteredPassword
+            }),
             headers: {
                 'Content-Type': 'application/json'
             }
         }
 
-        fetch("http://localhost:8082/user/login",options)
-        .then((res) => {
-            console.log(res)
-            return res.json()});
-    }  
+        fetch("http://localhost:8082/user/login", options)
+            .then((res) => {
+                console.log(res)
+                if (res.ok) {
+                    console.log("is this ok?")
+                    return res.json();
+                }
+                else {
+                    return res.json().then((data) => {
+                        let errorMessage = 'Authentification failed!';
+                        console.log(data);
+                        throw new Error(errorMessage);
+                    });
+                }
+            }).then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                alert(err.message);
+            });
+    };
+
+
 
     return (
         <div className="input-container">
@@ -37,22 +54,24 @@ function Login() {
                 <h2>Boeken reserveren</h2>
             </div>
 
-                <form className="login-input" onSubmit={logInHandler}>
-                    <label>
-                        <input
-                            type='email'
-                            ref={emailInputRef}
-                            placeholder = "E-mailadres"
-                        />
-                    </label>
-                    <label>
-                        <input
-                            type='password'
-                            ref={passwordInputRef}
-                            placeholder = "Wachtwoord"
-                        />
-                    </label> 
-                    <button className="login-button" type="submit">Login</button>
+            <form className="login-input" onSubmit={logInHandler}>
+                <label>
+                    <input
+                        type='email'
+                        ref={emailInputRef}
+                        required
+                        placeholder="E-mailadres"
+                    />
+                </label>
+                <label>
+                    <input
+                        type='password'
+                        ref={passwordInputRef}
+                        required
+                        placeholder="Wachtwoord"
+                    />
+                </label>
+                <button className="login-button" type="submit">Login</button>
             </form>
         </div>
     )
