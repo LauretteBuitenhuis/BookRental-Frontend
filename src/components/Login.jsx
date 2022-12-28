@@ -1,9 +1,12 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
+import AuthContext from '../Store/auth-context';
 
 function Login() {
 
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
+
+    const authCtx = useContext(AuthContext);
 
 
     function logInHandler(event) {
@@ -15,8 +18,8 @@ function Login() {
         const options = {
             method: 'Post',
             body: JSON.stringify({
-                enteredEmail,
-                enteredPassword
+                "email":enteredEmail,
+                "password":enteredPassword
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -28,9 +31,11 @@ function Login() {
                 console.log(res)
                 if (res.ok) {
                     console.log("is this ok?")
+                    console.log(res)
                     return res.json();
                 }
                 else {
+                    console.log("entered else statement")
                     return res.json().then((data) => {
                         let errorMessage = 'Authentification failed!';
                         console.log(data);
@@ -39,6 +44,7 @@ function Login() {
                 }
             }).then((data) => {
                 console.log(data);
+                authCtx.login(data);
             })
             .catch((err) => {
                 alert(err.message);
