@@ -1,15 +1,16 @@
 import React, { useRef, useContext } from 'react'
+import {useNavigate} from 'react-router-dom'
 import AuthContext from '../Store/auth-context';
 
-function Login() {
-
+const Login = () => {
+    const navigate = useNavigate();
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 
     const authCtx = useContext(AuthContext);
 
 
-    function logInHandler(event) {
+    const logInHandler = (event) => {
         event.preventDefault();
 
         const enteredEmail = emailInputRef.current.value;
@@ -18,33 +19,30 @@ function Login() {
         const options = {
             method: 'Post',
             body: JSON.stringify({
-                "email":enteredEmail,
-                "password":enteredPassword
+                "email": enteredEmail,
+                "password": enteredPassword
             }),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
         }
 
         fetch("http://localhost:8082/user/login", options)
             .then((res) => {
-                console.log(res)
                 if (res.ok) {
-                    console.log("is this ok?")
-                    console.log(res)
                     return res.json();
                 }
                 else {
-                    console.log("entered else statement")
                     return res.json().then((data) => {
                         let errorMessage = 'Authentification failed!';
-                        console.log(data);
                         throw new Error(errorMessage);
                     });
                 }
-            }).then((data) => {
+            })
+            .then((data) => {
                 console.log(data);
                 authCtx.login(data);
+                navigate('/main',{replace: true});
             })
             .catch((err) => {
                 alert(err.message);

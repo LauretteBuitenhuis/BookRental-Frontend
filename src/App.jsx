@@ -16,7 +16,7 @@ function App() {
     <div className="app-container">
       <Header/>
       <Routes>
-        (<Route path="/" element={ <Login/> } />)
+        {!isLoggedIn && (<Route path="/" element={ <Login/> } />)}
         {isLoggedIn && (<Route path="main" element={ <Main/> } />)}
       </Routes>
       <Footer/>
