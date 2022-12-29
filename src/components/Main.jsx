@@ -1,12 +1,30 @@
-import React from 'react'
-import Inventaris from './Inventaris'
+import { useContext } from 'react'
+import AuthContext from '../Store/auth-context'
+import AdminPage from './AdminPage';
+import UserPage from './UserPage';
 
 function Main() {
-  return (
-    <div>
-      <Inventaris />
-    </div>
-  )
+  const authCtx = useContext(AuthContext);
+
+  const isAdmin = authCtx.isAdmin;
+  console.log(isAdmin);
+
+  if (isAdmin) {
+    return (
+      <div>
+        <AdminPage />
+      </div>
+    )
+  }
+
+  else {
+    return (
+      <div>
+        <UserPage />
+      </div>
+    )
+  }
+
 }
 
 export default Main
