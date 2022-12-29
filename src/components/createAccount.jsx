@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "../styles/createAccount.css"
-import { TextInput } from './FormInput';
+import { AdminInput, TextInput } from './FormInput';
 
 export function CreateAccount() {
   const [firstName, setFirstName] = useState('');
@@ -10,7 +10,7 @@ export function CreateAccount() {
   const [admin, setAdmin] = useState('');
 
   const handleClick=(e) => {
-    const user = { firstName, lastName, email, password, admin };
+    const user = { firstName, lastName, email, password};
     console.log(user);
     fetch("http://localhost:8082/user/create", {
       method: "POST",
@@ -18,24 +18,24 @@ export function CreateAccount() {
       body: JSON.stringify(user)
     }).then(() => {
       console.log("New user added")
-  });
-};  
+    });
+  };
+  
     return (
       <div className="createaccount-container">
         <h2>Nieuwe gebruiker</h2>
 
       <form>
-        <TextInput placeholder = "Voornaam" value={firstName}/>
-        <TextInput placeholder = "Achternaam" value={lastName}/>
-        <TextInput placeholder = "Email" value={email}/>  
+        <TextInput placeholder = "Voornaam" value={firstName} onChange={(e)=>setFirstName(e.target.value)}required/>
+        <TextInput placeholder = "Achternaam" value={lastName} required/>
+        <TextInput placeholder = "Email" value={email} required/>  
         
         <input type="password" placeholder="Wachtwoord" autoComplete="off" value={password} onChange={(e)=>setPassword(e.target.value)} required></input>
 
-        <label htmlFor="is-admin-checkbox">
-        <input id="is-admin-checkbox" type="checkbox"></input>
-          Admin</label>
+        {/* TODO - it's not submitting anything */}
+        <label htmlFor="is-admin-checkbox"><AdminInput></AdminInput>Admin</label>
 
-        <button type="submit" onClick={handleClick}>Aanmaken</button>
+        <button type="submit" onClick={handleClick} onSubmit="AdminInput()">Aanmaken</button>
       </form>
       </div>
     )

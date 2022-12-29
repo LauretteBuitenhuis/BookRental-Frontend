@@ -13,6 +13,16 @@ export function PasswordInput(props) {
     return
 }
 
-export function BooleanInput(props) {
-    return
+export function AdminInput() {
+    const [checked, setChecked] = useState(false);
+
+    const handleCheckbox = (e) => {
+        setChecked(e.target.checked);
+        console.log(!checked)
+        return !checked;
+    }
+
+    return (
+        <input id="is-admin-checkbox" type="checkbox" onChange={handleCheckbox}></input>
+    )
 }
