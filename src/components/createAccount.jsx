@@ -4,33 +4,29 @@ import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
 
 export function CreateAccount() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [admin, setAdmin] = useState("");
-
-  const handleClick = (event) => {
-    const user = { firstName, lastName, email, password };
-    console.log(user);
-    fetch("http://localhost:8082/user/create", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    }).then(() => {
-      console.log("New user added");
-    });
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const user = Object.fromEntries(
-      Object.entries(event.target.elements).filter(([key]) =>
-        Number.isNaN(Number.parseInt(key))
-      )
-    );
-    console.log(user);
+    const { firstName, lastName, email, password, isAdmin } =
+      event.target.elements;
+
+    const userDto = {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      password: password.value,
+      isAdmin: isAdmin.checked,
+    };
+
+    fetch("http://localhost:8082/user/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userDto),
+    }).then(() => {
+      console.log("New user added");
+    });
   };
 
   return (
@@ -38,14 +34,9 @@ export function CreateAccount() {
       <h2>Nieuwe gebruiker</h2>
 
       <form onSubmit={handleSubmit}>
-        <TextInput
-          name="firstName"
-          placeholder="Voornaam"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <TextInput name="lastName" placeholder="Achternaam" value={lastName} />
-        <TextInput name="email" placeholder="Email" value={email} />
+        <TextInput name="firstName" placeholder="Voornaam" />
+        <TextInput name="lastName" placeholder="Achternaam" />
+        <TextInput name="email" placeholder="Email" />
 
         <input
           name="password"
@@ -57,8 +48,7 @@ export function CreateAccount() {
           required
         ></input>
 
-        {/* TODO - it's not submitting anything */}
-        <CheckboxInput name="isAmin" label="Admin" />
+        <CheckboxInput name="isAdmin" label="Admin" />
 
         <button type="submit">Aanmaken</button>
       </form>
