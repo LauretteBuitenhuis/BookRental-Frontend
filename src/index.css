@@ -20,12 +20,14 @@ body {
 }
 
 .app-container {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  position: absolute;
+  display: grid;
+  grid-template-rows: 15vh 70vh 5vh;
+  grid-column-gap: 10px;
 }
 
+.my-spacer {
+  flex: 1 1 auto;
+}
 
 .header-img {
   width: 100px;
@@ -83,6 +85,24 @@ input[type=text],input[type=password],input[type=email]:focus {
   font-family: euclid-bold;
   font-size: 36px;
   }
+
+
+  .login-adminheader {
+    margin-left: 100px;
+  }
+  
+  .login-adminheader h4 {
+    color: #ab1403;
+    font-family: euclid-bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+    }
+
+    .login-adminheader h2 {
+      margin-top: 0;
+      font-family: euclid-bold;
+      font-size: 36px;
+      }
 
 .login-input {
   display: flex;
@@ -218,3 +238,42 @@ select {
 .book-add-form input[type=text] {
   padding: 10px;
  }
+
+ .request-button {
+  background-color: #03AB03;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: bold;
+  transition-duration: 0.4s;
+}
+
+.request-button:hover {
+ background-color: #00E600;
+}
+
+.navbar {
+  margin-bottom: 50px;
+ margin-top: 0;
+ background-color: black;
+ display: flex;
+ justify-content: space-between;
+}
+
+.navbar button {
+  padding: 15px 50px;
+  background-color: black;
+  font-size: 18px;
+  font-family: euclid-semibold;
+}
+
+.navbar button:hover {
+  padding: 15px 50px;
+  background-color:  #03AB03;;
+  font-size: 18px;
+  font-family: euclid-semibold;
+}

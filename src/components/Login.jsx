@@ -1,5 +1,5 @@
 import React, { useRef, useContext } from 'react'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import AuthContext from '../Store/auth-context';
 
 const Login = () => {
@@ -34,7 +34,7 @@ const Login = () => {
                 }
                 else {
                     return res.json().then((data) => {
-                        let errorMessage = 'Authentification failed!';
+                        let errorMessage = data.message;
                         throw new Error(errorMessage);
                     });
                 }
@@ -42,7 +42,7 @@ const Login = () => {
             .then((data) => {
                 console.log(data);
                 authCtx.login(data);
-                navigate('/main',{replace: true});
+                navigate('/main', { replace: true });
             })
             .catch((err) => {
                 alert(err.message);
