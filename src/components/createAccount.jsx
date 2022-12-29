@@ -24,14 +24,13 @@ export function CreateAccount() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const elements = event.target.elements;
-    const user = {
-      firstName: elements["first-name"].value,
-      lastName: elements["last-name"].value,
-      email: elements.email.value,
-      password: elements.password.value,
-      admin: elements["is-admin"].value,
-    };
+
+    const user = Object.fromEntries(
+      Object.entries(event.target.elements).filter(([key]) =>
+        Number.isNaN(Number.parseInt(key))
+      )
+    );
+    console.log(user);
   };
 
   return (
