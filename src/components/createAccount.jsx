@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "../styles/createAccount.css"
-import { AdminInput, TextInput } from './FormInput';
+import { CheckboxInput, TextInput } from './FormInput';
 
 export function CreateAccount() {
   const [firstName, setFirstName] = useState('');
@@ -33,7 +33,7 @@ export function CreateAccount() {
         <input type="password" placeholder="Wachtwoord" autoComplete="off" value={password} onChange={(e)=>setPassword(e.target.value)} required></input>
 
         {/* TODO - it's not submitting anything */}
-        <label htmlFor="is-admin-checkbox"><AdminInput></AdminInput>Admin</label>
+        <label htmlFor="is-admin-checkbox"><CheckboxInput></CheckboxInput>Admin</label>
 
         <button type="submit" onClick={handleClick} onSubmit="AdminInput()">Aanmaken</button>
       </form>
