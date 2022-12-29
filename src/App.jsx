@@ -3,7 +3,6 @@ import { Routes, Route, Navigate} from "react-router-dom"
 import Login from "./components/Login"
 import Main from "./components/Main"
 import Header from "./components/Header"
-import Footer from "./components/Footer"
 import AuthContext from "./Store/auth-context"
 
 
@@ -22,7 +21,6 @@ function App() {
           
           </Route> 
       </Routes>
-      <Footer/>
     </div>
   )
 }
