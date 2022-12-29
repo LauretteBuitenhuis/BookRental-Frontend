@@ -9,6 +9,8 @@ export function CreateAccount() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const element = document.querySelector(`#get-request .result`);
+
     const { firstName, lastName, email, password, isAdmin } =
       event.target.elements;
 
@@ -20,13 +22,30 @@ export function CreateAccount() {
       isAdmin: isAdmin.checked,
     };
 
+    // TODO - fix: TypeError: Cannot read properties of undefined (reading 'JSON')
+    // TODO - show error code and message
     fetch("http://localhost:8082/user/create", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Nn61QRfP0T2qthQ9uqQp2AxtrLmUmaG8iAYsSP3mWck6dUlNPe4REATLmVuMUy3sa0PQUdqQqFkxR2hEBoYHXCj2SmDYExsiPjX4ywjNj7WIzAN7yoyzHxXeICB5HnwhgZpcHggSe55pxQZAsMBKhx",
+      },
       body: JSON.stringify(userDto),
-    }).then(() => {
-      console.log("New user added");
-    });
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.status, response.statusText);
+        }
+      })
+      .then((response) => response.JSON())
+      .then((user) =>
+        alert(`User with email ${user.email} was successfully created`)
+      )
+      .catch((error) => {
+        alert("Oops! An error occurred.\n\n" + "Request failed:\n" + error);
+        console.log(error);
+      });
   };
 
   return (
@@ -38,6 +57,7 @@ export function CreateAccount() {
         <TextInput name="lastName" placeholder="Achternaam" />
         <TextInput name="email" placeholder="Email" />
 
+        {/* TODO - Create component */}
         <input
           name="password"
           type="password"
