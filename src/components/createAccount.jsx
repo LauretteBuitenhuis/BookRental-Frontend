@@ -23,8 +23,7 @@ export function CreateAccount() {
       isAdmin: isAdmin.checked,
     };
 
-    // TODO - fix: TypeError: Cannot read properties of undefined (reading 'JSON')
-    // TODO - show error code and message
+    // TODO - fix: response.statusText not showing error message
     fetch("http://localhost:8082/user/create", {
       method: "POST",
       headers: {
@@ -36,15 +35,16 @@ export function CreateAccount() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(response.status, response.statusText);
+          throw new Error(response.status);
         }
+        return response.json();
       })
-      .then((response) => response.JSON())
-      .then((user) =>
-        alert(`User with email ${user.email} was successfully created`)
+      .then(() =>
+        alert(`User with email ${userDto.email} was successfully created`)
       )
       .catch((error) => {
         alert("Oops! An error occurred.\n\n" + "Request failed:\n" + error);
+        console.log(error);
       });
   };
 
