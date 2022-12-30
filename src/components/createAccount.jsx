@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles/createAccount.css";
 import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
+import { PasswordInput } from "./PasswordInput";
 
 export function CreateAccount() {
   const [password, setPassword] = useState("");
@@ -44,7 +45,6 @@ export function CreateAccount() {
       )
       .catch((error) => {
         alert("Oops! An error occurred.\n\n" + "Request failed:\n" + error);
-        console.log(error);
       });
   };
 
@@ -56,20 +56,8 @@ export function CreateAccount() {
         <TextInput name="firstName" placeholder="Voornaam" />
         <TextInput name="lastName" placeholder="Achternaam" />
         <TextInput name="email" placeholder="Email" />
-
-        {/* TODO - Create component */}
-        <input
-          name="password"
-          type="password"
-          placeholder="Wachtwoord"
-          autoComplete="off"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        ></input>
-
+        <PasswordInput name="password" placeholder="password" />
         <CheckboxInput name="isAdmin" label="Admin" />
-
         <button type="submit">Aanmaken</button>
       </form>
     </div>
