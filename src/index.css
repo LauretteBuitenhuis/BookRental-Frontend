@@ -32,9 +32,9 @@ body {
 .header-img {
   width: 100px;
   padding: 10px;
-  position:absolute;
-  top:0;
-  right:0;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .footer {
@@ -42,10 +42,10 @@ body {
   color: white;
   font-size: 12px;
   margin: 0;
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   margin-top: auto;
 }
 
@@ -54,7 +54,9 @@ body {
   display: flex;
 }
 
-input[type=text], input[type=password], input[type=email] {
+input[type=text],
+input[type=password],
+input[type=email] {
   border: none;
   border-bottom: 2px solid rgb(48, 48, 48);
   background-color: transparent;
@@ -64,45 +66,56 @@ input[type=text], input[type=password], input[type=email] {
   font-size: 24px;
 }
 
-input[type=text],input[type=password],input[type=email]:focus {
+input[type=text],
+input[type=password],
+input[type=email]:focus {
   outline: none;
 }
 
-.login-header, .inventaris-header {
+.login-header,
+.inventaris-header {
   margin-left: 100px;
 }
 
-.login-header h4, .inventaris-header h4 {
+.login-header h4,
+.inventaris-header h4 {
   color: #03Ab03;
   font-family: euclid-bold;
   font-size: 20px;
   margin-bottom: 10px;
-  }
+}
 
-  
-.login-header h2, .inventaris-header h2 {
+
+.login-header h2,
+.inventaris-header h2 {
   margin-top: 0;
   font-family: euclid-bold;
   font-size: 36px;
-  }
+}
 
+.adminheader-container {
+  Display: flex;
+  flex-direction:row;
+  align-items: center;
+}
 
-  .login-adminheader {
-    margin-left: 100px;
-  }
-  
-  .login-adminheader h4 {
-    color: #ab1403;
-    font-family: euclid-bold;
-    font-size: 20px;
-    margin-bottom: 10px;
-    }
+.adminheader {
+  margin-left: 100px;
+  display: inline-block;
+}
 
-    .login-adminheader h2 {
-      margin-top: 0;
-      font-family: euclid-bold;
-      font-size: 36px;
-      }
+.adminheader h4 {
+  color: #ab1403;
+  font-family: euclid-bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.adminheader h2 {
+  margin-top: 0;
+  font-family: euclid-bold;
+  font-size: 36px;
+}
 
 .login-input {
   display: flex;
@@ -112,28 +125,29 @@ input[type=text],input[type=password],input[type=email]:focus {
   font-size: 20px;
 }
 
-.login-button,  .book-add-container button {
+.login-button,
+.book-add-container button {
   background-color: black;
   padding: 12px 24px;
   border-radius: 50px;
   font-size: 30px;
   color: white;
- text-align: center;
+  text-align: center;
 }
 
-.logout-button {
-  background-color: white;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 16px;
-  color: black;
- text-align: center;
+
+.login-button:hover {
+  background-color: #52525b;
+  color: #E4E4E7;
 }
 
-.login-button a:visited, .login-button a:link {
+.login-button a:visited,
+.login-button a:link {
   color: white;
   text-decoration: none;
 }
+
+
 
 ::placeholder {
   font-size: 24px;
@@ -237,9 +251,9 @@ select {
 
 .book-add-form input[type=text] {
   padding: 10px;
- }
+}
 
- .request-button {
+.request-button {
   background-color: #03AB03;
   border: none;
   color: white;
@@ -253,27 +267,43 @@ select {
 }
 
 .request-button:hover {
- background-color: #00E600;
+  background-color: #00E600;
 }
 
 .navbar {
-  margin-bottom: 50px;
- margin-top: 0;
- background-color: black;
- display: flex;
- justify-content: space-between;
+  margin-right: 0;
+  margin-top: 0;
+  display: flex;
+  justify-content:flex-end;
+  width: 50%;
+  height: 70%;
 }
 
-.navbar button {
-  padding: 15px 50px;
+/* .navbar button {
+  padding: 15px 30px;
   background-color: black;
-  font-size: 18px;
+  font-size: 14px;
   font-family: euclid-semibold;
+} */
+
+/* .navbar button:hover {
+  padding: 15px 30px;
+  background-color: #03AB03;
+  ;
+  font-size: 14px;
+  font-family: euclid-semibold;
+} */
+
+.logout-button {
+  background-color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 16px;
+  color: black;
+  text-align: center;
 }
 
-.navbar button:hover {
-  padding: 15px 50px;
-  background-color:  #03AB03;;
-  font-size: 18px;
-  font-family: euclid-semibold;
+.logout-button:hover{
+  background-color: #E4E4E7;
+  color:#52525B;
 }

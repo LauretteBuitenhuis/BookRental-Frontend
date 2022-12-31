@@ -16,10 +16,9 @@ function App() {
       <Header/>
       <Routes>
         {!isLoggedIn && (<Route path="/" element={ <Login/> } />)}
-        {isLoggedIn && (<Route path="main" element={ <Main/> } />)}
+        {isLoggedIn && (<Route path="main" element={ <Main/> } />)} 
         <Route path="*" element={<Navigate to='/'/>}>
-          
-          </Route> 
+         </Route>
       </Routes>
     </div>
   )
