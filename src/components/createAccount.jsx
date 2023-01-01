@@ -1,16 +1,11 @@
-import React, { useState } from "react";
 import "../styles/createAccount.css";
 import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
 import { PasswordInput } from "./PasswordInput";
 
 export function CreateAccount() {
-  const [password, setPassword] = useState("");
-
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    const element = document.querySelector(`#get-request .result`);
 
     const { firstName, lastName, email, password, isAdmin } =
       event.target.elements;
