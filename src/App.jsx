@@ -1,4 +1,3 @@
-import { Routes, Route } from "react-router-dom";
 import "./styles/index.css";
 import { CreateAccount } from "./components/CreateAccount";
 import { useContext } from "react";
