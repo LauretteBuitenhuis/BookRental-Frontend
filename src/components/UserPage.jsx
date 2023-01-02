@@ -1,10 +1,28 @@
-import Inventaris from './Inventaris'
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../Store/auth-context';
 
 function UserPage() {
-    console.log('entered User page')
+    const navigate = useNavigate();
+    const authCtx = useContext(AuthContext);
+
+    const logoutHandler = () => {
+        authCtx.logout();
+        navigate('/', { replace: true });
+    }
+
     return (
-        <div>
-            <Inventaris />
+        <div className="userheader-container">
+            <div className="userheader">
+                <h4>OVERZICHT</h4>
+                <h2>Reserveringen</h2>
+            </div>
+
+            <nav className='navbar'>
+                {/* <div>User icon...<div>
+                <span className="my-spacer">Voornaam Achternaam</span> */}
+                <button className='logout-button' onClick={logoutHandler} > logout</button>
+            </nav>
         </div>
     )
 }
