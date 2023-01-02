@@ -3,8 +3,11 @@ import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
 import { PasswordInput } from "./PasswordInput";
 import AuthContext from "../store/auth-context";
+import { useContext } from "react";
 
 export function CreateAccount() {
+  const auth = useContext(AuthContext);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -23,8 +26,7 @@ export function CreateAccount() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // TODO - WIM172 - Admin rights
-        Authorization: "",
+        Authorization: auth.token,
       },
       body: JSON.stringify(userDto),
     })
@@ -54,7 +56,7 @@ export function CreateAccount() {
         <TextInput name="firstName" placeholder="Voornaam" />
         <TextInput name="lastName" placeholder="Achternaam" />
         <TextInput name="email" placeholder="Email" />
-        <PasswordInput name="password" placeholder="password" />
+        <PasswordInput name="password" placeholder="Password" />
         <CheckboxInput name="isAdmin" label="Admin" />
         <button type="submit">Aanmaken</button>
       </form>
