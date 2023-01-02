@@ -2,6 +2,7 @@ import "../styles/createAccount.css";
 import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
 import { PasswordInput } from "./PasswordInput";
+import AuthContext from "../store/auth-context";
 
 export function CreateAccount() {
   const handleSubmit = (event) => {
@@ -23,8 +24,7 @@ export function CreateAccount() {
       headers: {
         "Content-Type": "application/json",
         // TODO - WIM172 - Admin rights
-        Authorization:
-          "Nn61QRfP0T2qthQ9uqQp2AxtrLmUmaG8iAYsSP3mWck6dUlNPe4REATLmVuMUy3sa0PQUdqQqFkxR2hEBoYHXCj2SmDYExsiPjX4ywjNj7WIzAN7yoyzHxXeICB5HnwhgZpcHggSe55pxQZAsMBKhx",
+        Authorization: "",
       },
       body: JSON.stringify(userDto),
     })

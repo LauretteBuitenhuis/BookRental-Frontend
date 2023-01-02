@@ -1,7 +1,7 @@
-import { useContext } from 'react'
-import AuthContext from '../Store/auth-context'
-import AdminPage from './AdminPage';
-import UserPage from './UserPage';
+import { useContext } from "react";
+import AuthContext from "../store/auth-context";
+import AdminPage from "./AdminPage";
+import UserPage from "./UserPage";
 
 function Main() {
   const authCtx = useContext(AuthContext);
@@ -13,17 +13,14 @@ function Main() {
       <div>
         <AdminPage />
       </div>
-    )
-  }
-
-  else {
+    );
+  } else {
     return (
       <div>
         <UserPage />
       </div>
-    )
+    );
   }
-
 }
 
-export default Main
+export default Main;
