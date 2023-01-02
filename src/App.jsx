@@ -18,7 +18,7 @@ function App() {
       <Routes>
         {!isLoggedIn && <Route path="/" element={<Login />} />}
         {isLoggedIn && <Route path="main" element={<Main />} />}
-        <Route path="/register" element={<CreateAccount />} />
+        {isLoggedIn && <Route path="/register" element={<CreateAccount />} />}
         <Route path="*" element={<Navigate to="/" />}></Route>
       </Routes>
     </div>
