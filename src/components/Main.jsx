@@ -5,22 +5,7 @@ import UserPage from "./UserPage";
 
 function Main() {
   const authCtx = useContext(AuthContext);
-
-  const isAdmin = authCtx.isAdmin;
-
-  if (isAdmin) {
-    return (
-      <div>
-        <AdminPage />
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <UserPage />
-      </div>
-    );
-  }
+  return authCtx.isAdmin ? <AdminPage /> : <UserPage />;
 }
 
 export default Main;
