@@ -18,7 +18,6 @@ export function CreateAccount() {
       isAdmin: isAdmin.checked,
     };
 
-    // TODO - fix: response.statusText not showing error message
     fetch("http://localhost:8082/user/create", {
       method: "POST",
       headers: {
@@ -30,7 +29,10 @@ export function CreateAccount() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(response.status);
+          return response.json().then((error) => {
+            let errorMessage = error.message;
+            throw new Error(response.status + " - " + errorMessage);
+          });
         }
         return response.json();
       })
