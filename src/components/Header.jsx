@@ -18,7 +18,7 @@ function Header() {
     <div className="header">
       <img src={logo} alt='Header' className='header-img' />
     <div>
-      <button className='logout-button' onClick={logoutHandler} > logout</button>
+      <button className='logout-button' alt='log out' onClick={logoutHandler} > logout</button>
       </div> </div>
   )
 };
