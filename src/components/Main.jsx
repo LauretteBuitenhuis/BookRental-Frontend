@@ -7,7 +7,6 @@ function Main() {
   const authCtx = useContext(AuthContext);
 
   const isAdmin = authCtx.isAdmin;
-  console.log(isAdmin);
 
   if (isAdmin) {
     return (

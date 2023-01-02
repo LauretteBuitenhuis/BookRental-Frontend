@@ -40,7 +40,6 @@ const Login = () => {
                 }
             })
             .then((data) => {
-                console.log(data);
                 authCtx.login(data);
                 navigate('/main', { replace: true });
             })
