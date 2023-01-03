@@ -134,7 +134,7 @@ export function Inventory() {
         <label>Sorteren op:</label>
         <select defaultValue="relevantie">
           <option value="title">titel</option>
-          <option value="author">autheur</option>
+          <option value="author">auteur</option>
           <option value="relevantie">relevantie</option>
           <option value="available">beschikbaarheid</option>
         </select>
@@ -244,7 +244,7 @@ export function Inventory() {
                 onClick={() => setDeleteModus(false)}
               >
                 Nee, annuleren
-              </button>{" "}
+              </button>
             </div>
           </div>
         </div>
