@@ -25,11 +25,6 @@ body {
   grid-column-gap: 10px;
 }
 
-/* .my-spacer {
-  flex: 1 1 auto;
-  
-} */
-
 .header-img {
   width: 100px;
   padding: 10px;
@@ -79,8 +74,7 @@ input[type=email]:focus {
 }
 
 .login-header h4,
-.inventaris-header h4,
-.userheader h4 {
+.inventaris-header h4 {
   color: #03Ab03;
   font-family: euclid-bold;
   font-size: 20px;
@@ -89,36 +83,12 @@ input[type=email]:focus {
 
 
 .login-header h2,
-.inventaris-header h2,
-.userheader h2 {
+.inventaris-header h2 {
   margin-top: 0;
   font-family: euclid-bold;
   font-size: 36px;
 }
 
-.adminheader-container, .userheader-container{
-  Display: flex;
-  flex-direction:row;
-  align-items: center;
-}
-
-.adminheader {
-  margin-left: 100px;
-  display: inline-block;
-}
-
-.adminheader h4 {
-  color: #ab1403;
-  font-family: euclid-bold;
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.adminheader h2 {
-  margin-top: 0;
-  font-family: euclid-bold;
-  font-size: 36px;
-}
 
 .login-input {
   display: flex;
@@ -271,29 +241,6 @@ select {
 
 .request-button:hover {
   background-color: #00E600;
-}
-
-.navbar {
-  margin-right: 0;
-  margin-top: 0;
-  display: flex;
-  float: right;
-  text-align: right;
-  width: 90%;
-  font-size: 18px;
-
-}
-
-.navbar button {
-  height: 60px;
-  background: none;
-  border: none;
-
-}
-
-.navbar button:hover {
-  padding: 10px 10px;
-  background-color: none;
 }
 
 .logout-button {

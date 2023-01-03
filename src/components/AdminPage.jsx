@@ -5,6 +5,7 @@ import logOutIcon from '../assets/ic_exit_to_app_24px.png';
 import EmployeesIcon from '../assets/ic_supervisor_account_24px.png';
 import InventoryIcon from '../assets/BooksOverview.png';
 import AdminIcon from '../assets/ic_account_box_24px_admin.png';
+import "../styles/Header.css";
 
 
 function AdminPage() {
@@ -25,8 +26,8 @@ function AdminPage() {
 
 
             <nav className='navbar'>
-                <div><img src={AdminIcon} alt='Admin'/></div>
-                <span className="my-spacer">Voornaam Achternaam</span> 
+                <button><img src={AdminIcon} alt='Admin'/></button>
+                <span>Voornaam Achternaam</span> 
                 <button> <img src={InventoryIcon} alt='Boeken inventaris' /></button>
                 <button> <img src={EmployeesIcon} alt='Werknemers' /></button>               
                 <button><img src={logOutIcon} alt='log out' onClick={logoutHandler}/></button>
