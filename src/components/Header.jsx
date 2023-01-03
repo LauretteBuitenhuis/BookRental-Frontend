@@ -8,7 +8,6 @@ function Header() {
       navigate('main', {replace: true});
     }
 
-
   return (
     <div className="header">
       <button><img src={logo} alt="Header" className="header-img" onClick={redirectMainHandler}/></button>

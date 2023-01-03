@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../store/auth-context';
-import '../styles/Header.css'
 
 function UserPage() {
     const navigate = useNavigate();
