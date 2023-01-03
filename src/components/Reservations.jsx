@@ -7,13 +7,13 @@ import { useContext } from "react";
 export function Reservations() {
   const [reservationData, setReservationData] = useState([]);
   const [copy, setCopy] = useState();
+  const [reservation, setReservation] = useState();
   const [loan, setLoan] = useState();
 
   const auth = useContext(AuthContext);
 
   function getPendingReservations() {
-    const token = "tychotoken" // TODO: UPDATE TOKEN
-    fetch("http://localhost:8082/reservation/pending", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/reservation/pending`, {
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
@@ -24,34 +24,55 @@ export function Reservations() {
 
   function approveReservation(reservation, toApprove) {
 
-    setCopy(null);
-
-    if (toApprove) {
+    if (toApprove === true) {
       // Get random copy
-      fetch(`${process.env.BACKEND_URL}/book/getrandomcopy/${reservation.book.id}`, {
-        method: 'get',
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/book/getrandomcopy/${reservation.book.id}`, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': auth.token,
         }
-      }).then(res => res.json()).then(copy => setCopy(copy))
+      }).then(res => res.json()).then(copy => {
+        setCopy(copy)
 
+        // Check if copy is available
+        if (copy !== null && copy !== undefined) {
+          // Approve / deny reservation with given copy
+          fetch(`${process.env.REACT_APP_BACKEND_URL}/reservation/approve/${reservation.id}/${copy.id}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': auth.token,
+            }
+          }).then(res => res.json()).then(loan => {
+            setLoan(loan)
+            getPendingReservations()
+          })
+        }
+        else {
+          throw new Error("No copy is available for rental");
+        }
+      })
     }
 
-    // Approve / deny reservation with given copy
-    fetch(`${process.env.BACKEND_URL}/reservation/approve/${reservation.id}/${copy.id}/${toApprove}`, {
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': auth.token,
-      }
-    }).then(res => res.json()).then(loan => setLoan(loan))
-
+    else {
+      // Approve / deny reservation with given copy
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/reservation/deny/${reservation.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': auth.token,
+        }
+      }).then(res => res.json()).then(reservation => {
+        setReservation(reservation)
+        getPendingReservations()
+      })
+    }
   }
 
   useEffect(() => {
     getPendingReservations()
-  }, [])
+  })
 
   const listItemsTable =
     reservationData &&

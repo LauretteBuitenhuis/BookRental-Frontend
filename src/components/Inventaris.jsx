@@ -15,7 +15,7 @@ function BookOverview() {
   const [deleteId, setDeleteId] = useState()
 
   function getAllBooks() {
-    fetch(`${process.env.BACKEND_URL}/book/all`).then(res => res.json()).then(data => setBookData(data))
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`).then(res => res.json()).then(data => setBookData(data))
   }
 
   function addBook() {
@@ -27,7 +27,7 @@ function BookOverview() {
     setTitle('');
     setAuthor('');
     setIsbn('');
-    fetch(`${process.env.BACKEND_URL}/book/create`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ function BookOverview() {
   }
 
   function deleteBook(id) {
-    fetch(`${process.env.BACKEND_URL}/book/${id}/delete`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${id}/delete`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ function BookOverview() {
       author,
       isbn
     }
-    fetch(`${process.env.BACKEND_URL}/book/${newBook.id}/edit`, {
+    fetch(`${process.env.REACT_APP_REACT_APP_BACKEND_URL}/book/${newBook.id}/edit`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
