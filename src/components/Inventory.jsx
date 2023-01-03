@@ -128,28 +128,29 @@ export function Inventory() {
     <div>
       <div className="inventory-container">
         <h2>Inventaris</h2>
-        <div className="inventory-searchbar">
-          <TextInput name="search" placeholder="Zoek..." />
-          <CheckboxInput name="isAvailable" label="Beschikbaar" />
-          <label>Sorteren op:</label>
-          <select defaultValue="relevantie">
-            <option value="locatie">Locatie</option>
-            <option value="beschikbaarheid">Beschikbaarheid</option>
-            <option value="pagina">Pagina's</option>
-            <option value="relevantie">Relevantie</option>
-          </select>
-          Voeg nieuw boek toe
-          <MdLibraryAdd className="addIcon" onClick={() => setAddModus(true)} />
-        </div>
-
-        <table className="inventory-table">
+        <TextInput name="search" placeholder="Zoek..." />
+        <label>Sorteren op:</label>
+        <select defaultValue="relevantie">
+          <option value="title">titel</option>
+          <option value="author">autheur</option>
+          <option value="relevantie">relevantie</option>
+          <option value="available">beschikbaarheid</option>
+        </select>
+        <select defaultValue="asc">
+          <option value="asc">oplopend</option>
+          <option value="desc">aflopend</option>
+        </select>
+        <CheckboxInput name="isAvailable" label="Beschikbaar" />
+        Voeg nieuw boek toe
+        <MdLibraryAdd className="addIcon" onClick={() => setAddModus(true)} />
+        <table>
           <thead>
             <tr>
               <th>ID</th>
               <th>Title</th>
               <th>Author</th>
               <th>Isbn</th>
-              <th>Update</th>
+              <th>Wijzig</th>
             </tr>
           </thead>
           <tbody>
@@ -174,10 +175,8 @@ export function Inventory() {
       </div>
 
       {addModus ? (
-        <div className="inventory-add-container">
-          <h2>{updateModus ? "Update Book" : "Add New Book"}</h2>
+        <div className="inventory-container">
           <form
-            className="form"
             onSubmit={(e) => {
               e.preventDefault();
               if (updateModus === false) {
@@ -188,7 +187,7 @@ export function Inventory() {
             }}
           >
             {" "}
-            <label>Title:</label>
+            <label>Titel:</label>
             <input
               type="text"
               value={title}
@@ -196,7 +195,7 @@ export function Inventory() {
                 setTitle(e.target.value);
               }}
             />
-            <label>Author:</label>
+            <label>Auteur:</label>
             <input
               type="text"
               value={author}
@@ -204,7 +203,7 @@ export function Inventory() {
                 setAuthor(e.target.value);
               }}
             />
-            <label>Isbn:</label>
+            <label>ISBN:</label>
             <input
               type="text"
               value={isbn}
@@ -213,7 +212,7 @@ export function Inventory() {
               }}
             />
             <button type="submit" className="button">
-              {updateModus ? "Update Book" : "Add New Book"}
+              {updateModus ? "Bijwerken" : "Als nieuw boek toevoegen"}
             </button>
             <button
               type="submit"
@@ -226,23 +225,25 @@ export function Inventory() {
         </div>
       ) : null}
       {deleteModus ? (
-        <div className="inventory-add-container">
-          <h2>Weet je zeker dat je {title} uit het systeem wil halen?</h2>
-          <div>
-            <button
-              type="submit"
-              className="button"
-              onClick={() => deleteBook(deleteId)}
-            >
-              Verwijder boek
-            </button>
-            <button
-              type="submit"
-              className="button"
-              onClick={() => setDeleteModus(false)}
-            >
-              Annuleren
-            </button>{" "}
+        <div className="inventory-container">
+          <div className="pop-up">
+            <h3>Weet je zeker dat je {title} uit het systeem wil halen?</h3>
+            <div>
+              <button
+                type="submit"
+                className="button"
+                onClick={() => deleteBook(deleteId)}
+              >
+                Ja, verwijder boek
+              </button>
+              <button
+                type="submit"
+                className="button"
+                onClick={() => setDeleteModus(false)}
+              >
+                Nee, annuleren
+              </button>{" "}
+            </div>
           </div>
         </div>
       ) : null}
