@@ -25,9 +25,10 @@ body {
   grid-column-gap: 10px;
 }
 
-.my-spacer {
+/* .my-spacer {
   flex: 1 1 auto;
-}
+  
+} */
 
 .header-img {
   width: 100px;
@@ -73,7 +74,7 @@ input[type=email]:focus {
 }
 
 .login-header,
-.inventaris-header, {
+.inventaris-header {
   margin-left: 100px;
 }
 
@@ -276,25 +277,24 @@ select {
   margin-right: 0;
   margin-top: 0;
   display: flex;
-  justify-content:flex-end;
-  width: 50%;
-  height: 70%;
+  float: right;
+  text-align: right;
+  width: 90%;
+  font-size: 18px;
+
 }
 
-/* .navbar button {
-  padding: 15px 30px;
-  background-color: black;
-  font-size: 14px;
-  font-family: euclid-semibold;
-} */
+.navbar button {
+  height: 60px;
+  background: none;
+  border: none;
 
-/* .navbar button:hover {
-  padding: 15px 30px;
-  background-color: #03AB03;
-  ;
-  font-size: 14px;
-  font-family: euclid-semibold;
-} */
+}
+
+.navbar button:hover {
+  padding: 10px 10px;
+  background-color: none;
+}
 
 .logout-button {
   background-color: white;

@@ -26,7 +26,7 @@ const Login = () => {
       },
     };
 
-    fetch("http://localhost:8082/user/login", options)
+    fetch(`${process.env.BACKEND_URL}/user/login`, options)
       .then((res) => {
         if (res.ok) {
           return res.json();

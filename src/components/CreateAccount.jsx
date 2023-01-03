@@ -22,7 +22,7 @@ export function CreateAccount() {
       isAdmin: isAdmin.checked,
     };
 
-    fetch("http://localhost:8082/user/create", {
+    fetch(`${process.env.BACKEND_URL}/user/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

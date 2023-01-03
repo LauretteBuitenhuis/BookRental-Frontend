@@ -1,17 +1,18 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import logo from "../assets/0012p000041aQ4LAAU.png";
-import AuthContext from "../store/auth-context";
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import logo from '../assets/0012p000041aQ4LAAU.png'
+import AuthContext from '../store/auth-context';
 
 function Header() {
   // TODO: remove logout button for development purposes
   const navigate = useNavigate();
-  const authCtx = useContext(AuthContext);
+    const authCtx = useContext(AuthContext);
 
-  const logoutHandler = () => {
-    authCtx.logout();
-    navigate("/", { replace: true });
-  };
+    const logoutHandler = () => {
+        authCtx.logout();
+        navigate('/', { replace: true });
+    }
+
 
   return (
     <div className="header">
@@ -25,5 +26,6 @@ function Header() {
     </div>
   );
 }
+
 
 export default Header;
