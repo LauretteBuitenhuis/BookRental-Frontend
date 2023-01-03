@@ -1,10 +1,8 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/0012p000041aQ4LAAU.png";
 import AuthContext from "../store/auth-context";
 
-function Header() {
-  // TODO: remove logout button for development purposes
+function UserPage() {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
 
@@ -14,16 +12,22 @@ function Header() {
   };
 
   return (
-    <div className="header">
-      <img src={logo} alt="Header" className="header-img" />
-      <div>
+    <div className="userheader-container">
+      <div className="userheader">
+        <h4>OVERZICHT</h4>
+        <h2>Reserveringen</h2>
+      </div>
+
+      <nav className="navbar">
+        {/* <div>User icon...<div>
+                <span className="my-spacer">Voornaam Achternaam</span> */}
         <button className="logout-button" onClick={logoutHandler}>
           {" "}
           logout
         </button>
-      </div>{" "}
+      </nav>
     </div>
   );
 }
 
-export default Header;
+export default UserPage;

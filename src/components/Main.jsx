@@ -1,12 +1,11 @@
-import React from 'react'
-import BookOverview from './BookOverview'
+import { useContext } from "react";
+import AuthContext from "../store/auth-context";
+import AdminPage from "./AdminPage";
+import UserPage from "./UserPage";
 
 function Main() {
-  return (
-    <div>
-      <BookOverview />
-    </div>
-  )
+  const authCtx = useContext(AuthContext);
+  return authCtx.isAdmin ? <AdminPage /> : <UserPage />;
 }
 
-export default Main
+export default Main;

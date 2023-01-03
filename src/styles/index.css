@@ -1,0 +1,311 @@
+@font-face {
+  font-family: euclid;
+  src: url(../assets/EuclidSquare-Regular.ttf);
+}
+
+@font-face {
+  font-family: euclid-semibold;
+  src: url(../assets/EuclidSquare-SemiBold.ttf);
+}
+
+
+@font-face {
+  font-family: euclid-bold;
+  src: url(../assets/EuclidSquare-Bold.ttf);
+}
+
+body {
+  font-family: euclid;
+  background-color: #E4E4E7;
+}
+
+.app-container {
+  display: grid;
+  grid-template-rows: 15vh 70vh 5vh;
+  grid-column-gap: 10px;
+}
+
+.my-spacer {
+  flex: 1 1 auto;
+}
+
+.header-img {
+  width: 100px;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.footer {
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: auto;
+}
+
+
+.inventaris-container {
+  display: flex;
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+  border: none;
+  border-bottom: 2px solid rgb(48, 48, 48);
+  background-color: transparent;
+  padding: 20px;
+  margin: 20px;
+  width: 400px;
+  font-size: 24px;
+}
+
+input[type=text],
+input[type=password],
+input[type=email]:focus {
+  outline: none;
+}
+
+.login-header,
+.inventaris-header, {
+  margin-left: 100px;
+}
+
+.login-header h4,
+.inventaris-header h4,
+.userheader h4 {
+  color: #03Ab03;
+  font-family: euclid-bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+
+.login-header h2,
+.inventaris-header h2,
+.userheader h2 {
+  margin-top: 0;
+  font-family: euclid-bold;
+  font-size: 36px;
+}
+
+.adminheader-container, .userheader-container{
+  Display: flex;
+  flex-direction:row;
+  align-items: center;
+}
+
+.adminheader {
+  margin-left: 100px;
+  display: inline-block;
+}
+
+.adminheader h4 {
+  color: #ab1403;
+  font-family: euclid-bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.adminheader h2 {
+  margin-top: 0;
+  font-family: euclid-bold;
+  font-size: 36px;
+}
+
+.login-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 20px;
+}
+
+.login-button,
+.book-add-container button {
+  background-color: black;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+}
+
+
+.login-button:hover {
+  background-color: #52525b;
+  color: #E4E4E7;
+}
+
+.login-button a:visited,
+.login-button a:link {
+  color: white;
+  text-decoration: none;
+}
+
+
+
+::placeholder {
+  font-size: 24px;
+  color: #A1A1AA;
+}
+
+.bookoverview-searchbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 900px;
+  margin-left: 100px;
+  font-family: euclid-semibold;
+}
+
+select {
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+}
+
+.bookoverview-searchbar ::placeholder {
+  font-size: 18px;
+}
+
+.bookoverview-searchbar input[type=text] {
+  padding: 10px;
+  width: 200px;
+  margin: 0;
+}
+
+.bookoverview-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  margin-left: 100px;
+  font-size: 0.9em;
+  width: 900px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.bookoverview-table thead tr {
+  background-color: #03AB03;
+  color: #ffffff;
+  text-align: left;
+}
+
+.bookoverview-table th,
+.bookoverview-table td {
+  padding: 12px 15px;
+}
+
+.bookoverview-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.bookoverview-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.bookoverview-table tbody tr:last-of-type {
+  border-bottom: 2px solid #03AB03;
+}
+
+.table-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.icon {
+  font-size: 20px;
+  color: #03AB03;
+}
+
+.icon:hover {
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.book-add-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  border: 2px solid black;
+  background-color: rgb(243, 243, 243);
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+}
+
+.book-add-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-add-form input[type=text] {
+  padding: 10px;
+}
+
+.request-button {
+  background-color: #03AB03;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: bold;
+  transition-duration: 0.4s;
+}
+
+.request-button:hover {
+  background-color: #00E600;
+}
+
+.navbar {
+  margin-right: 0;
+  margin-top: 0;
+  display: flex;
+  justify-content:flex-end;
+  width: 50%;
+  height: 70%;
+}
+
+/* .navbar button {
+  padding: 15px 30px;
+  background-color: black;
+  font-size: 14px;
+  font-family: euclid-semibold;
+} */
+
+/* .navbar button:hover {
+  padding: 15px 30px;
+  background-color: #03AB03;
+  ;
+  font-size: 14px;
+  font-family: euclid-semibold;
+} */
+
+.logout-button {
+  background-color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+}
+
+.logout-button:hover{
+  background-color: #E4E4E7;
+  color:#52525B;
+}
