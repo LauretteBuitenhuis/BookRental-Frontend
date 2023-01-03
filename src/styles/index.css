@@ -33,6 +33,11 @@ body {
   right: 0;
 }
 
+.header button {
+  background: none;
+  border: none;
+}
+
 .footer {
   background-color: black;
   color: white;
@@ -242,6 +247,7 @@ select {
 .request-button:hover {
   background-color: #00E600;
 }
+
 
 .logout-button {
   background-color: white;
