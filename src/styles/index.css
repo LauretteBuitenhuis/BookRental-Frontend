@@ -25,10 +25,10 @@ body {
   grid-column-gap: 10px;
 }
 
-.my-spacer {
+/* .my-spacer {
   flex: 1 1 auto;
   
-}
+} */
 
 .header-img {
   width: 100px;
@@ -274,9 +274,11 @@ select {
 }
 
 .navbar {
-  margin-right: 100px;
+  margin-right: 0;
   margin-top: 0;
   display: flex;
+  float: right;
+  text-align: right;
   width: 90%;
   font-size: 18px;
 
