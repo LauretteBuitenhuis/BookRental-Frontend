@@ -72,7 +72,7 @@ export function Reservations() {
 
   useEffect(() => {
     getPendingReservations()
-  })
+  }, [])
 
   const listItemsTable =
     reservationData &&
