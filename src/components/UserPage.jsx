@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/auth-context";
 import logOutIcon from '../assets/ic_exit_to_app_24px.png';
 import UserIcon from '../assets/ic_account_box_24px_user.png';
-import BookInventory from '../assets/ic_add_to_photos_24px.png';
 import '../styles/mainUser.css';
-
+import { MdLibraryAdd } from "react-icons/md";
 
 function UserPage() {
     const navigate = useNavigate();
@@ -34,7 +33,26 @@ function UserPage() {
                     <button><img src={logOutIcon} alt='log out' onClick={logoutHandler} /></button>
                 </nav>
             </div>
-            <img src={BookInventory} alt='Books' onClick={bookInventoryHandler} />
+
+            <div className="main-container">
+                <div className="possessions">
+                    <h5>Huidige bezittingen</h5>
+                    <table>
+                        <tr>
+                            <th>title</th>
+                            <th>Author</th>
+                            <th>ISBN</th>
+                            <th>Start-date</th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div className="requests">
+                    <h5>Verzoeken <MdLibraryAdd className="icon"onClick={bookInventoryHandler} /></h5>
+                </div>
+            </div>
+
+
         </div>
 
     )
