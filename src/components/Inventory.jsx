@@ -2,6 +2,8 @@ import "../styles/inventory.css";
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { MdLibraryAdd } from "react-icons/md";
+import { BsPencilFill } from "react-icons/bs";
+import { BsTrashFill } from "react-icons/bs";
 import AuthContext from "../store/auth-context";
 import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
@@ -12,7 +14,7 @@ import { CheckboxInput } from "./CheckboxInput";
 export function Inventory() {
   const auth = useContext(AuthContext);
 
-  const [bookData, setBookData] = useState({});
+  const [book, setBook] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [isbn, setIsbn] = useState("");
@@ -27,7 +29,7 @@ export function Inventory() {
   function getAllBooks() {
     fetch("http://localhost:8082/book/all")
       .then((res) => res.json())
-      .then((data) => setBookData(data));
+      .then((data) => setBook(data));
   }
 
   function addBook() {
@@ -150,6 +152,24 @@ export function Inventory() {
               <th>Update</th>
             </tr>
           </thead>
+          <tbody>
+            {book.map((book, key) => (
+              <tr key={key}>
+                <td>{book.id}</td>
+                <td>{book.title}</td>
+                <td>{book.author}</td>
+                <td>{book.isbn}</td>
+                <td className="table-buttons">
+                  <span onClick={() => updateBook(book)}>
+                    <BsPencilFill className="icon" />
+                  </span>
+                  <span onClick={() => showDeletePopUp(book)}>
+                    <BsTrashFill className="icon" />
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
 
