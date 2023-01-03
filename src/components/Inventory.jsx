@@ -120,9 +120,9 @@ export function Inventory() {
     });
   }
 
-  useEffect(() => {
+  {
     getAllBooks();
-  }, []);
+  }
 
   return (
     <div>
