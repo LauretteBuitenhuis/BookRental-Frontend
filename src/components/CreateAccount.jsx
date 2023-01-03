@@ -22,7 +22,7 @@ export function CreateAccount() {
       isAdmin: isAdmin.checked,
     };
 
-    fetch(`${process.env.BACKEND_URL}/user/create`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/user/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
