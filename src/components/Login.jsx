@@ -47,7 +47,7 @@ const Login = () => {
   };
 
   return (
-    <div className="input-container">
+    <div>
       <div className="login-header">
         <h4>INLOG SCHERM</h4>
         <h2>Boeken reserveren</h2>
