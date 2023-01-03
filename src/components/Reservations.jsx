@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { BsFillXCircleFill } from "react-icons/bs";
+import AuthContext from "../store/auth-context";
+import { useContext } from "react";
 
-function Reservations() {
+export function Reservations() {
   const [reservationData, setReservationData] = useState([]);
-  const [token, setToken] = useState(localStorage.token);
   const [copy, setCopy] = useState();
   const [loan, setLoan] = useState();
+
+  const auth = useContext(AuthContext);
 
   function getPendingReservations() {
     const token = "tychotoken" // TODO: UPDATE TOKEN
@@ -14,38 +17,37 @@ function Reservations() {
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `${token}`
+        'Authorization': auth.token,
       }
     }).then(res => res.json()).then(data => setReservationData(data))
   }
 
   function approveReservation(reservation, toApprove) {
-    const token = "admin" // TODO: UPDATE TOKEN
 
-    console.log("Called method");
+    setCopy(null);
 
-    // Get random copy
-    fetch(`http://localhost:8082/book/getrandomcopy/${reservation.book.id}`, {
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `${token}`
-      }
-    }).then(res => res.json()).then(copy => setCopy(copy))
+    if (toApprove) {
+      // Get random copy
+      fetch(`${process.env.BACKEND_URL}/book/getrandomcopy/${reservation.book.id}`, {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': auth.token,
+        }
+      }).then(res => res.json()).then(copy => setCopy(copy))
 
-    console.log(`${copy.id}`);
+    }
 
     // Approve / deny reservation with given copy
-    fetch(`http://localhost:8082/reservation/approve/${reservation.id}/${copy.id}/${toApprove}`, {
+    fetch(`${process.env.BACKEND_URL}/reservation/approve/${reservation.id}/${copy.id}/${toApprove}`, {
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `${token}`
+        'Authorization': auth.token,
       }
     }).then(res => res.json()).then(loan => setLoan(loan))
-  }
 
-  console.log("loan gelukt joepie");
+  }
 
   useEffect(() => {
     getPendingReservations()

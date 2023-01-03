@@ -1,23 +1,32 @@
-import { Routes, Route } from "react-router-dom"
-import Login from "./components/Login"
-import Main from "./components/Main"
-import Reservations from "./components/Reservations"
-import Header from "./components/Header"
-import Footer from "./components/Footer"
+import "./styles/index.css";
+import { CreateAccount } from "./components/CreateAccount";
+import { useContext } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Login from "./components/Login";
+import Main from "./components/Main";
+import Header from "./components/Header";
+import AuthContext from "./store/auth-context";
+import Reservations from "./components/Reservations";
 
 function App() {
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn();
+
   return (
     <div className="app-container">
-      <Header/>
+      <Header />
       <Routes>
-        <Route path="/" element={ <Login/> } />
-        <Route path="main" element={ <Main/> } />
-        {/* <Route path="/adminpage" element={ <Adminpage/>} /> */}
-        <Route path="/reservations" element={ <Reservations/>} />
+        {!isLoggedIn && <Route path="/" element={<Login />} />}
+        {isLoggedIn && <Route path="main" element={<Main />} />}
+        {isLoggedIn && <Route path="/reservations" element={<Reservations />} />}
+        {isLoggedIn && <Route path="/register" element={<CreateAccount />} />}
+        <Route
+          path="*"
+          element={<Navigate to={isLoggedIn ? "/main" : "/"} replace />}
+        />
       </Routes>
-      <Footer/>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

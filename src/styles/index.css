@@ -1,17 +1,17 @@
 @font-face {
   font-family: euclid;
-  src: url(./assets/EuclidSquare-Regular.ttf);
+  src: url(../assets/EuclidSquare-Regular.ttf);
 }
 
 @font-face {
   font-family: euclid-semibold;
-  src: url(./assets/EuclidSquare-SemiBold.ttf);
+  src: url(../assets/EuclidSquare-SemiBold.ttf);
 }
 
 
 @font-face {
   font-family: euclid-bold;
-  src: url(./assets/EuclidSquare-Bold.ttf);
+  src: url(../assets/EuclidSquare-Bold.ttf);
 }
 
 body {
@@ -25,13 +25,16 @@ body {
   grid-column-gap: 10px;
 }
 
+.my-spacer {
+  flex: 1 1 auto;
+}
 
 .header-img {
   width: 100px;
   padding: 10px;
-  position:absolute;
-  top:0;
-  right:0;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .footer {
@@ -39,10 +42,11 @@ body {
   color: white;
   font-size: 12px;
   margin: 0;
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: auto;
 }
 
 
@@ -50,7 +54,9 @@ body {
   display: flex;
 }
 
-input[type=text] {
+input[type=text],
+input[type=password],
+input[type=email] {
   border: none;
   border-bottom: 2px solid rgb(48, 48, 48);
   background-color: transparent;
@@ -60,27 +66,58 @@ input[type=text] {
   font-size: 24px;
 }
 
-input[type=text]:focus {
+input[type=text],
+input[type=password],
+input[type=email]:focus {
   outline: none;
 }
 
-.login-header, .inventaris-header {
+.login-header,
+.inventaris-header, {
   margin-left: 100px;
 }
 
-.login-header h4, .inventaris-header h4 {
+.login-header h4,
+.inventaris-header h4,
+.userheader h4 {
   color: #03Ab03;
   font-family: euclid-bold;
   font-size: 20px;
   margin-bottom: 10px;
-  }
+}
 
-  
-.login-header h2, .inventaris-header h2 {
+
+.login-header h2,
+.inventaris-header h2,
+.userheader h2 {
   margin-top: 0;
   font-family: euclid-bold;
   font-size: 36px;
-  }
+}
+
+.adminheader-container, .userheader-container{
+  Display: flex;
+  flex-direction:row;
+  align-items: center;
+}
+
+.adminheader {
+  margin-left: 100px;
+  display: inline-block;
+}
+
+.adminheader h4 {
+  color: #ab1403;
+  font-family: euclid-bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.adminheader h2 {
+  margin-top: 0;
+  font-family: euclid-bold;
+  font-size: 36px;
+}
 
 .login-input {
   display: flex;
@@ -90,19 +127,29 @@ input[type=text]:focus {
   font-size: 20px;
 }
 
-.login-button,  .book-add-container button {
+.login-button,
+.book-add-container button {
   background-color: black;
   padding: 12px 24px;
   border-radius: 50px;
   font-size: 30px;
   color: white;
- text-align: center;
+  text-align: center;
 }
 
-.login-button a:visited, .login-button a:link {
+
+.login-button:hover {
+  background-color: #52525b;
+  color: #E4E4E7;
+}
+
+.login-button a:visited,
+.login-button a:link {
   color: white;
   text-decoration: none;
 }
+
+
 
 ::placeholder {
   font-size: 24px;
@@ -206,4 +253,59 @@ select {
 
 .book-add-form input[type=text] {
   padding: 10px;
- }
+}
+
+.request-button {
+  background-color: #03AB03;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: bold;
+  transition-duration: 0.4s;
+}
+
+.request-button:hover {
+  background-color: #00E600;
+}
+
+.navbar {
+  margin-right: 0;
+  margin-top: 0;
+  display: flex;
+  justify-content:flex-end;
+  width: 50%;
+  height: 70%;
+}
+
+/* .navbar button {
+  padding: 15px 30px;
+  background-color: black;
+  font-size: 14px;
+  font-family: euclid-semibold;
+} */
+
+/* .navbar button:hover {
+  padding: 15px 30px;
+  background-color: #03AB03;
+  ;
+  font-size: 14px;
+  font-family: euclid-semibold;
+} */
+
+.logout-button {
+  background-color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+}
+
+.logout-button:hover{
+  background-color: #E4E4E7;
+  color:#52525B;
+}
