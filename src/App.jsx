@@ -1,6 +1,6 @@
 import "./styles/index.css";
 import { CreateAccount } from "./components/CreateAccount";
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import Main from "./components/Main";
