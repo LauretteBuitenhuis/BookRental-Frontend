@@ -6,7 +6,7 @@ import Login from "./components/Login";
 import Main from "./components/Main";
 import Header from "./components/Header";
 import AuthContext from "./store/auth-context";
-import UserBookOverview from "./components/UserBookOverview";
+import Books from "./components/Books";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -19,7 +19,7 @@ function App() {
         {!isLoggedIn && <Route path="/" element={<Login />} />}
         {isLoggedIn && <Route path="main" element={<Main />} />}
         {isLoggedIn && <Route path="/register" element={<CreateAccount />} />}
-        {/* {isLoggedIn && <Route path="user/books/overview" element={<UserBookOverview />} />} */}
+        {isLoggedIn && <Route path="books" element={<Books />} />}
         <Route
           path="*"
           element={<Navigate to={isLoggedIn ? "/main" : "/"} replace />}
