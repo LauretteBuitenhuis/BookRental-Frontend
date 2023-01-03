@@ -1,8 +1,8 @@
-.inventaris-container {
+.inventory-container {
   display: flex;
 }
 
-.book-add-container button {
+.inventory-container button {
   background-color: black;
   padding: 12px 24px;
   border-radius: 50px;
@@ -11,7 +11,7 @@
   text-align: center;
 }
 
-.bookoverview-searchbar {
+.inventory-searchbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,7 +20,7 @@
   font-family: euclid-semibold;
 }
 
-.book-add-container {
+.inventory-add-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -33,26 +33,26 @@
   padding: 25px;
 }
 
-.book-add-form {
+.inventory-container form {
   display: flex;
   flex-direction: column;
 }
 
-.book-add-form input[type="text"] {
+.inventory-container input[type="text"] {
   padding: 10px;
 }
 
-.bookoverview-searchbar ::placeholder {
+.inventory-searchbar ::placeholder {
   font-size: 18px;
 }
 
-.bookoverview-searchbar input[type="text"] {
+.inventory-searchbar input[type="text"] {
   padding: 10px;
   width: 200px;
   margin: 0;
 }
 
-.bookoverview-table {
+.inventory-table {
   border-collapse: collapse;
   margin: 25px 0;
   margin-left: 100px;
@@ -61,25 +61,25 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-.bookoverview-table thead tr {
+.inventory-table thead tr {
   background-color: #03ab03;
   color: #ffffff;
   text-align: left;
 }
 
-.bookoverview-table th,
-.bookoverview-table td {
+.inventory-table th,
+.inventory-table td {
   padding: 12px 15px;
 }
 
-.bookoverview-table tbody tr {
+.inventory-table tbody tr {
   border-bottom: 1px solid #dddddd;
 }
 
-.bookoverview-table tbody tr:nth-of-type(even) {
+.inventory-table tbody tr:nth-of-type(even) {
   background-color: #f3f3f3;
 }
 
-.bookoverview-table tbody tr:last-of-type {
+.inventory-table tbody tr:last-of-type {
   border-bottom: 2px solid #03ab03;
 }

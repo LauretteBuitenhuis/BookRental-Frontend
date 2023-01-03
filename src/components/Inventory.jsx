@@ -1,3 +1,4 @@
+import "../styles/inventory.css";
 import React, { useState, useEffect } from "react";
 import { BsPencilFill } from "react-icons/bs";
 import { BsTrashFill } from "react-icons/bs";
@@ -5,7 +6,6 @@ import { MdLibraryAdd } from "react-icons/md";
 
 // TODO - reserveren van een boek
 // TODO - toggle admin/user
-// TODO - WIM222: filtering
 
 export function Inventory() {
   const [bookData, setBookData] = useState({});
@@ -17,6 +17,8 @@ export function Inventory() {
   const [addModus, setAddModus] = useState(false);
   const [deleteModus, setDeleteModus] = useState(false);
   const [deleteId, setDeleteId] = useState();
+  const [query, setQuery] = useState("");
+  const [checked, setChecked] = useState(true);
 
   function getAllBooks() {
     fetch("http://localhost:8082/book/all")
@@ -99,6 +101,17 @@ export function Inventory() {
     setAddModus(false);
   }
 
+  // TODO - WIM222: filtering
+  function filter(books) {
+    return (books.filter = (item) => {
+      return (
+        (item.author.toLowerCase().indexOf(query) !== -1 ||
+          item.title.toLowerCase().indexOf(query) !== -1) &&
+        (!checked || item.isAvailable)
+      );
+    });
+  }
+
   useEffect(() => {
     getAllBooks();
   }, []);
@@ -125,7 +138,7 @@ export function Inventory() {
   return (
     <div className="inventaris-container">
       <div className="inventory-container">
-        <div className="inventaris-header">
+        <div>
           <h4>BEKIJK INVENTARIS</h4>
           <h2>Inventaris</h2>
         </div>
@@ -170,10 +183,10 @@ export function Inventory() {
       </div>
 
       {addModus ? (
-        <div className="book-add-container">
+        <div className="inventory-add-container">
           <h2>{updateModus ? "Update Book" : "Add New Book"}</h2>
           <form
-            className="book-add-form"
+            className="form"
             onSubmit={(e) => {
               e.preventDefault();
               if (updateModus === false) {
@@ -208,12 +221,12 @@ export function Inventory() {
                 setIsbn(e.target.value);
               }}
             />
-            <button type="submit" className="basic-button">
+            <button type="submit" className="button">
               {updateModus ? "Update Book" : "Add New Book"}
             </button>
             <button
               type="submit"
-              className="basic-button"
+              className="button"
               onClick={() => leaveScreen()}
             >
               Annuleren
@@ -222,19 +235,19 @@ export function Inventory() {
         </div>
       ) : null}
       {deleteModus ? (
-        <div className="book-add-container">
+        <div className="inventory-add-container">
           <h2>Weet je zeker dat je {title} uit het systeem wil halen?</h2>
           <div>
             <button
               type="submit"
-              className="basic-button"
+              className="button"
               onClick={() => deleteBook(deleteId)}
             >
               Verwijder boek
             </button>
             <button
               type="submit"
-              className="basic-button"
+              className="button"
               onClick={() => setDeleteModus(false)}
             >
               Annuleren
