@@ -64,6 +64,7 @@ export function Inventory() {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Authorization: auth.token,
       },
     });
     setTitle("");
@@ -93,6 +94,7 @@ export function Inventory() {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: auth.token,
       },
       body: JSON.stringify(newBook),
     });
