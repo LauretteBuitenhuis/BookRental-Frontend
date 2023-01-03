@@ -2,8 +2,12 @@ import "../styles/createAccount.css";
 import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
 import { PasswordInput } from "./PasswordInput";
+import AuthContext from "../store/auth-context";
+import { useContext } from "react";
 
 export function CreateAccount() {
+  const auth = useContext(AuthContext);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -22,9 +26,7 @@ export function CreateAccount() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // TODO - WIM172 - Admin rights
-        Authorization:
-          "Nn61QRfP0T2qthQ9uqQp2AxtrLmUmaG8iAYsSP3mWck6dUlNPe4REATLmVuMUy3sa0PQUdqQqFkxR2hEBoYHXCj2SmDYExsiPjX4ywjNj7WIzAN7yoyzHxXeICB5HnwhgZpcHggSe55pxQZAsMBKhx",
+        Authorization: auth.token,
       },
       body: JSON.stringify(userDto),
     })
@@ -41,7 +43,7 @@ export function CreateAccount() {
         alert(`User with email ${userDto.email} was successfully created`)
       )
       .catch((error) => {
-        alert("Oops! An error occurred.\n\n" + "Request failed:\n" + error);
+        alert("Oops! An error occurred.\n\n Request failed:\n" + error);
         console.log(error);
       });
   };
@@ -54,7 +56,7 @@ export function CreateAccount() {
         <TextInput name="firstName" placeholder="Voornaam" />
         <TextInput name="lastName" placeholder="Achternaam" />
         <TextInput name="email" placeholder="Email" />
-        <PasswordInput name="password" placeholder="password" />
+        <PasswordInput name="password" placeholder="Password" />
         <CheckboxInput name="isAdmin" label="Admin" />
         <button type="submit">Aanmaken</button>
       </form>
