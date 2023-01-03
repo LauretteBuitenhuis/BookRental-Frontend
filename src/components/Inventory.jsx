@@ -1,13 +1,17 @@
 import "../styles/inventory.css";
 import React, { useState, useEffect } from "react";
-import { BsPencilFill } from "react-icons/bs";
-import { BsTrashFill } from "react-icons/bs";
+import { useContext } from "react";
 import { MdLibraryAdd } from "react-icons/md";
+import AuthContext from "../store/auth-context";
+import { TextInput } from "./TextInput";
+import { CheckboxInput } from "./CheckboxInput";
 
 // TODO - reserveren van een boek
-// TODO - toggle admin/user
+// TODO - toggle admin/user view
 
 export function Inventory() {
+  const auth = useContext(AuthContext);
+
   const [bookData, setBookData] = useState({});
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -39,9 +43,11 @@ export function Inventory() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: auth.token,
       },
       body: JSON.stringify(newBook),
     });
+    // TODO - succes message
     setAddModus(false);
   }
 
@@ -116,58 +122,24 @@ export function Inventory() {
     getAllBooks();
   }, []);
 
-  const listItemsTable =
-    bookData &&
-    bookData.map((book) => (
-      <tr key={book.id}>
-        <td>{book.id}</td>
-        <td>{book.title}</td>
-        <td>{book.author}</td>
-        <td>{book.isbn}</td>
-        <td className="table-buttons">
-          <span onClick={() => updateBook(book)}>
-            <BsPencilFill className="icon" />
-          </span>
-          <span onClick={() => showDeletePopUp(book)}>
-            <BsTrashFill className="icon" />
-          </span>
-        </td>
-      </tr>
-    ));
-
   return (
-    <div className="inventaris-container">
+    <div>
       <div className="inventory-container">
-        <div>
-          <h4>BEKIJK INVENTARIS</h4>
-          <h2>Inventaris</h2>
-        </div>
+        <h2>Inventaris</h2>
         <div className="inventory-searchbar">
-          <input type="text" placeholder="Zoek..." />
-          <div>
-            <label>
-              Beschikbaar:
-              <input name="isAvailable" type="checkbox" defaultChecked={true} />
-            </label>
-          </div>
-          <div>
-            {" "}
-            <label>Sorteren op:</label>
-            <select defaultValue="relevantie">
-              <option value="locatie">Locatie</option>
-              <option value="beschikbaarheid">Beschikbaarheid</option>
-              <option value="pagina">Pagina's</option>
-              <option value="relevantie">Relevantie</option>
-            </select>
-          </div>
-          <h3>
-            Voeg nieuw boek toe
-            <MdLibraryAdd
-              className="icon"
-              onClick={() => setAddModus(true)}
-            />{" "}
-          </h3>
+          <TextInput name="search" placeholder="Zoek..." />
+          <CheckboxInput name="isAvailable" label="Beschikbaar" />
+          <label>Sorteren op:</label>
+          <select defaultValue="relevantie">
+            <option value="locatie">Locatie</option>
+            <option value="beschikbaarheid">Beschikbaarheid</option>
+            <option value="pagina">Pagina's</option>
+            <option value="relevantie">Relevantie</option>
+          </select>
+          Voeg nieuw boek toe
+          <MdLibraryAdd className="addIcon" onClick={() => setAddModus(true)} />
         </div>
+
         <table className="inventory-table">
           <thead>
             <tr>
@@ -178,7 +150,6 @@ export function Inventory() {
               <th>Update</th>
             </tr>
           </thead>
-          <tbody>{listItemsTable}</tbody>
         </table>
       </div>
 
