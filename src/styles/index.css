@@ -1,17 +1,17 @@
 @font-face {
   font-family: euclid;
-  src: url(./assets/EuclidSquare-Regular.ttf);
+  src: url(../assets/EuclidSquare-Regular.ttf);
 }
 
 @font-face {
   font-family: euclid-semibold;
-  src: url(./assets/EuclidSquare-SemiBold.ttf);
+  src: url(../assets/EuclidSquare-SemiBold.ttf);
 }
 
 
 @font-face {
   font-family: euclid-bold;
-  src: url(./assets/EuclidSquare-Bold.ttf);
+  src: url(../assets/EuclidSquare-Bold.ttf);
 }
 
 body {
