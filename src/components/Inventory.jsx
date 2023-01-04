@@ -1,14 +1,23 @@
 import "../styles/sortedTable.css";
-import React, { useEffect, useState } from "react";
-import { useContext } from "react";
+import "../styles/mainAdmin.css";
+import "../styles/inventory.css";
+import logOutIcon from "../assets/ic_exit_to_app_24px.png";
+import EmployeesIcon from "../assets/ic_supervisor_account_24px.png";
+import InventoryIcon from "../assets/BooksOverview.png";
+import AdminIcon from "../assets/ic_account_box_24px_admin.png";
 import { MdLibraryAdd } from "react-icons/md";
+
 import AuthContext from "../store/auth-context";
+import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
 import { SortedTable } from "./SortedTable";
+import { useNavigate } from "react-router-dom";
 
 export function Inventory() {
   const auth = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [books, setBooks] = useState([]);
   const [title, setTitle] = useState("");
@@ -20,8 +29,17 @@ export function Inventory() {
   const [deleteModus, setDeleteModus] = useState(false);
   const [deleteId, setDeleteId] = useState();
 
+  const logoutHandler = () => {
+    auth.logout();
+    navigate("/", { replace: true });
+  };
+
+  const employeesHandler = () => {
+    navigate("/employees", { replace: true });
+  };
+
   function getAllBooks() {
-    fetch("http://localhost:8082/book/all")
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`)
       .then((res) => res.json())
       .then((data) => setBooks(data));
   }
@@ -35,7 +53,7 @@ export function Inventory() {
     setTitle("");
     setAuthor("");
     setIsbn("");
-    fetch("http://localhost:8082/book/create", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +72,7 @@ export function Inventory() {
   }
 
   function deleteBook(id) {
-    fetch(`http://localhost:8082/book/${id}/delete`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${id}/delete`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -83,8 +101,8 @@ export function Inventory() {
       author,
       isbn,
     };
-    fetch(`http://localhost:8082/book/${newBook.id}/edit`, {
-      method: "PUT",
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${newBook.id}/edit`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token,
@@ -104,7 +122,6 @@ export function Inventory() {
     setAddModus(false);
   }
 
-  // TODO - filtering
   // TODO - searching
   function search() {}
 
@@ -115,7 +132,28 @@ export function Inventory() {
   return (
     <div>
       <div className="inventory-container">
-        <h2>Inventaris</h2>
+        <div className="bookoverview-container">
+          <div className="bookoverview-header-admin">
+            <h4>BEKIJK INVENTARIS</h4>
+            <h2>Inventaris</h2>
+          </div>
+
+          <nav className="navbar">
+            <img src={AdminIcon} alt="Admin" />
+            <span>Voornaam Achternaam</span>
+            <img className="static" src={InventoryIcon} alt="inventaris" />
+            <button>
+              <img
+                src={EmployeesIcon}
+                alt="Werknemers"
+                onClick={employeesHandler}
+              />
+            </button>
+            <button>
+              <img src={logOutIcon} alt="log out" onClick={logoutHandler} />
+            </button>
+          </nav>
+        </div>
         <TextInput name="search" placeholder="Zoek..." onChange={search} />
         <CheckboxInput name="isAvailable" label="Beschikbaar" />
         Voeg nieuw boek toe
