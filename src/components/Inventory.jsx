@@ -1,4 +1,4 @@
-import "../styles/inventory.css";
+import "../styles/sortedTable.css";
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { MdLibraryAdd } from "react-icons/md";

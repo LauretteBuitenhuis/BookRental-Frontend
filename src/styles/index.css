@@ -67,56 +67,18 @@ input[type="email"]:focus {
   outline: none;
 }
 
-.login-header {
-  margin-left: 100px;
-}
-
-.login-header h4,
-.userheader h4 {
-  color: #03ab03;
-  font-family: euclid-bold;
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.login-header h2,
-.userheader h2 {
-  margin-top: 0;
-  font-family: euclid-bold;
-  font-size: 36px;
-}
-
-.login-input {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-size: 20px;
-}
-
-.login-button {
-  background-color: black;
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-size: 30px;
-  color: white;
-  text-align: center;
-}
-
-.login-button:hover {
-  background-color: #52525b;
-  color: #e4e4e7;
-}
-
-.login-button a:visited,
-.login-button a:link {
-  color: white;
-  text-decoration: none;
-}
-
 ::placeholder {
   font-size: 24px;
   color: #a1a1aa;
+}
+
+.bookoverview-searchbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 900px;
+  margin-left: 100px;
+  font-family: euclid-semibold;
 }
 
 select {
@@ -162,6 +124,7 @@ select {
   background-color: #00e600;
 }
 
+/* 
 .logout-button {
   background-color: white;
   padding: 6px 12px;
@@ -171,7 +134,7 @@ select {
   text-align: center;
 }
 
-.logout-button:hover {
-  background-color: #e4e4e7;
-  color: #52525b;
-}
+.logout-button:hover{
+  background-color: #E4E4E7;
+  color:#52525B;
+} */
