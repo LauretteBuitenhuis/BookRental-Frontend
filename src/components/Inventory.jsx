@@ -1,13 +1,13 @@
 import "../styles/sortedTable.css";
 import "../styles/mainAdmin.css";
 import "../styles/inventory.css";
-import { MdLibraryAdd } from "react-icons/md";
 import AuthContext from "../store/auth-context";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
 import { SortedTable } from "./SortedTable";
+import { AdminButton } from "./AdminButton";
 
 export function Inventory() {
   const auth = useContext(AuthContext);
@@ -128,13 +128,7 @@ export function Inventory() {
         <TextInput name="search" placeholder="Zoek..." onChange={search} />
         <div className="table-options">
           <CheckboxInput name="isAvailable" label="Beschikbaar" />
-          <div>
-            Voeg nieuw boek toe
-            <MdLibraryAdd
-              className="add-icon"
-              onClick={() => setAddModus(true)}
-            />
-          </div>
+          <AdminButton label="Voeg nieuw boek toe" setAddModus={setAddModus} />
         </div>
         <SortedTable
           showDeleteModal={showDeletePopUp}
