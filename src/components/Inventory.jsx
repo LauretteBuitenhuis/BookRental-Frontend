@@ -1,23 +1,16 @@
 import "../styles/sortedTable.css";
 import "../styles/mainAdmin.css";
 import "../styles/inventory.css";
-import logOutIcon from "../assets/ic_exit_to_app_24px.png";
-import EmployeesIcon from "../assets/ic_supervisor_account_24px.png";
-import InventoryIcon from "../assets/BooksOverview.png";
-import AdminIcon from "../assets/ic_account_box_24px_admin.png";
 import { MdLibraryAdd } from "react-icons/md";
-
 import AuthContext from "../store/auth-context";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
 import { SortedTable } from "./SortedTable";
-import { useNavigate } from "react-router-dom";
 
 export function Inventory() {
   const auth = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const [books, setBooks] = useState([]);
   const [title, setTitle] = useState("");
@@ -29,15 +22,6 @@ export function Inventory() {
   const [deleteModus, setDeleteModus] = useState(false);
   const [deleteId, setDeleteId] = useState();
   const [reservation, setReservation] = useState();
-
-  const logoutHandler = () => {
-    auth.logout();
-    navigate("/", { replace: true });
-  };
-
-  const employeesHandler = () => {
-    navigate("/employees", { replace: true });
-  };
 
   // TODO - create reservation
   function createReservation(book) {}
@@ -141,22 +125,6 @@ export function Inventory() {
             <h4>BEKIJK INVENTARIS</h4>
             <h3>Inventaris</h3>
           </div>
-
-          <nav className="navbar">
-            <img src={AdminIcon} alt="Admin" />
-            <span>Voornaam Achternaam</span>
-            <img className="static" src={InventoryIcon} alt="inventaris" />
-            <button>
-              <img
-                src={EmployeesIcon}
-                alt="Werknemers"
-                onClick={employeesHandler}
-              />
-            </button>
-            <button>
-              <img src={logOutIcon} alt="log out" onClick={logoutHandler} />
-            </button>
-          </nav>
         </div>
         <TextInput name="search" placeholder="Zoek..." onChange={search} />
         <CheckboxInput name="isAvailable" label="Beschikbaar" />
