@@ -137,9 +137,9 @@ export function Inventory() {
     <div>
       <div className="inventory-container">
         <div className="bookoverview-container">
-          <div className="bookoverview-header-admin">
+          <div>
             <h4>BEKIJK INVENTARIS</h4>
-            <h2>Inventaris</h2>
+            <h3>Inventaris</h3>
           </div>
 
           <nav className="navbar">
