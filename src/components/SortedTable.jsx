@@ -76,6 +76,9 @@ export function SortedTable(props) {
                 <td key={`col-${columnIndex}`}>{item[key] ?? ""}</td>
               ))}
               <td className="table-buttons">
+                <span onClick={() => createReservation(item)}>
+                  <BsDownload className="icon" />
+                </span>
                 <span onClick={() => updateBook(item)}>
                   <BsPencilFill className="icon" />
                 </span>
