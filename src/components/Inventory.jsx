@@ -1,12 +1,11 @@
 import "../styles/inventory.css";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { MdLibraryAdd } from "react-icons/md";
-import { BsPencilFill } from "react-icons/bs";
-import { BsTrashFill } from "react-icons/bs";
 import AuthContext from "../store/auth-context";
 import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
+import { SortedTable } from "./SortedTable";
 
 // TODO - reserveren van een boek
 // TODO - toggle admin/user view
@@ -14,7 +13,7 @@ import { CheckboxInput } from "./CheckboxInput";
 export function Inventory() {
   const auth = useContext(AuthContext);
 
-  const [book, setBook] = useState([]);
+  const [books, setBooks] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [isbn, setIsbn] = useState("");
@@ -23,13 +22,11 @@ export function Inventory() {
   const [addModus, setAddModus] = useState(false);
   const [deleteModus, setDeleteModus] = useState(false);
   const [deleteId, setDeleteId] = useState();
-  const [query, setQuery] = useState("");
-  const [checked, setChecked] = useState(true);
 
   function getAllBooks() {
     fetch("http://localhost:8082/book/all")
       .then((res) => res.json())
-      .then((data) => setBook(data));
+      .then((data) => setBooks(data));
   }
 
   function addBook() {
@@ -76,7 +73,6 @@ export function Inventory() {
     setAddModus(true);
     setUpdateModus(true);
     setUpdatedId(book.id);
-    console.log(book);
     setTitle(book.title);
     setAuthor(book.author);
     setIsbn(book.isbn);
@@ -111,72 +107,44 @@ export function Inventory() {
     setAddModus(false);
   }
 
-  // TODO - WIM222: filtering
-  function filter(books) {
-    return (books.filter = (item) => {
-      return (
-        (item.author.toLowerCase().indexOf(query) !== -1 ||
-          item.title.toLowerCase().indexOf(query) !== -1) &&
-        (!checked || item.isAvailable)
-      );
-    });
-  }
+  // TODO - filtering
+  // TODO - searching
+  function search() {}
 
-  {
+  useEffect(() => {
     getAllBooks();
-  }
+  }, []);
 
   return (
     <div>
       <div className="inventory-container">
         <h2>Inventaris</h2>
-        <TextInput name="search" placeholder="Zoek..." />
-        <label>Sorteren op:</label>
-        <select defaultValue="relevantie">
-          <option value="title">titel</option>
-          <option value="author">auteur</option>
-          <option value="relevantie">relevantie</option>
-          <option value="available">beschikbaarheid</option>
-        </select>
-        <select defaultValue="asc">
-          <option value="asc">oplopend</option>
-          <option value="desc">aflopend</option>
-        </select>
+        <TextInput name="search" placeholder="Zoek..." onChange={search} />
         <CheckboxInput name="isAvailable" label="Beschikbaar" />
         Voeg nieuw boek toe
         <MdLibraryAdd className="addIcon" onClick={() => setAddModus(true)} />
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Isbn</th>
-              <th>Wijzig</th>
-            </tr>
-          </thead>
-          <tbody>
-            {book.map((book, key) => (
-              <tr key={key}>
-                <td>{book.id}</td>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>{book.isbn}</td>
-                <td className="table-buttons">
-                  <span onClick={() => updateBook(book)}>
-                    <BsPencilFill className="icon" />
-                  </span>
-                  <span onClick={() => showDeletePopUp(book)}>
-                    <BsTrashFill className="icon" />
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <SortedTable
+          showDeleteModal={showDeletePopUp}
+          updateBook={updateBook}
+          data={books}
+          columns={[
+            {
+              key: "title",
+              sortable: true,
+            },
+            {
+              key: "author",
+              sortable: true,
+            },
+            {
+              key: "isbn",
+              sortable: false,
+            }
+          ]}
+        />
       </div>
 
-      {addModus ? (
+      {addModus && (
         <div className="inventory-container">
           <form
             onSubmit={(e) => {
@@ -225,8 +193,8 @@ export function Inventory() {
             </button>
           </form>
         </div>
-      ) : null}
-      {deleteModus ? (
+      )}
+      {deleteModus && (
         <div className="inventory-container">
           <div className="pop-up">
             <h3>Weet je zeker dat je {title} uit het systeem wil halen?</h3>
@@ -248,7 +216,7 @@ export function Inventory() {
             </div>
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 }
