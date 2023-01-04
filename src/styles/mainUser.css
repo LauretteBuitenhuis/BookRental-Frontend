@@ -34,7 +34,7 @@
     .user-navbar span {
       text-align:center;
       margin-left: 10px;
-      margin-right: 500px;
+      margin-right: 300px;
     }
   
     .user-navbar button {
@@ -46,7 +46,7 @@
     
     .user-navbar button:hover {
       padding: 10px 10px;
-      background-color: none;
+      background-color: #A1A1AA;
     }
   
     .main-container {

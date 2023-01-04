@@ -1,189 +1,220 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { BsPencilFill } from "react-icons/bs";
 import { BsTrashFill } from "react-icons/bs";
 import { MdLibraryAdd } from "react-icons/md";
+import logOutIcon from '../assets/ic_exit_to_app_24px.png';
+import EmployeesIcon from '../assets/ic_supervisor_account_24px.png';
+import InventoryIcon from '../assets/BooksOverview.png';
+import AdminIcon from '../assets/ic_account_box_24px_admin.png';
+import '../styles/mainAdmin.css';
+import { useNavigate } from 'react-router';
+import AuthContext from '../store/auth-context';
 
 function AdminBookOverview() {
-  const [bookData, setBookData] = useState([]);
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [isbn, setIsbn] = useState('');
-  const [updateModus, setUpdateModus] = useState(false);
-  const [updatedId, setUpdatedId] = useState()
-  const [addModus, setAddModus] = useState(false)
-  const [deleteModus, setDeleteModus] = useState(false)
-  const [deleteId, setDeleteId] = useState()
+    const [bookData, setBookData] = useState([]);
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+    const [isbn, setIsbn] = useState('');
+    const [updateModus, setUpdateModus] = useState(false);
+    const [updatedId, setUpdatedId] = useState()
+    const [addModus, setAddModus] = useState(false)
+    const [deleteModus, setDeleteModus] = useState(false)
+    const [deleteId, setDeleteId] = useState()
 
-  function getAllBooks() {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`).then(res => res.json()).then(data => setBookData(data))
-  }
+    const navigate = useNavigate();
+    const authCtx = useContext(AuthContext);
 
-  function addBook() {
-    let newBook = {
-      title,
-      author,
-      isbn,
+    const logoutHandler = () => {
+        authCtx.logout();
+        navigate("/", { replace: true });
+    };
+
+    const employeesHandler = () => {
+        navigate("/employees", { replace: true });
     }
-    setTitle('');
-    setAuthor('');
-    setIsbn('');
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/create`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newBook)
-    })
-    setAddModus(false)
-  }
 
-  function showDeletePopUp(book) {
-    setTitle(book.title)
-    setDeleteId(book.id)
-    setDeleteModus(true)
-  }
-
-  function deleteBook(id) {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${id}/delete`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    setTitle('');
-    setDeleteId();
-    setDeleteModus(false)
-  }
-
-  function updateBook(book) {
-    setAddModus(true)
-    setUpdateModus(true)
-    setUpdatedId(book.id)
-    console.log(book)
-    setTitle(book.title);
-    setAuthor(book.author);
-    setIsbn(book.isbn);
-  }
-
-  function sendBookUpdate() {
-    console.log("Send update")
-    let newBook = {
-      id: updatedId,
-      title,
-      author,
-      isbn
+    function getAllBooks() {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`).then(res => res.json()).then(data => setBookData(data))
     }
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${newBook.id}/edit`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newBook)
-    })
-    setTitle('');
-    setAuthor('');
-    setIsbn('');
-    setUpdatedId();
-    setUpdateModus(false)
-    setAddModus(false)
-  }
 
-function leaveScreen () {
-  setUpdateModus(false)
-  setAddModus(false)
-}
+    function addBook() {
+        let newBook = {
+            title,
+            author,
+            isbn,
+        }
+        setTitle('');
+        setAuthor('');
+        setIsbn('');
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/book/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newBook)
+        })
+        setAddModus(false)
+    }
+
+    function showDeletePopUp(book) {
+        setTitle(book.title)
+        setDeleteId(book.id)
+        setDeleteModus(true)
+    }
+
+    function deleteBook(id) {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${id}/delete`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        setTitle('');
+        setDeleteId();
+        setDeleteModus(false)
+    }
+
+    function updateBook(book) {
+        setAddModus(true)
+        setUpdateModus(true)
+        setUpdatedId(book.id)
+        console.log(book)
+        setTitle(book.title);
+        setAuthor(book.author);
+        setIsbn(book.isbn);
+    }
+
+    function sendBookUpdate() {
+        console.log("Send update")
+        let newBook = {
+            id: updatedId,
+            title,
+            author,
+            isbn
+        }
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${newBook.id}/edit`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newBook)
+        })
+        setTitle('');
+        setAuthor('');
+        setIsbn('');
+        setUpdatedId();
+        setUpdateModus(false)
+        setAddModus(false)
+    }
+
+    function leaveScreen() {
+        setUpdateModus(false)
+        setAddModus(false)
+    }
 
 
-  useEffect(() => {
-    getAllBooks()
-  }, [])
+    useEffect(() => {
+        getAllBooks()
+    }, [])
 
-  const listItemsTable =
-    bookData &&
-    bookData
-      .map(book => (
-        <tr key={book.id} >
-          <td>{book.id}</td>
-          <td>{book.title}</td>
-          <td>{book.author}</td>
-          <td>{book.isbn}</td>
-          <td className="table-buttons">
-            <span onClick={() => updateBook(book)}><BsPencilFill className="icon" /></span>
-            <span onClick={() => showDeletePopUp(book)}><BsTrashFill className="icon" /></span>
-          </td>
-        </tr>
-      ))
+    const listItemsTable =
+        bookData &&
+        bookData
+            .map(book => (
+                <tr key={book.id} >
+                    <td>{book.id}</td>
+                    <td>{book.title}</td>
+                    <td>{book.author}</td>
+                    <td>{book.isbn}</td>
+                    <td className="table-buttons">
+                        <span onClick={() => updateBook(book)}><BsPencilFill className="icon" /></span>
+                        <span onClick={() => showDeletePopUp(book)}><BsTrashFill className="icon" /></span>
+                    </td>
+                </tr>
+            ))
 
-  return (
-    <div className="inventaris-container">
+    return (
+        <div>
+            <div>
+                <div className="bookoverview-container">
+                    <div className="bookoverview-header-admin">
+                        <h4>BEKIJK INVENTARIS</h4>
+                        <h2>Inventaris</h2>
+                    </div>
 
-      <div className="bookoverview-container">
-        <div className="inventaris-header">
-          <h4>BEKIJK INVENTARIS</h4>
-          <h2>Inventaris</h2>
+                    <nav className='navbar'>
+                        <img src={AdminIcon} alt='Admin' />
+                        <span>Voornaam Achternaam</span>
+                        <img className="static" src={InventoryIcon} alt='inventaris' />
+                        <button> <img src={EmployeesIcon} alt='Werknemers' onClick={employeesHandler} /></button>
+                        <button><img src={logOutIcon} alt='log out' onClick={logoutHandler} /></button>
+                    </nav>
+                </div>
+
+
+                <div className="bookoverview-searchbar">
+                    <input type='text' placeholder="Zoek..." />
+                    <div><label>
+                        Beschikbaar:
+                        <input
+                            name="isAvailable"
+                            type="checkbox"
+                            defaultChecked={true}
+                        />
+                    </label></div>
+                    <div>  <label>Sorteren op:</label><select defaultValue="relevantie">
+                        <option value="locatie">Locatie</option>
+                        <option value="beschikbaarheid">Beschikbaarheid</option>
+                        <option value="pagina">Pagina's</option>
+                        <option value="relevantie">Relevantie</option>
+                    </select></div>
+                    <h3>Voeg nieuw boek toe<MdLibraryAdd className="icon" onClick={() => setAddModus(true)} />  </h3>
+                </div>
+                <table className="bookoverview-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Isbn</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {listItemsTable}
+                    </tbody>
+                </table>
+
+            </div>
+
+            {addModus ? <div className="book-add-container">
+                <h2>{updateModus ? 'Update Book' : 'Add New Book'}</h2>
+                <form className="book-add-form" onSubmit={(e) => {
+                    e.preventDefault();
+                    if (updateModus === false) {
+                        addBook();
+                    } else {
+                        sendBookUpdate()
+                    }
+                }}>    <label>Title:</label><input type='text' value={title} onChange={(e) => {
+                    setTitle(e.target.value);
+                }} />
+                    <label>Author:</label><input type='text' value={author} onChange={(e) => {
+                        setAuthor(e.target.value);
+                    }} />
+                    <label>Isbn:</label><input type='text' value={isbn} onChange={(e) => {
+                        setIsbn(e.target.value);
+                    }} />
+                    <button type="submit" className="basic-button">{updateModus ? 'Update Book' : 'Add New Book'}</button>
+                    <button type="submit" className="basic-button" onClick={() => leaveScreen()}>Annuleren</button>
+                </form>
+
+            </div> : null}
+            {deleteModus ? <div className="book-add-container"><h2>Weet je zeker dat je {title} uit het systeem wil halen?</h2>
+                <div><button type="submit" className="basic-button" onClick={() => deleteBook(deleteId)}>Verwijder boek</button>
+                    <button type="submit" className="basic-button" onClick={() => setDeleteModus(false)}>Annuleren</button> </div></div> : null}
         </div>
-        <div className="bookoverview-searchbar">
-          <input type='text' placeholder="Zoek..." />
-          <div><label>
-            Beschikbaar:
-            <input
-              name="isAvailable"
-              type="checkbox"
-              defaultChecked={true}
-            />
-          </label></div>
-          <div>  <label>Sorteren op:</label><select defaultValue="relevantie">
-            <option value="locatie">Locatie</option>
-            <option value="beschikbaarheid">Beschikbaarheid</option>
-            <option value="pagina">Pagina's</option>
-            <option value="relevantie">Relevantie</option>
-          </select></div>
-          <h3>Voeg nieuw boek toe<MdLibraryAdd className="icon" onClick={() => setAddModus(true)} />  </h3>
-        </div>
-        <table className="bookoverview-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Isbn</th>
-            </tr>
-          </thead>
-          <tbody>
-            {listItemsTable}
-          </tbody>
-        </table>
-
-      </div>
-
-      {addModus ? <div className="book-add-container">
-        <h2>{updateModus ? 'Update Book' : 'Add New Book'}</h2>
-        <form className="book-add-form" onSubmit={(e) => {
-          e.preventDefault();
-          if (updateModus === false) {
-            addBook();
-          } else {
-            sendBookUpdate()
-          }
-        }}>    <label>Title:</label><input type='text' value={title} onChange={(e) => {
-          setTitle(e.target.value);
-        }} />
-          <label>Author:</label><input type='text' value={author} onChange={(e) => {
-            setAuthor(e.target.value);
-          }} />
-          <label>Isbn:</label><input type='text' value={isbn} onChange={(e) => {
-            setIsbn(e.target.value);
-          }} />
-          <button type="submit" className="basic-button">{updateModus ? 'Update Book' : 'Add New Book'}</button>
-          <button type="submit" className="basic-button" onClick={() => leaveScreen() }>Annuleren</button>
-        </form>
-
-      </div> : null}
-      {deleteModus ? <div className="book-add-container"><h2>Weet je zeker dat je {title} uit het systeem wil halen?</h2>
-      <div><button type="submit" className="basic-button" onClick={() => deleteBook(deleteId)}>Verwijder boek</button>
-      <button type="submit" className="basic-button" onClick={() => setDeleteModus(false)}>Annuleren</button> </div></div> : null}
-    </div>
-  )
+    )
 }
 
 export default AdminBookOverview

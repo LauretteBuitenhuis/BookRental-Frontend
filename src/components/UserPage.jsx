@@ -28,7 +28,7 @@ function UserPage() {
                 </div>
 
                 <nav className='user-navbar'>
-                    <button><img src={UserIcon} alt='Admin' /></button>
+                    <img src={UserIcon} alt='Admin' />
                     <span>Voornaam Achternaam</span>
                     <button><img src={logOutIcon} alt='log out' onClick={logoutHandler} /></button>
                 </nav>

@@ -33,7 +33,7 @@ function AdminPage() {
       </div>
 
             <nav className='navbar'>
-                <button><img src={AdminIcon} alt='Admin'/></button>
+                <img src={AdminIcon} alt='Admin'/>
                 <span>Voornaam Achternaam</span> 
                 <button> <img src={InventoryIcon} alt='Boeken inventaris' onClick={bookInventoryHandler} /></button>
                 <button> <img src={EmployeesIcon} alt='Werknemers' onClick={employeesHandler} /></button>               
