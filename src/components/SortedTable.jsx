@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { BsPencilFill } from "react-icons/bs";
+import { BsDownload, BsPencilFill } from "react-icons/bs";
 import { BsTrashFill } from "react-icons/bs";
 import AuthContext from "../store/auth-context";
 
@@ -22,7 +22,13 @@ function SortedTableHeader(props) {
 }
 
 export function SortedTable(props) {
-  const { showDeleteModal, updateBook, data, columns = [] } = props;
+  const {
+    showDeleteModal,
+    updateBook,
+    createReservation,
+    data,
+    columns = [],
+  } = props;
 
   const [sortKey, setSortKey] = useState("title");
   const [isSortAscending, setIsSortAscending] = useState(true);
@@ -106,7 +112,7 @@ export function SortedTable(props) {
               }
             />
           ))}
-          <th>Wijzig</th>
+          <th>Reserveer</th>
         </tr>
       </thead>
       <tbody>
@@ -116,8 +122,8 @@ export function SortedTable(props) {
               <td key={`col-${columnIndex}`}>{item[key] ?? ""}</td>
             ))}
             <td className="table-buttons">
-              <span onClick={() => showDeleteModal(item)}>
-                <button>Reserveer</button>
+              <span onClick={() => createReservation(item)}>
+                <BsDownload className="icon" />
               </span>
             </td>
           </tr>

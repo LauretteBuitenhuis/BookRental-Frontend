@@ -28,6 +28,7 @@ export function Inventory() {
   const [addModus, setAddModus] = useState(false);
   const [deleteModus, setDeleteModus] = useState(false);
   const [deleteId, setDeleteId] = useState();
+  const [reservation, setReservation] = useState();
 
   const logoutHandler = () => {
     auth.logout();
@@ -38,9 +39,12 @@ export function Inventory() {
     navigate("/employees", { replace: true });
   };
 
+  // TODO - create reservation
+  function createReservation(book) {}
+
   function getAllBooks() {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`)
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((data) => setBooks(data));
   }
 
@@ -161,6 +165,7 @@ export function Inventory() {
         <SortedTable
           showDeleteModal={showDeletePopUp}
           updateBook={updateBook}
+          createReservation={createReservation}
           data={books}
           columns={[
             {
