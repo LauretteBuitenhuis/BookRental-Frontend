@@ -7,6 +7,7 @@ import Main from "./components/Main";
 import Reservations from "./components/Reservations";
 import Header from "./components/Header";
 import AuthContext from "./store/auth-context";
+import { Inventory } from "./components/Inventory";
 import Books from "./components/Books";
 import Employees from "./components/Employees";
 
@@ -21,6 +22,7 @@ function App() {
         {!isLoggedIn && <Route path="/" element={<Login />} />}
         {isLoggedIn && <Route path="main" element={<Main />} />}
         {isLoggedIn && <Route path="/register" element={<CreateAccount />} />}
+        {isLoggedIn && <Route path="/inventory" element={<Inventory />} />}
         {isLoggedIn && <Route path="books" element={<Books />} />}
         {isLoggedIn && <Route path="employees" element={<Employees />} />}
         {isLoggedIn && <Route path="reservations" element={<Reservations />} />}

@@ -29,7 +29,6 @@ const Login = () => {
 
     fetch(`${process.env.REACT_APP_BACKEND_URL}/user/login`, options)
       .then((res) => {
-        console.log(res);
         if (res.ok) {
           return res.json();
         } else {
