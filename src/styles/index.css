@@ -137,7 +137,6 @@ input[type=email]:focus {
   justify-content: space-between;
   align-items: center;
   width: 900px;
-  flex-grow:1;
   margin-left: 100px;
   font-family: euclid-semibold;
 }

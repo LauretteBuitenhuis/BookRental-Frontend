@@ -1,0 +1,55 @@
+.employeesheader-container {
+    Display: flex;
+}
+
+.employeesheader {
+    margin-left: 100px;
+    display: inline-block;
+}
+
+.employeesheader h4 {
+    color: #ab1403;
+    font-family: euclid-bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.employeesheader h2 {
+    margin-top: 0;
+    font-family: euclid-bold;
+    font-size: 36px;
+}
+
+.employeesnavbar {
+    margin-right: 100px;
+    margin-top: 25px;
+    text-align: right;
+    width: 100%;
+    font-size: 24px;
+}
+
+.employeesnavbar span {
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 50px;
+}
+
+.employeesnavbar button {
+    height: 60px;
+    background: none;
+    border: none;
+    margin-left: 20px;
+}
+
+
+
+.employeesnavbar button:hover {
+    padding: 10px 10px;
+    background-color: #A1A1AA;
+}
+
+.static {
+    height: 60px;
+        margin-left: 20px;
+    background-color: #A1A1AA;
+}
