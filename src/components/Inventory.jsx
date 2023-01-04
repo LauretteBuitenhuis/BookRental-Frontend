@@ -82,7 +82,6 @@ export function Inventory() {
   }
 
   function sendBookUpdate() {
-    console.log("Send update");
     let newBook = {
       id: updatedId,
       title,
@@ -96,7 +95,7 @@ export function Inventory() {
         Authorization: auth.token,
       },
       body: JSON.stringify(newBook),
-    });
+    }).then(() => getAllBooks());
     setTitle("");
     setAuthor("");
     setIsbn("");
@@ -127,9 +126,16 @@ export function Inventory() {
           </div>
         </div>
         <TextInput name="search" placeholder="Zoek..." onChange={search} />
-        <CheckboxInput name="isAvailable" label="Beschikbaar" />
-        Voeg nieuw boek toe
-        <MdLibraryAdd className="addIcon" onClick={() => setAddModus(true)} />
+        <div className="table-options">
+          <CheckboxInput name="isAvailable" label="Beschikbaar" />
+          <div>
+            Voeg nieuw boek toe
+            <MdLibraryAdd
+              className="add-icon"
+              onClick={() => setAddModus(true)}
+            />
+          </div>
+        </div>
         <SortedTable
           showDeleteModal={showDeletePopUp}
           updateBook={updateBook}
@@ -164,7 +170,6 @@ export function Inventory() {
               }
             }}
           >
-            {" "}
             <label>Titel:</label>
             <input
               type="text"
