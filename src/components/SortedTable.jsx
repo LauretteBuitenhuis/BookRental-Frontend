@@ -1,13 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsPencilFill } from "react-icons/bs";
 import { BsTrashFill } from "react-icons/bs";
-
-/**
- * column: {
- *  key: string,
- *  sortable: boolean
- * }
- */
 
 function SortedTableHeader(props) {
   const {
