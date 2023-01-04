@@ -3,7 +3,7 @@ import { BsPencilFill } from "react-icons/bs";
 import { BsTrashFill } from "react-icons/bs";
 import { MdLibraryAdd } from "react-icons/md";
 
-function BookOverview() {
+function AdminBookOverview() {
   const [bookData, setBookData] = useState([]);
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -147,7 +147,6 @@ function leaveScreen () {
               <th>Title</th>
               <th>Author</th>
               <th>Isbn</th>
-              <th>Update</th>
             </tr>
           </thead>
           <tbody>
@@ -187,4 +186,4 @@ function leaveScreen () {
   )
 }
 
-export default BookOverview
+export default AdminBookOverview

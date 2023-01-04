@@ -19,6 +19,8 @@
       font-family: euclid-bold;
       font-size: 36px;
     }
+
+    
   
   
   .user-navbar {
@@ -47,4 +49,25 @@
       background-color: none;
     }
   
-   
+    .main-container {
+        margin-left: 100px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .main-container h5 {
+        margin-top: 30px;
+        font-family: euclid-bold;
+        font-size: 18px;
+      }
+
+      .possesions {
+        margin-left: 100px;
+        width:50%;
+      }
+
+      .requests {
+        margin-left: 500px;
+        width:50%;
+        /* flex-direction: row; */
+      }
