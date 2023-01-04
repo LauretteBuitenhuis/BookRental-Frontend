@@ -7,6 +7,7 @@ import AdminIcon from "../assets/ic_account_box_24px_admin.png";
 import { useContext } from "react";
 import AuthContext from "../store/auth-context";
 
+// TODO - fix css
 function Header() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();

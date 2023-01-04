@@ -49,7 +49,7 @@ export function Inventory() {
       },
       body: JSON.stringify(newBook),
     }).then(() => getAllBooks());
-    // TODO - succes message
+    // TODO - succes and error messages
     setAddModus(false);
   }
 
