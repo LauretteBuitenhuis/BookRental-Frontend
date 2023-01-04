@@ -7,9 +7,6 @@ import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
 import { SortedTable } from "./SortedTable";
 
-// TODO - reserveren van een boek
-// TODO - toggle admin/user view
-
 export function Inventory() {
   const auth = useContext(AuthContext);
 
@@ -139,7 +136,7 @@ export function Inventory() {
             {
               key: "isbn",
               sortable: false,
-            }
+            },
           ]}
         />
       </div>
