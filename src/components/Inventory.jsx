@@ -106,7 +106,7 @@ export function Inventory() {
       isbn,
     };
     fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${newBook.id}/edit`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token,
