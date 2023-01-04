@@ -1,12 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import Reserve from '../assets/ic_archive_24px.png';
-
+import { BsDownload } from "react-icons/bs";
+import AuthContext from "../store/auth-context";
+import { useContext } from "react";
 
 function UserBookOverview() {
   const [bookData, setBookData] = useState([]);
+  const [reservation, setReservation] = useState();
+
+  const auth = useContext(AuthContext);
 
   function getAllBooks() {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`).then(res => res.json()).then(data => setBookData(data))
+  }
+
+  function createReservation(book) {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/reservation/create/${book.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': auth.token,
+      }
+    }).then(res => res.json()).then(reservation => {
+      setReservation(reservation)
+    })
   }
 
   useEffect(() => {
@@ -23,7 +40,8 @@ function UserBookOverview() {
           <td>{book.author}</td>
           <td>{book.isbn}</td>
           <td></td>
-          <td><button><img src={Reserve} alt='reserve'/></button></td>
+          <td className="table-buttons">
+          <span onClick={() => createReservation(book)}><BsDownload className="icon"/></span></td>      
         </tr>
       ))
 

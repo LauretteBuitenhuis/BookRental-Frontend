@@ -205,6 +205,11 @@ select {
   color: #03AB03;
 }
 
+.icongrey {
+  font-size: 20px;
+  color: #52525B;
+}
+
 .icon:hover {
   cursor: pointer;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
