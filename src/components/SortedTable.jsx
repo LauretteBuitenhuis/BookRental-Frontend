@@ -42,7 +42,6 @@ export function SortedTable(props) {
     : sortedDataWithoutOrder.reverse();
 
   const auth = useContext(AuthContext);
-  console.log(auth.isAdmin);
 
   if (auth.isAdmin === true) {
     return (
