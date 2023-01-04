@@ -3,10 +3,11 @@ import { CreateAccount } from "./components/CreateAccount";
 import { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
+import Reservations from "./components/Reservations";
 import Main from "./components/Main";
 import Header from "./components/Header";
 import AuthContext from "./store/auth-context";
-import Reservations from "./components/Reservations";
+import Books from "./components/Books";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -18,8 +19,9 @@ function App() {
       <Routes>
         {!isLoggedIn && <Route path="/" element={<Login />} />}
         {isLoggedIn && <Route path="main" element={<Main />} />}
-        {isLoggedIn && <Route path="/reservations" element={<Reservations />} />}
         {isLoggedIn && <Route path="/register" element={<CreateAccount />} />}
+        {isLoggedIn && <Route path="books" element={<Books />} />}
+        {isLoggedIn && <Route path="reservations" element={<Reservations />} />}
         <Route
           path="*"
           element={<Navigate to={isLoggedIn ? "/main" : "/"} replace />}
