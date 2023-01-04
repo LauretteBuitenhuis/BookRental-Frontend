@@ -20,9 +20,9 @@ function App() {
       <Routes>
         {!isLoggedIn && <Route path="/" element={<Login />} />}
         {isLoggedIn && <Route path="/main" element={<Main />} />}
-        {isLoggedIn && <Route path="/register" element={<CreateAccount />} />}
+        {isLoggedIn && authCtx.isAdmin && <Route path="/register" element={<CreateAccount />} />}
         {isLoggedIn && <Route path="/inventory" element={<Inventory />} />}
-        {isLoggedIn && <Route path="employees" element={<Employees />} />}
+        {isLoggedIn && authCtx.isAdmin && <Route path="employees" element={<Employees />} />}
         {isLoggedIn && <Route path="reservations" element={<Reservations />} />}
         <Route
           path="*"
