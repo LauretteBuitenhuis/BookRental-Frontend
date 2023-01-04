@@ -222,7 +222,7 @@ export function Inventory() {
               }}
             />
             <button type="submit" className="button">
-              {updateModus ? "Bijwerken" : "Als nieuw boek toevoegen"}
+              {updateModus ? "Bijwerken" : "Toevoegen"}
             </button>
             <button
               type="submit"
