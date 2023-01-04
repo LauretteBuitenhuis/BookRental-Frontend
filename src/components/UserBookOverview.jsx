@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Reserve from '../assets/ic_archive_24px.png';
 
 
 function UserBookOverview() {
@@ -21,6 +22,8 @@ function UserBookOverview() {
           <td>{book.title}</td>
           <td>{book.author}</td>
           <td>{book.isbn}</td>
+          <td></td>
+          <td><button><img src={Reserve} alt='reserve'/></button></td>
         </tr>
       ))
 
@@ -56,13 +59,14 @@ function UserBookOverview() {
               <th>Title</th>
               <th>Author</th>
               <th>Isbn</th>
+              <th>Beschikbaarheid</th>
+              <th>Reserveer</th>
             </tr>
           </thead>
           <tbody>
             {listItemsTable}
           </tbody>
         </table>
-
       </div>
       </div>
   )

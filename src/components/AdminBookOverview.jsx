@@ -147,7 +147,6 @@ function leaveScreen () {
               <th>Title</th>
               <th>Author</th>
               <th>Isbn</th>
-              <th>Update</th>
             </tr>
           </thead>
           <tbody>
