@@ -16,7 +16,7 @@ function UserPage() {
     };
 
     const bookInventoryHandler = () => {
-        navigate("/books", { replace: true });
+        navigate("/inventory", { replace: true });
     };
 
     return (
