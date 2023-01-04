@@ -48,7 +48,7 @@ export function Inventory() {
         Authorization: auth.token,
       },
       body: JSON.stringify(newBook),
-    });
+    }).then(() => getAllBooks());
     // TODO - succes message
     setAddModus(false);
   }
@@ -66,7 +66,7 @@ export function Inventory() {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
-    });
+    }).then(() => getAllBooks());
     setTitle("");
     setDeleteId();
     setDeleteModus(false);
