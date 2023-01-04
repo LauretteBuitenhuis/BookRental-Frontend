@@ -24,16 +24,17 @@ body {
   grid-column-gap: 10px;
 }
 
-.my-spacer {
-  flex: 1 1 auto;
-}
-
 .header-img {
   width: 100px;
   padding: 10px;
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.header button {
+  background: none;
+  border: none;
 }
 
 .footer {
@@ -80,31 +81,6 @@ input[type="email"]:focus {
 
 .login-header h2,
 .userheader h2 {
-  margin-top: 0;
-  font-family: euclid-bold;
-  font-size: 36px;
-}
-
-.adminheader-container,
-.userheader-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.adminheader {
-  margin-left: 100px;
-  display: inline-block;
-}
-
-.adminheader h4 {
-  color: #ab1403;
-  font-family: euclid-bold;
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.adminheader h2 {
   margin-top: 0;
   font-family: euclid-bold;
   font-size: 36px;
@@ -185,30 +161,6 @@ select {
 .request-button:hover {
   background-color: #00e600;
 }
-
-.navbar {
-  margin-right: 0;
-  margin-top: 0;
-  display: flex;
-  justify-content: flex-end;
-  width: 50%;
-  height: 70%;
-}
-
-/* .navbar button {
-  padding: 15px 30px;
-  background-color: black;
-  font-size: 14px;
-  font-family: euclid-semibold;
-} */
-
-/* .navbar button:hover {
-  padding: 15px 30px;
-  background-color: #03AB03;
-  ;
-  font-size: 14px;
-  font-family: euclid-semibold;
-} */
 
 .logout-button {
   background-color: white;
