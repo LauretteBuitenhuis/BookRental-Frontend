@@ -1,8 +1,6 @@
 .header {
   display: flex;
-  padding: 1vw;
-  padding-left: 2vw;
-  padding-right: 2vw;
+  padding: 1vw 2vw;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(211, 210, 210);
