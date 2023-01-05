@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { MdLibraryAdd } from "react-icons/md";
 import AuthContext from "../store/auth-context";
@@ -8,12 +8,30 @@ import InventoryIcon from '../assets/BooksOverview.png';
 import AdminIcon from '../assets/ic_account_box_24px_admin.png';
 import '../styles/employees.css';
 
+import { TextInput } from "./TextInput";
+import { CheckboxInput } from "./CheckboxInput";
+import { SortedTable } from "./SortedTable";
+
 
 
 
 function Employees() {
     const navigate = useNavigate();
     const authCtx = useContext(AuthContext);
+
+    const [users, setUsers] = useState([]);
+
+
+    function getAllUsers() {
+        fetch("http://localhost:8082/user/all")
+          .then((res) => res.json())
+          .then((data) => setUsers(data));
+      }
+
+      useEffect(() => {
+        getAllUsers();
+      }, []);
+
 
     const logoutHandler = () => {
         authCtx.logout();
@@ -28,6 +46,11 @@ function Employees() {
     const createUserHandler = () => {
         navigate("/register", { replace: true });
     };
+
+    // TODO - filtering
+    // TODO - searching
+    function search() { }
+
 
     return (
         <div>
@@ -47,9 +70,36 @@ function Employees() {
                         <button><img src={logOutIcon} alt='log out' onClick={logoutHandler} /></button>
                     </nav>
                 </div>
+
+                <div className="inventory-container-employees">
+
+                <TextInput name="search" placeholder="Zoek..." onChange={search} />
+                <CheckboxInput name="isAvailable" label="in Dienst" />
+                
+                <MdLibraryAdd className="icon" onClick={createUserHandler} />Voeg werknemer toe 
+                <SortedTable
+                    data={users}
+                    columns={[
+                        {
+                            key: "lastName",
+                            sortable: true,
+                        },
+                        {
+                            key: "firstName",
+                            sortable: true,
+                        },
+                        {
+                            key: "email",
+                            sortable: false,
+                        },
+                    ]}
+                />
+                </div>
+
+
             </div>
             <div>
-                <h5><MdLibraryAdd className="icon" onClick={createUserHandler} />Voeg werknemer toe </h5>
+
             </div>
 
 
