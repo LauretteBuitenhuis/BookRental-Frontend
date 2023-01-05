@@ -10,7 +10,7 @@ const AuthContext = React.createContext({
 
 export const AuthContextProvider = ({ children }) => {
   const initialToken = localStorage.getItem("token");
-  const initialIsAdmin = localStorage.getItem("isAdmin");
+  const initialIsAdmin = localStorage.getItem("isAdmin") ==="true";
 
   const [token, setToken] = useState(initialToken);
   const [isAdmin, setIsAdmin] = useState(initialIsAdmin);
