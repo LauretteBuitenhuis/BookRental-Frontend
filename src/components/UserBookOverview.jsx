@@ -5,8 +5,7 @@ import AuthContext from '../store/auth-context';
 import logOutIcon from '../assets/ic_exit_to_app_24px.png';
 import UserIcon from '../assets/ic_account_box_24px_user.png';
 import '../styles/inventory.css';
-
-
+import { BsDownload } from "react-icons/bs";
 
 function UserBookOverview() {
   const navigate = useNavigate();
@@ -18,9 +17,22 @@ function UserBookOverview() {
   };
 
   const [bookData, setBookData] = useState([]);
+  const [reservation, setReservation] = useState();
 
   function getAllBooks() {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`).then(res => res.json()).then(data => setBookData(data))
+  }
+
+  function createReservation(book) {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/reservation/create/${book.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': authCtx.token,
+      }
+    }).then(res => res.json()).then(reservation => {
+      setReservation(reservation)
+    })
   }
 
   useEffect(() => {
@@ -37,7 +49,8 @@ function UserBookOverview() {
           <td>{book.author}</td>
           <td>{book.isbn}</td>
           <td></td>
-          <td><button><img src={Reserve} alt='reserve' /></button></td>
+          <td className="table-buttons">
+          <span onClick={() => createReservation(book)}><BsDownload className="icon"/></span></td>      
         </tr>
       ))
 
