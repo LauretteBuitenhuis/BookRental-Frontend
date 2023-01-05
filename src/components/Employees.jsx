@@ -16,21 +16,26 @@ import { SortedTable } from "./SortedTable";
 
 
 function Employees() {
+    const auth = useContext(AuthContext);
     const navigate = useNavigate();
     const authCtx = useContext(AuthContext);
 
     const [users, setUsers] = useState([]);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [deleteModus, setDeleteModus] = useState(false);
+    const [deleteId, setDeleteId] = useState();
 
 
     function getAllUsers() {
         fetch("http://localhost:8082/user/all")
-          .then((res) => res.json())
-          .then((data) => setUsers(data));
-      }
+            .then((res) => res.json())
+            .then((data) => setUsers(data));
+    }
 
-      useEffect(() => {
+    useEffect(() => {
         getAllUsers();
-      }, []);
+    }, []);
 
 
     const logoutHandler = () => {
@@ -50,6 +55,27 @@ function Employees() {
     // TODO - filtering
     // TODO - searching
     function search() { }
+
+    function showDeletePopUp(user) {
+        setFirstName(user.firstName);
+        setLastName(user.lastName);
+        setDeleteId(user.id);
+        setDeleteModus(true);
+    }
+
+    function deleteUser(id) {
+        fetch(`http://localhost:8082/user/${id}/delete`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: auth.token,
+            },
+        });
+        setFirstName("");
+        setDeleteId();
+        setDeleteModus(false);
+    }
+
 
 
     return (
@@ -73,29 +99,52 @@ function Employees() {
 
                 <div className="inventory-container-employees">
 
-                <TextInput name="search" placeholder="Zoek..." onChange={search} />
-                <CheckboxInput name="isAvailable" label="in Dienst" />
-                
-                <MdLibraryAdd className="icon" onClick={createUserHandler} />Voeg werknemer toe 
-                <SortedTable
-                    data={users}
-                    columns={[
-                        {
-                            key: "lastName",
-                            sortable: true,
-                        },
-                        {
-                            key: "firstName",
-                            sortable: true,
-                        },
-                        {
-                            key: "email",
-                            sortable: false,
-                        },
-                    ]}
-                />
-                </div>
+                    <TextInput name="search" placeholder="Zoek..." onChange={search} />
+                    <CheckboxInput name="isAvailable" label="in Dienst" />
 
+                    <MdLibraryAdd className="icon" onClick={createUserHandler} />Voeg werknemer toe
+                    <SortedTable
+                        showDeleteModal={showDeletePopUp}
+                        data={users}
+                        columns={[
+                            {
+                                key: "lastName",
+                                sortable: true,
+                            },
+                            {
+                                key: "firstName",
+                                sortable: true,
+                            },
+                            {
+                                key: "email",
+                                sortable: false,
+                            },
+                        ]}
+                    />
+                </div>
+                {deleteModus && (
+        <div className="inventory-container">
+          <div className="pop-up">
+            <h3>Weet je zeker dat je {firstName +" " + lastName} uit het systeem wil halen?</h3>
+            <div>
+              <button
+                type="submit"
+                className="button"
+                onClick={() => deleteUser(deleteId)}
+              >
+                Ja, verwijder werknemer
+              </button>
+              <button
+                type="submit"
+                className="button"
+                onClick={() => setDeleteModus(false)}
+              >
+                Nee, annuleren
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
             </div>
             <div>
