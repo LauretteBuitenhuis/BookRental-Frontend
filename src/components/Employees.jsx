@@ -22,9 +22,13 @@ function Employees() {
 
     const [users, setUsers] = useState([]);
     const [firstName, setFirstName] = useState("");
+    const [email, setEmail] = useState("");
     const [lastName, setLastName] = useState("");
     const [deleteModus, setDeleteModus] = useState(false);
     const [deleteId, setDeleteId] = useState();
+    const [addModus, setAddModus] = useState(false);
+    const [updateModus, setUpdateModus] = useState(false);
+    const [updatedId, setUpdatedId] = useState();
 
 
     function getAllUsers() {
@@ -36,6 +40,45 @@ function Employees() {
     useEffect(() => {
         getAllUsers();
     }, []);
+
+    function updateUser(user) {
+        setAddModus(true);
+        setUpdateModus(true);
+        setUpdatedId(user.id);
+        setFirstName(user.FirstName);
+        setLastName(user.LastName);
+        setEmail(user.email);
+      }
+    
+      function sendUserUpdate() {
+        console.log("Send update");
+        let newUser = {
+          id: updatedId,
+          firstName,
+          lastName,
+          email,
+        };
+        fetch(`http://localhost:8082/user/${newUser.id}/edit`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth.token,
+          },
+          body: JSON.stringify(newUser),
+        });
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setUpdatedId();
+        setUpdateModus(false);
+        setAddModus(false);
+      }
+
+      
+      function leaveScreen() {
+        setUpdateModus(false);
+        setAddModus(false);
+      }
 
 
     const logoutHandler = () => {
@@ -105,6 +148,7 @@ function Employees() {
                     <MdLibraryAdd className="icon" onClick={createUserHandler} />Voeg werknemer toe
                     <SortedTable
                         showDeleteModal={showDeletePopUp}
+                        updateFunction={updateUser}
                         data={users}
                         columns={[
                             {
@@ -122,6 +166,59 @@ function Employees() {
                         ]}
                     />
                 </div>
+
+                {addModus && (
+        <div className="inventory-container">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (updateModus === false) {
+                //addUser();
+              } else {
+                sendUserUpdate();
+              }
+            }}
+          >
+            {" "}
+            <label>Voornaam:</label>
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
+            />
+            <label>Achternaam:</label>
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
+            />
+            <label>E-mail:</label>
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <button type="submit" className="button">
+              {updateModus ? "Bijwerken" : "Als nieuwe werknemer toevoegen"}
+            </button>
+            <button
+              type="submit"
+              className="button"
+              onClick={() => leaveScreen()}
+            >
+              Annuleren
+            </button>
+          </form>
+        </div>
+      )}
+
+
                 {deleteModus && (
         <div className="inventory-container">
           <div className="pop-up">

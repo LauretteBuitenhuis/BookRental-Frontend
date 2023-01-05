@@ -122,7 +122,7 @@ export function Inventory() {
         <MdLibraryAdd className="addIcon" onClick={() => setAddModus(true)} />
         <SortedTable
           showDeleteModal={showDeletePopUp}
-          updateBook={updateBook}
+          updateFunction={updateBook}
           data={books}
           columns={[
             {
