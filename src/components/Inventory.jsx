@@ -37,6 +37,7 @@ export function Inventory() {
       .then((res) => res.json())
       .then((reservation) => {
         setReservation(reservation);
+        getAllNonReservedByUserBooks();
       });
   }
 
@@ -44,6 +45,18 @@ export function Inventory() {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`)
       .then((response) => response.json())
       .then((data) => setBooks(data));
+  }
+
+  function getAllNonReservedByUserBooks() {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all/user`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': auth.token,
+      }
+    }).then(res => res.json()).then(data => {
+      setBooks(data)
+    })
   }
 
   function addBook() {
@@ -127,7 +140,7 @@ export function Inventory() {
   function search() {}
 
   useEffect(() => {
-    getAllBooks();
+    auth.isAdmin ? getAllBooks() : getAllNonReservedByUserBooks();
   }, []);
 
   return (
