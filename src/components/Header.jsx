@@ -40,6 +40,8 @@ function Header() {
     return null;
   }
 
+  if (window.location.pathname === "/") return null;
+
   return (
     <div className="header">
       <div className="profile">
