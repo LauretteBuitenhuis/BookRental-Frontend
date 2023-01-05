@@ -29,6 +29,11 @@ function Header() {
     navigate("main", { replace: true });
   };
 
+  // TODO - get current user
+  function CurrentUser(props) {
+    const { getAllUser } = props;
+  }
+
   function EmployeeButton() {
     if (auth.isAdmin === true) {
       return (
