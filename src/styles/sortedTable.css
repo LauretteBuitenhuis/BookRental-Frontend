@@ -1,8 +1,26 @@
+.inventory-container {
+  margin: 5vw;
+  margin-top: 0;
+}
+
 .inventory-container h2 {
   text-transform: uppercase;
   letter-spacing: 0.15rem;
   text-align: left;
   margin-bottom: 5vh;
+}
+
+.inventory-container h3 {
+  margin-top: 0;
+  font-family: euclid-bold;
+  font-size: 36px;
+}
+
+.inventory-container h4 {
+  color: #ab1403;
+  font-family: euclid-bold;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .inventory-container form {
@@ -56,7 +74,7 @@
 }
 
 .inventory-container table {
-  margin-top: 5vh;
+  margin-top: 1vh;
 }
 
 .inventory-container th {
@@ -68,6 +86,17 @@
 
 .inventory-container td {
   padding-left: 5px;
+}
+
+.inventory-container .table-options {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+}
+
+.inventory-container .add-icon {
+  margin-left: 10px;
+  margin-bottom: 0;
 }
 
 .inventory-container select:hover {
