@@ -11,18 +11,14 @@ function Employees() {
 
   return (
     <div>
-      <div>
-        <div className="employeesheader-container">
-          <div className="employeesheader">
-            <h4>BEKIJK WERKNEMERS</h4>
-            <h2>Werknemersoverzicht</h2>
-          </div>
+      <div className="employeesheader-container">
+        <div className="employeesheader">
+          <h4>BEKIJK WERKNEMERS</h4>
+          <h2>Werknemersoverzicht</h2>
         </div>
-      </div>
-      <div>
         <h5>
           <MdLibraryAdd className="icon" onClick={createUserHandler} />
-          Voeg werknemer toe{" "}
+          Voeg werknemer toe
         </h5>
       </div>
     </div>
