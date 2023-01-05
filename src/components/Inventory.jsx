@@ -22,7 +22,6 @@ export function Inventory() {
   const [deleteId, setDeleteId] = useState();
   const [reservation, setReservation] = useState();
 
-  // TODO - create reservation
   function createReservation(book) {
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/reservation/create/${book.id}`,
@@ -30,8 +29,9 @@ export function Inventory() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: authCtx.token,
+          Authorization: auth.token,
         },
+        body: JSON.stringify(book.id, auth.token),
       }
     )
       .then((res) => res.json())
