@@ -1,0 +1,26 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 5wh;
+}
+
+.header img {
+  width: 2rem;
+  margin-right: 2vw;
+}
+
+.header .logo {
+  width: 100px;
+  padding: 10px;
+  margin: 0;
+}
+
+.header button {
+  background: none;
+  border: none;
+}
+
+.header span {
+    margin-right: 2vw;;
+}
