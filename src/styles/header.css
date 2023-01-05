@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  padding: 1vw 2vw;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(211, 210, 210);
+}
+
+.header img {
+  width: 2vw;
+}
+
+.header .logo {
+  width: 10vw;
+}
+
+.header .profile {
+  display: inline-flex;
+  align-items: center;
+}
+
+.header button {
+  display: inline-flex;
+  background: none;
+  border: none;
+  margin-left: 5vw;
+}
+
+.header h4 {
+  margin: 0;
+  margin-left: 2vw;
+}
