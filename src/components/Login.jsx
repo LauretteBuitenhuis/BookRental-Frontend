@@ -1,6 +1,7 @@
 import React, { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/auth-context";
+import "../styles/login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,7 +29,6 @@ const Login = () => {
 
     fetch(`${process.env.REACT_APP_BACKEND_URL}/user/login`, options)
       .then((res) => {
-        console.log(res);
         if (res.ok) {
           return res.json();
         } else {

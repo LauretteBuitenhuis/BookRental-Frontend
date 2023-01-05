@@ -1,0 +1,132 @@
+.bookoverview-container {
+  display: flex;
+}
+
+.bookoverview-header {
+  margin-left: 100px;
+  display: inline-block;
+}
+
+.bookoverview-header h4 {
+  color: #03ab03;
+  font-family: euclid-bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.bookoverview-header h2 {
+  margin-top: 0;
+  font-family: euclid-bold;
+  font-size: 36px;
+}
+
+.bookoverview-header-admin {
+  margin-left: 100px;
+  display: inline-block;
+}
+
+.bookoverview-header-admin h4 {
+  color: #ab1403;
+  font-family: euclid-bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.bookoverview-header-admin h2 {
+  margin-top: 0;
+  font-family: euclid-bold;
+  font-size: 36px;
+}
+
+.bookoverview-navbar {
+  margin-right: 100px;
+  margin-top: 25px;
+  text-align: right;
+  width: 100%;
+  font-size: 24px;
+}
+
+.bookoverview-navbar span {
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 300px;
+}
+
+.bookoverview-navbar button {
+  height: 60px;
+  background: none;
+  border: none;
+  margin-left: 20px;
+}
+
+.bookoverview-navbar button:hover {
+  padding: 10px 10px;
+  background-color: #a1a1aa;
+}
+
+.bookoverview-searchbar ::placeholder {
+  font-size: 18px;
+}
+
+.bookoverview-searchbar input[type="text"] {
+  padding: 10px;
+  width: 200px;
+  margin: 0;
+}
+
+.bookoverview-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  margin-left: 100px;
+  font-size: 0.9em;
+  width: 900px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.bookoverview-table thead tr {
+  background-color: #03ab03;
+  color: #ffffff;
+  text-align: left;
+}
+
+.bookoverview-table thead tr.red {
+  background-color: #AB0303;
+  color: #ffffff;
+  text-align: left;
+}
+
+.bookoverview-table th,
+.bookoverview-table td {
+  padding: 12px 15px;
+}
+
+.bookoverview-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.bookoverview-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.bookoverview-table tbody tr:last-of-type {
+  border-bottom: 2px solid #03ab03;
+}
+
+.bookoverview-table tbody tr:last-of-type.red {
+  border-bottom: 2px solid #AB0303;
+}
+
+.book-add-container button {
+  background-color: black;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+}
+
+.static {
+  height: 60px;
+  margin-left: 20px;
+  background-color: #a1a1aa;
+}
