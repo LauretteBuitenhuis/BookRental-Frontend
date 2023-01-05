@@ -5,7 +5,6 @@ import AuthContext from "../store/auth-context";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { TextInput } from "./TextInput";
-import { CheckboxInput } from "./CheckboxInput";
 import { SortedTable } from "./SortedTable";
 import { AdminButton } from "./AdminButton";
 
@@ -24,7 +23,22 @@ export function Inventory() {
   const [reservation, setReservation] = useState();
 
   // TODO - create reservation
-  function createReservation(book) {}
+  function createReservation(book) {
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/reservation/create/${book.id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authCtx.token,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((reservation) => {
+        setReservation(reservation);
+      });
+  }
 
   function getAllBooks() {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`)

@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import Main from "./components/Main";
-import Reservations from "./components/Reservations";
 import Header from "./components/Header";
 import AuthContext from "./store/auth-context";
 import { Inventory } from "./components/Inventory";
@@ -28,7 +27,6 @@ function App() {
         {isLoggedIn && authCtx.isAdmin && (
           <Route path="employees" element={<Employees />} />
         )}
-        {isLoggedIn && <Route path="reservations" element={<Reservations />} />}
         <Route
           path="*"
           element={<Navigate to={isLoggedIn ? "/main" : "/"} replace />}

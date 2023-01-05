@@ -83,7 +83,22 @@ select {
   color: #03ab03;
 }
 
+.icon.red {
+  font-size: 20px;
+  color: #ab1403;
+}
+
+.iconclickable {
+  font-size: 20px;
+  color: #52525B;
+}
+
 .icon:hover {
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.iconclickable:hover {
   cursor: pointer;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
