@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "../styles/header.css";
 import logo from "../assets/0012p000041aQ4LAAU.png";
 import logOutIcon from "../assets/ic_exit_to_app_24px.png";
 import EmployeesIcon from "../assets/ic_supervisor_account_24px.png";
@@ -27,10 +28,12 @@ function Header() {
 
   return (
     <div className="header">
-      <nav className="navbar">
+      <div className="profile">
         <img src={AdminIcon} alt="Admin" />
-        <span>Voornaam Achternaam</span>
-        <img className="static" src={InventoryIcon} alt="inventaris" />
+        <h4>Voornaam Achternaam</h4>
+      </div>
+      <div className="button">
+        <img src={InventoryIcon} alt="inventaris" />
         <button>
           <img
             src={EmployeesIcon}
@@ -41,14 +44,9 @@ function Header() {
         <button>
           <img src={logOutIcon} alt="log out" onClick={logoutHandler} />
         </button>
-      </nav>
+      </div>
       <button>
-        <img
-          src={logo}
-          alt="Header"
-          className="header-img"
-          onClick={redirectMainHandler}
-        />
+        <img src={logo} className="logo" onClick={redirectMainHandler} />
       </button>
     </div>
   );

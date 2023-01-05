@@ -18,25 +18,6 @@ body {
   background-color: #e4e4e7;
 }
 
-.app-container {
-  display: grid;
-  grid-template-rows: 15vh 70vh 5vh;
-  grid-column-gap: 10px;
-}
-
-.header-img {
-  width: 100px;
-  padding: 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.header button {
-  background: none;
-  border: none;
-}
-
 .footer {
   background-color: black;
   color: white;
