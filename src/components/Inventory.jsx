@@ -127,7 +127,9 @@ export function Inventory() {
         </div>
         <TextInput name="search" placeholder="Zoek..." onChange={search} />
         <div className="table-options">
-          <CheckboxInput name="isAvailable" label="Beschikbaar" />
+          {/* 
+          TODO - how to check if book is available
+          <CheckboxInput name="isAvailable" label="Beschikbaar" /> */}
           <AdminButton label="Voeg nieuw boek toe" setAddModus={setAddModus} />
         </div>
         <SortedTable
