@@ -23,6 +23,18 @@ function UserBookOverview() {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`).then(res => res.json()).then(data => setBookData(data))
   }
 
+  function getAllNonReservedByUserBooks() {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all/user`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': authCtx.token,
+      }
+    }).then(res => res.json()).then(data => {
+      setBookData(data)
+    })
+  }
+
   function createReservation(book) {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/reservation/create/${book.id}`, {
       method: 'POST',
@@ -32,11 +44,12 @@ function UserBookOverview() {
       }
     }).then(res => res.json()).then(reservation => {
       setReservation(reservation)
+      getAllNonReservedByUserBooks()
     })
   }
 
   useEffect(() => {
-    getAllBooks()
+    getAllNonReservedByUserBooks()
   }, [])
 
   const listItemsTable =
