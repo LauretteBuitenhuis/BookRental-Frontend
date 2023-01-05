@@ -21,6 +21,10 @@ function Header() {
     navigate("/employees", { replace: true });
   };
 
+  const inventoryHandler = () => {
+    navigate("/inventory", { replace: true });
+  };
+
   const redirectMainHandler = () => {
     navigate("main", { replace: true });
   };
@@ -49,7 +53,13 @@ function Header() {
         <h4>Voornaam Achternaam</h4>
       </div>
       <div className="button">
-        <img src={InventoryIcon} alt="inventaris" />
+        <button>
+          <img
+            src={InventoryIcon}
+            alt="inventaris"
+            onClick={inventoryHandler}
+          />
+        </button>
         <EmployeeButton />
         <button>
           <img src={logOutIcon} alt="log out" onClick={logoutHandler} />
