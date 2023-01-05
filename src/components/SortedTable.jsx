@@ -30,7 +30,7 @@ export function SortedTable(props) {
     columns = [],
   } = props;
 
-  const [sortKey, setSortKey] = useState("title");
+  const [sortKey, setSortKey] = useState(columns[0].key);
   const [isSortAscending, setIsSortAscending] = useState(true);
 
   const sortedDataWithoutOrder = data.sort((a, b) =>
