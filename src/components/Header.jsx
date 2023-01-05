@@ -25,6 +25,21 @@ function Header() {
     navigate("main", { replace: true });
   };
 
+  function EmployeeButton() {
+    if (auth.isAdmin === true) {
+      return (
+        <button>
+          <img
+            src={EmployeesIcon}
+            alt="Werknemers"
+            onClick={employeesHandler}
+          />
+        </button>
+      );
+    }
+    return null;
+  }
+
   return (
     <div className="header">
       <div className="profile">
@@ -33,13 +48,7 @@ function Header() {
       </div>
       <div className="button">
         <img src={InventoryIcon} alt="inventaris" />
-        <button>
-          <img
-            src={EmployeesIcon}
-            alt="Werknemers"
-            onClick={employeesHandler}
-          />
-        </button>
+        <EmployeeButton />
         <button>
           <img src={logOutIcon} alt="log out" onClick={logoutHandler} />
         </button>
