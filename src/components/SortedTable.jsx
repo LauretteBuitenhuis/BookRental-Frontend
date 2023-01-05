@@ -1,13 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsPencilFill } from "react-icons/bs";
 import { BsTrashFill } from "react-icons/bs";
-
-/**
- * column: {
- *  key: string,
- *  sortable: boolean
- * }
- */
 
 function SortedTableHeader(props) {
   const {
@@ -28,9 +21,9 @@ function SortedTableHeader(props) {
 }
 
 export function SortedTable(props) {
-  const { showDeleteModal, updateBook, data, columns = [] } = props;
+  const { showDeleteModal, updateFunction, data, columns = [] } = props;
 
-  const [sortKey, setSortKey] = useState("title");
+  const [sortKey, setSortKey] = useState(columns[0].key);
   const [isSortAscending, setIsSortAscending] = useState(true);
 
   const sortedDataWithoutOrder = data.sort((a, b) =>
@@ -73,7 +66,7 @@ export function SortedTable(props) {
               <td key={`col-${columnIndex}`}>{item[key] ?? ""}</td>
             ))}
             <td className="table-buttons">
-              <span onClick={() => updateBook(item)}>
+              <span onClick={() => updateFunction(item)}>
                 <BsPencilFill className="icon" />
               </span>
               <span onClick={() => showDeleteModal(item)}>
