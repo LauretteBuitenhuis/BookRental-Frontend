@@ -122,7 +122,7 @@ export function Inventory() {
         <div className="bookoverview-container">
           <div>
             <h4>BEKIJK INVENTARIS</h4>
-            <h3>Inventaris</h3>
+            <h3>Boeken</h3>
           </div>
         </div>
         <TextInput name="search" placeholder="Zoek..." onChange={search} />
