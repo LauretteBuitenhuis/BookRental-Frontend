@@ -1,11 +1,12 @@
 import "../styles/sortedTable.css";
-import React, { useEffect, useState } from "react";
-import { useContext } from "react";
-import { MdLibraryAdd } from "react-icons/md";
+import "../styles/mainAdmin.css";
+import "../styles/inventory.css";
 import AuthContext from "../store/auth-context";
+import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { TextInput } from "./TextInput";
-import { CheckboxInput } from "./CheckboxInput";
 import { SortedTable } from "./SortedTable";
+import { AdminButton } from "./AdminButton";
 
 export function Inventory() {
   const auth = useContext(AuthContext);
@@ -19,11 +20,43 @@ export function Inventory() {
   const [addModus, setAddModus] = useState(false);
   const [deleteModus, setDeleteModus] = useState(false);
   const [deleteId, setDeleteId] = useState();
+  const [reservation, setReservation] = useState();
+
+  function createReservation(book) {
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/reservation/create/${book.id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token,
+        },
+        body: JSON.stringify(book.id, auth.token),
+      }
+    )
+      .then((res) => res.json())
+      .then((reservation) => {
+        setReservation(reservation);
+        getAllNonReservedByUserBooks();
+      });
+  }
 
   function getAllBooks() {
-    fetch("http://localhost:8082/book/all")
-      .then((res) => res.json())
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`)
+      .then((response) => response.json())
       .then((data) => setBooks(data));
+  }
+
+  function getAllNonReservedByUserBooks() {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all/user`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': auth.token,
+      }
+    }).then(res => res.json()).then(data => {
+      setBooks(data)
+    })
   }
 
   function addBook() {
@@ -35,15 +68,15 @@ export function Inventory() {
     setTitle("");
     setAuthor("");
     setIsbn("");
-    fetch("http://localhost:8082/book/create", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
       body: JSON.stringify(newBook),
-    });
-    // TODO - succes message
+    }).then(() => getAllBooks());
+    // TODO - succes and error messages
     setAddModus(false);
   }
 
@@ -76,21 +109,20 @@ export function Inventory() {
   }
 
   function sendBookUpdate() {
-    console.log("Send update");
     let newBook = {
       id: updatedId,
       title,
       author,
       isbn,
     };
-    fetch(`http://localhost:8082/book/${newBook.id}/edit`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${newBook.id}/edit`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
       body: JSON.stringify(newBook),
-    });
+    }).then(() => getAllBooks());
     setTitle("");
     setAuthor("");
     setIsbn("");
@@ -104,25 +136,33 @@ export function Inventory() {
     setAddModus(false);
   }
 
-  // TODO - filtering
   // TODO - searching
   function search() {}
 
   useEffect(() => {
-    getAllBooks();
+    auth.isAdmin ? getAllBooks() : getAllNonReservedByUserBooks();
   }, []);
 
   return (
     <div>
       <div className="inventory-container">
-        <h2>Inventaris</h2>
+        <div className="bookoverview-container">
+          <div>
+            <h4>BEKIJK INVENTARIS</h4>
+            <h3>Boeken</h3>
+          </div>
+        </div>
         <TextInput name="search" placeholder="Zoek..." onChange={search} />
-        <CheckboxInput name="isAvailable" label="Beschikbaar" />
-        Voeg nieuw boek toe
-        <MdLibraryAdd className="addIcon" onClick={() => setAddModus(true)} />
+        <div className="table-options">
+          {/* 
+          TODO - how to check if book is available
+          <CheckboxInput name="isAvailable" label="Beschikbaar" /> */}
+          <AdminButton label="Voeg nieuw boek toe" setAddModus={setAddModus} />
+        </div>
         <SortedTable
           showDeleteModal={showDeletePopUp}
-          updateFunction={updateBook}
+          updateBook={updateBook}
+          createReservation={createReservation}
           data={books}
           columns={[
             {
@@ -153,7 +193,6 @@ export function Inventory() {
               }
             }}
           >
-            {" "}
             <label>Titel:</label>
             <input
               type="text"
@@ -179,7 +218,7 @@ export function Inventory() {
               }}
             />
             <button type="submit" className="button">
-              {updateModus ? "Bijwerken" : "Als nieuw boek toevoegen"}
+              {updateModus ? "Bijwerken" : "Toevoegen"}
             </button>
             <button
               type="submit"

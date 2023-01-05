@@ -7,28 +7,32 @@ import Main from "./components/Main";
 import Header from "./components/Header";
 import AuthContext from "./store/auth-context";
 import { Inventory } from "./components/Inventory";
-import Books from "./components/Books";
 import Employees from "./components/Employees";
+import Footer from "./components/Footer";
 
 function App() {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn();
 
   return (
-    <div className="app-container">
+    <div>
       <Header />
       <Routes>
         {!isLoggedIn && <Route path="/" element={<Login />} />}
-        {isLoggedIn && <Route path="main" element={<Main />} />}
-        {isLoggedIn && <Route path="/register" element={<CreateAccount />} />}
+        {isLoggedIn && <Route path="/main" element={<Main />} />}
+        {isLoggedIn && authCtx.isAdmin && (
+          <Route path="/register" element={<CreateAccount />} />
+        )}
         {isLoggedIn && <Route path="/inventory" element={<Inventory />} />}
-        {isLoggedIn && <Route path="books" element={<Books />} />}
-        {isLoggedIn && <Route path="employees" element={<Employees />} />}
+        {isLoggedIn && authCtx.isAdmin && (
+          <Route path="employees" element={<Employees />} />
+        )}
         <Route
           path="*"
           element={<Navigate to={isLoggedIn ? "/main" : "/"} replace />}
         />
       </Routes>
+      <Footer />
     </div>
   );
 }
