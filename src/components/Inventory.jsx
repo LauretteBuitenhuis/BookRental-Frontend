@@ -54,13 +54,13 @@ export function Inventory() {
   }
 
   function deleteBook(id) {
-    fetch(`http://localhost:8082/book/${id}/delete`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${id}/delete`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
-    });
+    }).then(() => getAllBooks());
     setTitle("");
     setDeleteId();
     setDeleteModus(false);

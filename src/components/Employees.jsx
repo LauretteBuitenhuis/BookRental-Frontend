@@ -64,13 +64,13 @@ function Employees() {
     }
 
     function deleteUser(id) {
-        fetch(`http://localhost:8082/user/${id}/delete`, {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/user/${id}/delete`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: auth.token,
             },
-        });
+        }).then(() => getAllUsers());
         setFirstName("");
         setDeleteId();
         setDeleteModus(false);
