@@ -12,9 +12,10 @@ import { BsFillXCircleFill } from "react-icons/bs";
 
 function AdminPage() {
   const [reservationData, setReservationData] = useState([]);
-  const [copy, setCopy] = useState();
+  const [copies, setCopies] = useState([]);
   const [reservation, setReservation] = useState();
   const [loan, setLoan] = useState();
+  const [chooseCopyModus, setchooseCopyModus] = useState(false);
 
   const auth = useContext(AuthContext);
 
@@ -30,11 +31,15 @@ function AdminPage() {
       .then((data) => setReservationData(data));
   }
 
+  function leaveScreen() {
+    setchooseCopyModus(false);
+  }
+
   function approveReservation(reservation, toApprove) {
     if (toApprove === true) {
-      // Get random copy
+      // Get all copies
       fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/book/getrandomcopy/${reservation.book.id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/book/copy/${reservation.book.id}`,
         {
           method: "GET",
           headers: {
@@ -44,29 +49,15 @@ function AdminPage() {
         }
       )
         .then((res) => res.json())
-        .then((copy) => {
-          setCopy(copy);
+        .then((copies) => {
+          setCopies(copies);
 
           // Check if copy is available
-          if (copy !== null && copy !== undefined) {
-            // Approve / deny reservation with given copy
-            fetch(
-              `${process.env.REACT_APP_BACKEND_URL}/reservation/approve/${reservation.id}/${copy.id}`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: auth.token,
-                },
-              }
-            )
-              .then((res) => res.json())
-              .then((loan) => {
-                setLoan(loan);
-                getPendingReservations();
-              });
-          } else {
+          if (copies.length === 0) {
             throw new Error("No copy is available for rental");
+          }
+          else {
+            setchooseCopyModus(true);
           }
         });
     } else {
@@ -89,6 +80,25 @@ function AdminPage() {
     }
   }
 
+  function createLoan(reservation, copy){
+    fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/reservation/approve/${reservation.id}/${copy.id}/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((loan) => {
+        setLoan(loan);
+        leaveScreen();
+        getPendingReservations();
+      })
+  }
+
   useEffect(() => {
     getPendingReservations();
   }, []);
@@ -106,6 +116,21 @@ function AdminPage() {
           </span>
           <span onClick={() => approveReservation(reservation, false)}>
             <BsFillXCircleFill className="icon" />
+          </span>
+        </td>
+      </tr>
+    ));
+
+  const listCopies =
+    copies &&
+    copies.map((copy) => (
+      <tr key={copy.id}>
+        <td>{copy.id}</td>
+        <td>{copy.book.title}</td>
+        <td>{copy.book.author}</td>
+        <td className="table-buttons">
+          <span onClick={() => createLoan(reservation, copy)}>
+            <BsFillCheckCircleFill className="icon" />
           </span>
         </td>
       </tr>
@@ -137,6 +162,48 @@ function AdminPage() {
           </table>
         </div>
       </div>
+
+      {chooseCopyModus && (
+        <div className="inventory-container">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            {" "}
+            <div className="inventaris-container">
+              <div className="bookoverview-container">
+                <center>
+                <table className="bookoverview-table">
+                  <thead>
+                    <tr className="red">
+                      <th>Kopie id</th>
+                      <th>Boek titel</th>
+                      <th>Autheur</th>
+                      <th>
+                        <center>Leen uit</center>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>{listCopies}</tbody>
+                </table>
+                </center>
+              </div>
+            </div>
+
+            <center>
+            <button
+              type="submit"
+              className="button"
+              onClick={() => leaveScreen()}
+            >
+              Annuleren
+            </button>
+            </center>
+          </form>
+        </div>
+      )}
+
     </div>
   );
 }
