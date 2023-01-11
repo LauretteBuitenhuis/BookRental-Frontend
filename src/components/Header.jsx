@@ -11,6 +11,7 @@ import AuthContext from "../store/auth-context";
 function Header() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
+  const name=auth.name;
 
   const logoutHandler = () => {
     auth.logout();
@@ -55,7 +56,7 @@ function Header() {
     <div className="header">
       <div className="profile">
         <img src={AdminIcon} alt="Admin" />
-        <h4>Voornaam Achternaam</h4>
+        <h4> {name} </h4>
       </div>
       <div className="button">
         <button>

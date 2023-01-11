@@ -8,7 +8,6 @@ import Header from "./components/Header";
 import AuthContext from "./store/auth-context";
 import { Inventory } from "./components/Inventory";
 import Employees from "./components/Employees";
-import Footer from "./components/Footer";
 
 function App() {
   const authCtx = useContext(AuthContext);
