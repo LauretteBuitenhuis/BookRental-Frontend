@@ -15,6 +15,7 @@ function Header() {
   const navigate = useNavigate();
   const name=auth.name;
 
+
   const logoutHandler = () => {
     auth.logout();
     navigate("/", { replace: true });
@@ -52,7 +53,7 @@ function Header() {
   return (
     <div className="header">
       <button>
-        <AiFillHome className="icon" onClick={redirectMainHandler} />
+        <AiFillHome className= {auth.isAdmin ? "icon red":"icon"} onClick={redirectMainHandler} />
       </button>
       <div className="profile">
         <img src={AdminIcon} alt="Admin" />
