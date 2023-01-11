@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
-import { BsDownload, BsPencilFill } from "react-icons/bs";
-import { BsTrashFill } from "react-icons/bs";
+import { BsDownload, BsPencilFill, BsTrashFill } from "react-icons/bs";
 import AuthContext from "../store/auth-context";
 
 function SortedTableHeader(props) {

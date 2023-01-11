@@ -32,7 +32,6 @@ function App() {
           element={<Navigate to={isLoggedIn ? "/main" : "/"} replace />}
         />
       </Routes>
-      <Footer />
     </div>
   );
 }
