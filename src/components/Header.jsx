@@ -7,6 +7,8 @@ import InventoryIcon from "../assets/BooksOverview.png";
 import AdminIcon from "../assets/ic_account_box_24px_admin.png";
 import { useContext } from "react";
 import AuthContext from "../store/auth-context";
+import { AiFillHome } from "react-icons/ai";
+
 
 function Header() {
   const auth = useContext(AuthContext);
@@ -30,11 +32,6 @@ function Header() {
     navigate("main", { replace: true });
   };
 
-  // TODO - get current user
-  function CurrentUser(props) {
-    const { getAllUser } = props;
-  }
-
   function EmployeeButton() {
     if (auth.isAdmin === true) {
       return (
@@ -54,6 +51,9 @@ function Header() {
 
   return (
     <div className="header">
+      <button>
+        <AiFillHome className="icon" onClick={redirectMainHandler} />
+      </button>
       <div className="profile">
         <img src={AdminIcon} alt="Admin" />
         <h4> {name} </h4>
@@ -72,7 +72,7 @@ function Header() {
         </button>
       </div>
       <button>
-        <img src={logo} className="logo" onClick={redirectMainHandler} />
+        <img src={logo} alt="to homepage" className="logo"/>
       </button>
     </div>
   );
