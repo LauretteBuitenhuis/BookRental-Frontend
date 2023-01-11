@@ -52,13 +52,8 @@ function AdminPage() {
         .then((copies) => {
           setCopies(copies);
 
-          // Check if copy is available
-          if (copies.length === 0) {
-            throw new Error("No copy is available for rental");
-          }
-          else {
-            setchooseCopyModus(true);
-          }
+          setchooseCopyModus(true);
+          setReservation(reservation);
         });
     } else {
       // Approve / deny reservation with given copy
