@@ -19,6 +19,7 @@ function AdminPage() {
 
   const auth = useContext(AuthContext);
 
+  // TODO - WIM272: error messages
   function getPendingReservations() {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/reservation/pending`, {
       method: "get",
@@ -37,7 +38,7 @@ function AdminPage() {
 
   function approveReservation(reservation, toApprove) {
     if (toApprove === true) {
-      // Get all copies
+      /// TODO - WIM272: error messages
       fetch(
         `${process.env.REACT_APP_BACKEND_URL}/book/copy/${reservation.book.id}`,
         {
@@ -56,7 +57,7 @@ function AdminPage() {
           setReservation(reservation);
         });
     } else {
-      // Approve / deny reservation with given copy
+      // TODO - WIM272: error messages
       fetch(
         `${process.env.REACT_APP_BACKEND_URL}/reservation/deny/${reservation.id}`,
         {
@@ -75,6 +76,7 @@ function AdminPage() {
     }
   }
 
+  // TODO - WIM272: error messages
   function createLoan(reservation, copy){
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/reservation/approve/${reservation.id}/${copy.id}/`,

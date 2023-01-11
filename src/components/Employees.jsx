@@ -21,6 +21,7 @@ function Employees() {
   const [updateModus, setUpdateModus] = useState(false);
   const [updatedId, setUpdatedId] = useState();
 
+  // TODO - WIM272: error messages
   function getAllUsers() {
     fetch("http://localhost:8082/user/all")
       .then((res) => res.json())
@@ -39,7 +40,7 @@ function Employees() {
     setLastName(user.LastName);
     setEmail(user.email);
   }
-
+  // TODO - WIM272: error messages
   function sendUserUpdate() {
     console.log("Send update");
     let newUser = {
@@ -92,7 +93,7 @@ function Employees() {
     setDeleteId(user.id);
     setDeleteModus(true);
   }
-
+  // TODO - WIM272: error messages
   function deleteUser(id) {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/user/${id}/delete`, {
       method: "DELETE",

@@ -21,7 +21,7 @@ export function Inventory() {
   const [deleteModus, setDeleteModus] = useState(false);
   const [deleteId, setDeleteId] = useState();
   const [reservation, setReservation] = useState();
-
+// TODO - WIM272: error messages
   function createReservation(book) {
     fetch(
       `${process.env.REACT_APP_BACKEND_URL}/reservation/create/${book.id}`,
@@ -40,13 +40,13 @@ export function Inventory() {
         getAllNonReservedByUserBooks();
       });
   }
-
+  // TODO - WIM272: error messages
   function getAllBooks() {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`)
       .then((response) => response.json())
       .then((data) => setBooks(data));
   }
-
+  // TODO - WIM272: error messages
   function getAllNonReservedByUserBooks() {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all/user`, {
       method: 'GET',
@@ -58,7 +58,7 @@ export function Inventory() {
       setBooks(data)
     })
   }
-
+// TODO - WIM272: error messages
   function addBook() {
     let newBook = {
       title,
@@ -76,7 +76,6 @@ export function Inventory() {
       },
       body: JSON.stringify(newBook),
     }).then(() => getAllBooks());
-    // TODO - succes and error messages
     setAddModus(false);
   }
 
@@ -85,7 +84,7 @@ export function Inventory() {
     setDeleteId(book.id);
     setDeleteModus(true);
   }
-
+// TODO - WIM272: error messages
   function deleteBook(id) {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${id}/delete`, {
       method: "DELETE",
@@ -107,7 +106,7 @@ export function Inventory() {
     setAuthor(book.author);
     setIsbn(book.isbn);
   }
-
+// TODO - WIM272: error messages
   function sendBookUpdate() {
     let newBook = {
       id: updatedId,
