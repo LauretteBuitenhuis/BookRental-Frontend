@@ -43,7 +43,7 @@ export function CreateAccount() {
         alert(`User with email ${userDto.email} was successfully created`)
       )
       .catch((error) => {
-        alert("Oops! An error occurred.\n\n Request failed:\n" + error);
+        alert("Oops! An error occurred.\n\nRequest failed:\n" + error);
         console.log(error);
       });
   };
