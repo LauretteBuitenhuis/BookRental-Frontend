@@ -6,6 +6,7 @@ const AuthContext = React.createContext({
   login: (_loginUserDto) => {},
   logout: () => {},
   isAdmin: false,
+  name: null,
 });
 
 export const AuthContextProvider = ({ children }) => {
@@ -14,6 +15,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const [token, setToken] = useState(initialToken);
   const [isAdmin, setIsAdmin] = useState(initialIsAdmin);
+  const [name, setName] = useState();
 
   const isLoggedIn = useCallback(() => {
     return token != null;
@@ -26,6 +28,9 @@ export const AuthContextProvider = ({ children }) => {
     const userDtoIsAdmin = loginUserDto.isAdmin === "admin";
     setIsAdmin(userDtoIsAdmin);
     localStorage.setItem("isAdmin", userDtoIsAdmin);
+
+    setName(loginUserDto.name);
+    localStorage.setItem("name",loginUserDto.name)
   };
 
   const logoutHandler = () => {
@@ -41,6 +46,7 @@ export const AuthContextProvider = ({ children }) => {
     login: loginHandler,
     logout: logoutHandler,
     isAdmin,
+    name,
   };
 
   return (
