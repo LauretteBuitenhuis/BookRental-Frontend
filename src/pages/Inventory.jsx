@@ -4,9 +4,9 @@ import "../styles/inventory.css";
 import AuthContext from "../store/auth-context";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { TextInput } from "./TextInput";
-import { SortedTable } from "./SortedTable";
-import { AdminButton } from "./AdminButton";
+import { TextInput } from "../components/TextInput";
+import { SortedTable } from "../components/SortedTable";
+import { AdminButton } from "../components/AdminButton";
 
 export function Inventory() {
   const auth = useContext(AuthContext);
