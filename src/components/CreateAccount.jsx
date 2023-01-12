@@ -38,9 +38,6 @@ export function CreateAccount() {
   return (
     <div className="createaccount-container">
       <h2>Nieuwe gebruiker</h2>
-
-      {hasError && <div>{error}</div>}
-
       <form onSubmit={handleSubmit}>
         <TextInput name="firstName" placeholder="Voornaam" />
         <TextInput name="lastName" placeholder="Achternaam" />
