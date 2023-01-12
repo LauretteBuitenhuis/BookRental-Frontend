@@ -3,10 +3,13 @@ import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
 import { PasswordInput } from "./PasswordInput";
 import AuthContext from "../store/auth-context";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { fetchFromApi } from "./fetchFromApi";
 
 export function CreateAccount() {
   const auth = useContext(AuthContext);
+  const [error, setError] = useState(null);
+  const hasError = error != null;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,35 +25,21 @@ export function CreateAccount() {
       isAdmin: isAdmin.checked,
     };
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/user/create`, {
+    fetchFromApi(`user/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
       body: JSON.stringify(userDto),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((error) => {
-            let errorMessage = error.message;
-            throw new Error(response.status + " - " + errorMessage);
-          });
-        }
-        return response.json();
-      })
-      .then(() =>
-        alert(`User with email ${userDto.email} was successfully created`)
-      )
-      .catch((error) => {
-        alert("Oops! An error occurred.\n\nRequest failed:\n" + error);
-        console.log(error);
-      });
+    }).catch((error) => setError(error.message));
   };
 
   return (
     <div className="createaccount-container">
       <h2>Nieuwe gebruiker</h2>
+
+      {hasError && <div>{error}</div>}
 
       <form onSubmit={handleSubmit}>
         <TextInput name="firstName" placeholder="Voornaam" />
