@@ -52,7 +52,7 @@ export function Inventory() {
       setBooks(data);
     });
   }
-  // TODO - WIM272: error messages
+
   function addBook() {
     let newBook = {
       title,
