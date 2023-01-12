@@ -34,10 +34,9 @@ function AdminPage() {
     setchooseCopyModus(false);
   }
 
-  // TODO - fix: CORS error (merge?)
   function approveReservation(reservation, toApprove) {
     if (toApprove === true) {
-      fetchFromApi(`/book/copy/${reservation.book.id}`, {
+      fetchFromApi(`book/copy/${reservation.book.id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +49,7 @@ function AdminPage() {
         setReservation(reservation);
       });
     } else {
-      fetchFromApi(`/reservation/deny/${reservation.id}`, {
+      fetchFromApi(`reservation/deny/${reservation.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +63,7 @@ function AdminPage() {
   }
 
   function createLoan(reservation, copy) {
-    fetchFromApi(`/reservation/approve/${reservation.id}/${copy.id}/`, {
+    fetchFromApi(`reservation/approve/${reservation.id}/${copy.id}/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
