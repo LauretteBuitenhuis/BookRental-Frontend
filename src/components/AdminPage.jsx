@@ -9,7 +9,7 @@ import "../styles/mainAdmin.css";
 import React, { useState, useEffect } from "react";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { BsFillXCircleFill } from "react-icons/bs";
-import { fetchFromApi } from "./fetchFromApi";
+import { fetchFromApi } from "./FetchFromApi";
 
 function AdminPage() {
   const [reservationData, setReservationData] = useState([]);
