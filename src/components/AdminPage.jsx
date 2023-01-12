@@ -9,6 +9,7 @@ import "../styles/mainAdmin.css";
 import React, { useState, useEffect } from "react";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { BsFillXCircleFill } from "react-icons/bs";
+import { fetchFromApi } from "./fetchFromApi";
 
 function AdminPage() {
   const [reservationData, setReservationData] = useState([]);
@@ -19,81 +20,61 @@ function AdminPage() {
 
   const auth = useContext(AuthContext);
 
-  // TODO - WIM272: error messages
   function getPendingReservations() {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/reservation/pending`, {
-      method: "get",
+    fetchFromApi("reservation/pending", {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
-    })
-      .then((res) => res.json())
-      .then((data) => setReservationData(data));
+    }).then((data) => setReservationData(data));
   }
 
   function leaveScreen() {
     setchooseCopyModus(false);
   }
 
+  // TODO - fix: CORS error (merge?)
   function approveReservation(reservation, toApprove) {
     if (toApprove === true) {
-      /// TODO - WIM272: error messages
-      fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/book/copy/${reservation.book.id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token,
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((copies) => {
-          setCopies(copies);
-
-          setchooseCopyModus(true);
-          setReservation(reservation);
-        });
-    } else {
-      // TODO - WIM272: error messages
-      fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/reservation/deny/${reservation.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token,
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((reservation) => {
-          setReservation(reservation);
-          getPendingReservations();
-        });
-    }
-  }
-
-  // TODO - WIM272: error messages
-  function createLoan(reservation, copy){
-    fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/reservation/approve/${reservation.id}/${copy.id}/`,
-      {
-        method: "POST",
+      fetchFromApi(`/book/copy/${reservation.book.id}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token,
         },
-      }
-    )
-      .then((res) => res.json())
-      .then((loan) => {
-        setLoan(loan);
-        leaveScreen();
+      }).then((copies) => {
+        setCopies(copies);
+
+        setchooseCopyModus(true);
+        setReservation(reservation);
+      });
+    } else {
+      fetchFromApi(`/reservation/deny/${reservation.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token,
+        },
+      }).then((reservation) => {
+        setReservation(reservation);
         getPendingReservations();
-      })
+      });
+    }
+  }
+
+  function createLoan(reservation, copy) {
+    fetchFromApi(`/reservation/approve/${reservation.id}/${copy.id}/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token,
+      },
+    }).then((loan) => {
+      setLoan(loan);
+      leaveScreen();
+      getPendingReservations();
+    });
   }
 
   useEffect(() => {
@@ -171,36 +152,34 @@ function AdminPage() {
             <div className="inventaris-container">
               <div className="bookoverview-container">
                 <center>
-                <table className="bookoverview-table">
-                  <thead>
-                    <tr className="red">
-                      <th>Kopie id</th>
-                      <th>Boek titel</th>
-                      <th>Autheur</th>
-                      <th>
-                        <center>Leen uit</center>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>{listCopies}</tbody>
-                </table>
+                  <table className="bookoverview-table">
+                    <thead>
+                      <tr className="red">
+                        <th>Kopie id</th>
+                        <th>Boek titel</th>
+                        <th>Autheur</th>
+                        <th>
+                          <center>Leen uit</center>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>{listCopies}</tbody>
+                  </table>
                 </center>
               </div>
             </div>
-
             <center>
-            <button
-              type="submit"
-              className="button"
-              onClick={() => leaveScreen()}
-            >
-              Annuleren
-            </button>
+              <button
+                type="submit"
+                className="button"
+                onClick={() => leaveScreen()}
+              >
+                Annuleren
+              </button>
             </center>
           </form>
         </div>
       )}
-
     </div>
   );
 }
