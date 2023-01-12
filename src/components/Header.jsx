@@ -12,7 +12,7 @@ import { FaBook } from "react-icons/fa";
 function Header() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const name=auth.name;
+  const name = auth.name;
 
 
   const logoutHandler = () => {
@@ -36,7 +36,7 @@ function Header() {
     if (auth.isAdmin === true) {
       return (
         <button>
-          <BsPeopleFill className= "header-icon red"
+          <BsPeopleFill className="header-icon red"
             onClick={employeesHandler}
           />
         </button>
@@ -49,23 +49,19 @@ function Header() {
 
   return (
     <div className="header">
-      <button>
-        <AiFillHome className="header-icon grey" onClick={redirectMainHandler} />
-      </button>
-      <div className="profile">
-        <BsPersonFill className= {auth.isAdmin ? "header-icon red":"header-icon green"}/>
-        <h4> {name} </h4>
-      </div>
+      <button><img src={logo} alt="logo" onClick={redirectMainHandler} /> </button>
+
       <div>
-        <button>
-          <FaBook className= {auth.isAdmin ? "header-icon red":"header-icon green"} onClick={inventoryHandler} />
-        </button>
-        <EmployeeButton classname="header-icon red"/>
-        <button>
-          <TbLogout className="header-icon grey" onClick={logoutHandler} />
-        </button>
+        <button><FaBook className={auth.isAdmin ? "header-icon red" : "header-icon green"} onClick={inventoryHandler} /></button>
+        <EmployeeButton classname="header-icon red" />
       </div>
-        <img src={logo} alt="logo"  />
+
+      <div className="profile">
+        <BsPersonFill className={auth.isAdmin ? "header-icon red" : "header-icon green"} />
+        <h4> {name} </h4>
+        <button><TbLogout className="header-icon grey" onClick={logoutHandler} /></button>
+
+      </div>
     </div>
   );
 }
