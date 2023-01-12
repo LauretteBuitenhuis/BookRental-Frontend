@@ -1,13 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/header.css";
 import logo from "../assets/0012p000041aQ4LAAU.png";
-import logOutIcon from "../assets/ic_exit_to_app_24px.png";
-import EmployeesIcon from "../assets/ic_supervisor_account_24px.png";
-import InventoryIcon from "../assets/BooksOverview.png";
-import AdminIcon from "../assets/ic_account_box_24px_admin.png";
 import { useContext } from "react";
 import AuthContext from "../store/auth-context";
 import { AiFillHome } from "react-icons/ai";
+import { BsPeopleFill, BsPersonFill } from "react-icons/bs";
+import { TbLogout } from "react-icons/tb";
+import { FaBook } from "react-icons/fa";
 
 
 function Header() {
@@ -37,9 +36,7 @@ function Header() {
     if (auth.isAdmin === true) {
       return (
         <button>
-          <img
-            src={EmployeesIcon}
-            alt="Werknemers"
+          <BsPeopleFill className= "header-icon red"
             onClick={employeesHandler}
           />
         </button>
@@ -56,24 +53,20 @@ function Header() {
         <AiFillHome className= {auth.isAdmin ? "header-icon red":"header-icon"} onClick={redirectMainHandler} />
       </button>
       <div className="profile">
-        <img src={AdminIcon} alt="Admin" />
+        <BsPersonFill className= {auth.isAdmin ? "header-icon red":"header-icon"}/>
         <h4> {name} </h4>
       </div>
       <div>
         <button>
-          <img color="red"
-            src={InventoryIcon}
-            alt="inventaris"
-            onClick={inventoryHandler}
-          />
+          <FaBook className= {auth.isAdmin ? "header-icon red":"header-icon"} onClick={inventoryHandler} />
         </button>
-        <EmployeeButton />
+        <EmployeeButton classname="header-icon red"/>
         <button>
-          <img src={logOutIcon} alt="log out" onClick={logoutHandler} />
+          <TbLogout className= {auth.isAdmin ? "header-icon red":"header-icon"} onClick={logoutHandler} />
         </button>
       </div>
       <button>
-        <img src={logo} alt="to homepage" className="logo"/>
+        <img src={logo} alt="logo" className="logo"/>
       </button>
     </div>
   );
