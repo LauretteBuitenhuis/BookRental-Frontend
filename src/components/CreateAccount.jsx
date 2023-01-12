@@ -32,7 +32,7 @@ export function CreateAccount() {
         Authorization: auth.token,
       },
       body: JSON.stringify(userDto),
-    }).catch((error) => setError(error.message));
+    });
   };
 
   return (
