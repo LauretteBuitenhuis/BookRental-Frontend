@@ -1,10 +1,5 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/auth-context";
-import logOutIcon from "../assets/ic_exit_to_app_24px.png";
-import EmployeesIcon from "../assets/ic_supervisor_account_24px.png";
-import InventoryIcon from "../assets/BooksOverview.png";
-import AdminIcon from "../assets/ic_account_box_24px_admin.png";
 import "../styles/mainAdmin.css";
 import React, { useState, useEffect } from "react";
 import { BsFillCheckCircleFill } from "react-icons/bs";
@@ -159,14 +154,14 @@ function AdminPage() {
       </div>
 
       {chooseCopyModus && (
-        <div className="inventory-container">
+        <div className="inventory-container red">
           <form
             onSubmit={(e) => {
               e.preventDefault();
             }}
           >
             {" "}
-            <div className="inventaris-container">
+            <div className="inventaris-container red">
               <div className="bookoverview-container">
                 <center>
                 <table className="bookoverview-table">

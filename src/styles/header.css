@@ -1,17 +1,15 @@
 .header {
   display: flex;
-  padding: 1vw 2vw;
+  padding: 1vw 1vw;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(211, 210, 210);
 }
 
 .header img {
-  width: 2vw;
-}
-
-.header .logo {
-  width: 10vw;
+  min-width: 70px;
+  max-width: 150px;
+  width: 15vw;
 }
 
 .header .profile {
@@ -19,14 +17,35 @@
   align-items: center;
 }
 
-.header button {
+.header button{
   display: inline-flex;
   background: none;
   border: none;
-  margin-left: 5vw;
+  margin-left: 2vw;
+  margin-right: 2vw;
 }
 
 .header h4 {
   margin: 0;
   margin-left: 2vw;
+}
+
+.header-icon.green {
+  font-size: 3vw;
+  color: #03ab03;
+}
+
+.header-icon.grey {
+  font-size: 3vw;
+  color: #52525B;
+}
+
+.header-icon.red {
+  font-size: 3vw;
+  color: #ab1403;
+}
+
+.header button :hover{
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
