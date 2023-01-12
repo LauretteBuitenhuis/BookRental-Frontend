@@ -5,6 +5,7 @@ import AuthContext from "../store/auth-context";
 import "../styles/employees.css";
 import { TextInput } from "./TextInput";
 import { SortedTable } from "./SortedTable";
+import { fetchFromApi } from "./FetchFromApi";
 
 function Employees() {
   const auth = useContext(AuthContext);
@@ -21,11 +22,8 @@ function Employees() {
   const [updateModus, setUpdateModus] = useState(false);
   const [updatedId, setUpdatedId] = useState();
 
-  // TODO - WIM272: error messages
   function getAllUsers() {
-    fetch("http://localhost:8082/user/all")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
+    fetchFromApi(`user/all`).then((data) => setUsers(data));
   }
 
   useEffect(() => {
@@ -40,16 +38,16 @@ function Employees() {
     setLastName(user.LastName);
     setEmail(user.email);
   }
-  // TODO - WIM272: error messages
+
   function sendUserUpdate() {
-    console.log("Send update");
     let newUser = {
       id: updatedId,
       firstName,
       lastName,
       email,
     };
-    fetch(`http://localhost:8082/user/${newUser.id}/edit`, {
+
+    fetchFromApi(`/user/${newUser.id}/edit`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -69,16 +67,6 @@ function Employees() {
     setUpdateModus(false);
     setAddModus(false);
   }
-
-  const logoutHandler = () => {
-    authCtx.logout();
-    navigate("/", { replace: true });
-  };
-
-  const bookInventoryHandler = () => {
-    navigate("/books", { replace: true });
-  };
-
   const createUserHandler = () => {
     navigate("/register", { replace: true });
   };
@@ -93,9 +81,9 @@ function Employees() {
     setDeleteId(user.id);
     setDeleteModus(true);
   }
-  // TODO - WIM272: error messages
+
   function deleteUser(id) {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/user/${id}/delete`, {
+    fetchFromApi(`/user/${id}/delete`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -150,7 +138,6 @@ function Employees() {
               onSubmit={(e) => {
                 e.preventDefault();
                 if (updateModus === false) {
-                  //addUser();
                 } else {
                   sendUserUpdate();
                 }
