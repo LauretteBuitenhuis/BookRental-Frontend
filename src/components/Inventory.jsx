@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { TextInput } from "./TextInput";
 import { SortedTable } from "./SortedTable";
 import { AdminButton } from "./AdminButton";
+import { fetchFromApi } from "./FetchFromApi";
 
 export function Inventory() {
   const auth = useContext(AuthContext);
@@ -21,44 +22,37 @@ export function Inventory() {
   const [deleteModus, setDeleteModus] = useState(false);
   const [deleteId, setDeleteId] = useState();
   const [reservation, setReservation] = useState();
-// TODO - WIM272: error messages
+
   function createReservation(book) {
-    fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/reservation/create/${book.id}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth.token,
-        },
-        body: JSON.stringify(book.id, auth.token),
-      }
-    )
-      .then((res) => res.json())
-      .then((reservation) => {
-        setReservation(reservation);
-        getAllNonReservedByUserBooks();
-      });
-  }
-  // TODO - WIM272: error messages
-  function getAllBooks() {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`)
-      .then((response) => response.json())
-      .then((data) => setBooks(data));
-  }
-  // TODO - WIM272: error messages
-  function getAllNonReservedByUserBooks() {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all/user`, {
-      method: 'GET',
+    fetchFromApi(`reservation/create/${book.id}`, {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': auth.token,
-      }
-    }).then(res => res.json()).then(data => {
-      setBooks(data)
-    })
+        "Content-Type": "application/json",
+        Authorization: auth.token,
+      },
+      body: JSON.stringify(book.id, auth.token),
+    }).then((reservation) => {
+      setReservation(reservation);
+      getAllNonReservedByUserBooks();
+    });
   }
-// TODO - WIM272: error messages
+
+  function getAllBooks() {
+    fetchFromApi(`book/all`).then((data) => setBooks(data));
+  }
+
+  function getAllNonReservedByUserBooks() {
+    fetchFromApi(`book/all/user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token,
+      },
+    }).then((data) => {
+      setBooks(data);
+    });
+  }
+  // TODO - WIM272: error messages
   function addBook() {
     let newBook = {
       title,
@@ -68,7 +62,8 @@ export function Inventory() {
     setTitle("");
     setAuthor("");
     setIsbn("");
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/create`, {
+
+    fetchFromApi(`book/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,9 +79,9 @@ export function Inventory() {
     setDeleteId(book.id);
     setDeleteModus(true);
   }
-// TODO - WIM272: error messages
+
   function deleteBook(id) {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${id}/delete`, {
+    fetchFromApi(`book/${id}/delete`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +101,7 @@ export function Inventory() {
     setAuthor(book.author);
     setIsbn(book.isbn);
   }
-// TODO - WIM272: error messages
+
   function sendBookUpdate() {
     let newBook = {
       id: updatedId,
@@ -114,7 +109,8 @@ export function Inventory() {
       author,
       isbn,
     };
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${newBook.id}/edit`, {
+
+    fetchFromApi(`book/${newBook.id}/edit`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
