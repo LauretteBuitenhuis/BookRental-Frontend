@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { TextInput } from "./TextInput";
 import { SortedTable } from "./SortedTable";
 import { AdminButton } from "./AdminButton";
+import { fetchFromApi } from "./FetchFromApi";
 
 export function Inventory() {
   const auth = useContext(AuthContext);
@@ -23,40 +24,33 @@ export function Inventory() {
   const [reservation, setReservation] = useState();
 
   function createReservation(book) {
-    fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/reservation/create/${book.id}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth.token,
-        },
-        body: JSON.stringify(book.id, auth.token),
-      }
-    )
-      .then((res) => res.json())
-      .then((reservation) => {
-        setReservation(reservation);
-        getAllNonReservedByUserBooks();
-      });
+    fetchFromApi(`reservation/create/${book.id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token,
+      },
+      body: JSON.stringify(book.id, auth.token),
+    }).then((reservation) => {
+      setReservation(reservation);
+      getAllNonReservedByUserBooks();
+    });
   }
 
   function getAllBooks() {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`)
-      .then((response) => response.json())
-      .then((data) => setBooks(data));
+    fetchFromApi(`book/all`).then((data) => setBooks(data));
   }
 
   function getAllNonReservedByUserBooks() {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all/user`, {
-      method: 'GET',
+    fetchFromApi(`book/all/user`, {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': auth.token,
-      }
-    }).then(res => res.json()).then(data => {
-      setBooks(data)
-    })
+        "Content-Type": "application/json",
+        Authorization: auth.token,
+      },
+    }).then((data) => {
+      setBooks(data);
+    });
   }
 
   function addBook() {
@@ -68,7 +62,8 @@ export function Inventory() {
     setTitle("");
     setAuthor("");
     setIsbn("");
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/create`, {
+
+    fetchFromApi(`book/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +71,6 @@ export function Inventory() {
       },
       body: JSON.stringify(newBook),
     }).then(() => getAllBooks());
-    // TODO - succes and error messages
     setAddModus(false);
   }
 
@@ -87,7 +81,7 @@ export function Inventory() {
   }
 
   function deleteBook(id) {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${id}/delete`, {
+    fetchFromApi(`book/${id}/delete`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -115,7 +109,8 @@ export function Inventory() {
       author,
       isbn,
     };
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${newBook.id}/edit`, {
+
+    fetchFromApi(`book/${newBook.id}/edit`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

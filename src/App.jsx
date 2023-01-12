@@ -8,6 +8,8 @@ import Header from "./components/Header";
 import AuthContext from "./store/auth-context";
 import { Inventory } from "./components/Inventory";
 import Employees from "./components/Employees";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -31,6 +33,7 @@ function App() {
           element={<Navigate to={isLoggedIn ? "/main" : "/"} replace />}
         />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
