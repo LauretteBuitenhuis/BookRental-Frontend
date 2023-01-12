@@ -50,23 +50,23 @@ function Header() {
   return (
     <div className="header">
       <button>
-        <AiFillHome className= {auth.isAdmin ? "header-icon red":"header-icon"} onClick={redirectMainHandler} />
+        <AiFillHome className="header-icon grey" onClick={redirectMainHandler} />
       </button>
       <div className="profile">
-        <BsPersonFill className= {auth.isAdmin ? "header-icon red":"header-icon"}/>
+        <BsPersonFill className= {auth.isAdmin ? "header-icon red":"header-icon green"}/>
         <h4> {name} </h4>
       </div>
       <div>
         <button>
-          <FaBook className= {auth.isAdmin ? "header-icon red":"header-icon"} onClick={inventoryHandler} />
+          <FaBook className= {auth.isAdmin ? "header-icon red":"header-icon green"} onClick={inventoryHandler} />
         </button>
         <EmployeeButton classname="header-icon red"/>
         <button>
-          <TbLogout className= {auth.isAdmin ? "header-icon red":"header-icon"} onClick={logoutHandler} />
+          <TbLogout className="header-icon grey" onClick={logoutHandler} />
         </button>
       </div>
       <button>
-        <img src={logo} alt="logo" className="logo"/>
+        <img src={logo} alt="logo"  />
       </button>
     </div>
   );
