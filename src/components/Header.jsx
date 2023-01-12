@@ -65,9 +65,7 @@ function Header() {
           <TbLogout className="header-icon grey" onClick={logoutHandler} />
         </button>
       </div>
-      <button>
         <img src={logo} alt="logo"  />
-      </button>
     </div>
   );
 }

@@ -17,7 +17,7 @@
   align-items: center;
 }
 
-.header button {
+.header button{
   display: inline-flex;
   background: none;
   border: none;
@@ -51,7 +51,7 @@
   color: #ab1403;
 }
 
-.header-icon:hover {
+.header button :hover{
   cursor: pointer;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
