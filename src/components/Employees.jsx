@@ -47,7 +47,7 @@ function Employees() {
       email,
     };
 
-    fetchFromApi(`/user/${newUser.id}/edit`, {
+    fetchFromApi(`user/${newUser.id}/edit`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ function Employees() {
     setAddModus(false);
   }
   const createUserHandler = () => {
-    navigate("/register", { replace: true });
+    navigate("register", { replace: true });
   };
 
   // TODO - filtering
@@ -83,7 +83,7 @@ function Employees() {
   }
 
   function deleteUser(id) {
-    fetchFromApi(`/user/${id}/delete`, {
+    fetchFromApi(`user/${id}/delete`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
