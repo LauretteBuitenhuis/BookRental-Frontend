@@ -91,7 +91,7 @@
 .inventory-container .table-options {
   display: flex;
   width: 100%;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .inventory-container .add-icon {

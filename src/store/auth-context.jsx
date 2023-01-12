@@ -12,10 +12,11 @@ const AuthContext = React.createContext({
 export const AuthContextProvider = ({ children }) => {
   const initialToken = localStorage.getItem("token");
   const initialIsAdmin = localStorage.getItem("isAdmin") === "true";
+  const initialName = localStorage.getItem("name");
 
   const [token, setToken] = useState(initialToken);
   const [isAdmin, setIsAdmin] = useState(initialIsAdmin);
-  const [name, setName] = useState();
+  const [name, setName] = useState(initialName);
 
   const isLoggedIn = useCallback(() => {
     return token != null;

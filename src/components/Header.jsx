@@ -3,7 +3,6 @@ import "../styles/header.css";
 import logo from "../assets/0012p000041aQ4LAAU.png";
 import { useContext } from "react";
 import AuthContext from "../store/auth-context";
-import { AiFillHome } from "react-icons/ai";
 import { BsPeopleFill, BsPersonFill } from "react-icons/bs";
 import { TbLogout } from "react-icons/tb";
 import { FaBook } from "react-icons/fa";
