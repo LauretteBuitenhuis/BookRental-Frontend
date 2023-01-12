@@ -154,14 +154,14 @@ function AdminPage() {
       </div>
 
       {chooseCopyModus && (
-        <div className="inventory-container">
+        <div className="inventory-container red">
           <form
             onSubmit={(e) => {
               e.preventDefault();
             }}
           >
             {" "}
-            <div className="inventaris-container">
+            <div className="inventaris-container red">
               <div className="bookoverview-container">
                 <center>
                 <table className="bookoverview-table">
