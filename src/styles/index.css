@@ -18,7 +18,17 @@ body {
   background-color: #e4e4e7;
 }
 
-.footer {
+.icon {
+  font-size: 20px;
+  color: #03ab03;
+}
+
+.icon:hover {
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+/* .footer {
   background-color: black;
   color: white;
   font-size: 12px;
@@ -28,11 +38,9 @@ body {
   left: 0;
   right: 0;
   margin-top: auto;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"] {
+} */
+/* 
+input[type="text"] {
   border: none;
   border-bottom: 2px solid rgb(48, 48, 48);
   background-color: transparent;
@@ -42,17 +50,15 @@ input[type="email"] {
   font-size: 24px;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"]:focus {
+input[type="text"]:focus {
   outline: none;
 }
 
 ::placeholder {
   font-size: 24px;
   color: #a1a1aa;
-}
-
+} */
+/* 
 .bookoverview-searchbar {
   display: flex;
   justify-content: space-between;
@@ -60,9 +66,9 @@ input[type="email"]:focus {
   width: 900px;
   margin-left: 100px;
   font-family: euclid-semibold;
-}
+} */
 
-select {
+/* select {
   background-color: transparent;
   border: none;
   padding: 0 1em 0 0;
@@ -70,7 +76,7 @@ select {
   font-size: inherit;
   cursor: inherit;
   line-height: inherit;
-}
+} */
 
 .table-buttons {
   display: flex;
@@ -78,32 +84,19 @@ select {
   align-items: center;
 }
 
-.icon {
-  font-size: 20px;
-  color: #03ab03;
-}
 
-.icon.red {
-  font-size: 20px;
-  color: #ab1403;
-}
-
-.iconclickable {
+/* .iconclickable {
   font-size: 20px;
   color: #52525B;
 }
 
-.icon:hover {
-  cursor: pointer;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
 
 .iconclickable:hover {
   cursor: pointer;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
+} */
 
-.request-button {
+/* .request-button {
   background-color: #03ab03;
   border: none;
   color: white;
@@ -118,7 +111,7 @@ select {
 
 .request-button:hover {
   background-color: #00e600;
-}
+} */
 
 /* 
 .logout-button {

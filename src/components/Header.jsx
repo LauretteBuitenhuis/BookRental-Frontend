@@ -53,15 +53,15 @@ function Header() {
   return (
     <div className="header">
       <button>
-        <AiFillHome className= {auth.isAdmin ? "icon red":"icon"} onClick={redirectMainHandler} />
+        <AiFillHome className= {auth.isAdmin ? "header-icon red":"header-icon"} onClick={redirectMainHandler} />
       </button>
       <div className="profile">
         <img src={AdminIcon} alt="Admin" />
         <h4> {name} </h4>
       </div>
-      <div className="button">
+      <div>
         <button>
-          <img
+          <img color="red"
             src={InventoryIcon}
             alt="inventaris"
             onClick={inventoryHandler}
