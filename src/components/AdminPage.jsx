@@ -1,15 +1,10 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/auth-context";
-import logOutIcon from "../assets/ic_exit_to_app_24px.png";
-import EmployeesIcon from "../assets/ic_supervisor_account_24px.png";
-import InventoryIcon from "../assets/BooksOverview.png";
-import AdminIcon from "../assets/ic_account_box_24px_admin.png";
 import "../styles/mainAdmin.css";
 import React, { useState, useEffect } from "react";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { BsFillXCircleFill } from "react-icons/bs";
-import { fetchFromApi } from "./FetchFromApi";
+import { fetchFromApi } from "../store/fetchFromApi";
 
 function AdminPage() {
   const [reservationData, setReservationData] = useState([]);

@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { TextInput } from "../components/TextInput";
 import { SortedTable } from "../components/SortedTable";
 import { AdminButton } from "../components/AdminButton";
-import { fetchFromApi } from "./FetchFromApi";
+import { fetchFromApi } from "../store/fetchFromApi";
 
 export function Inventory() {
   const auth = useContext(AuthContext);

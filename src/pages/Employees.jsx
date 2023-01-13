@@ -5,7 +5,7 @@ import AuthContext from "../store/auth-context";
 import "../styles/employees.css";
 import { TextInput } from "../components/TextInput";
 import { SortedTable } from "../components/SortedTable";
-import { fetchFromApi } from "./FetchFromApi";
+import { fetchFromApi } from "../store/fetchFromApi";
 
 function Employees() {
   const auth = useContext(AuthContext);

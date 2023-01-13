@@ -4,7 +4,7 @@ import { CheckboxInput } from "./CheckboxInput";
 import { PasswordInput } from "./PasswordInput";
 import AuthContext from "../store/auth-context";
 import { useContext } from "react";
-import { fetchFromApi } from "./FetchFromApi";
+import { fetchFromApi } from "../store/fetchFromApi";
 
 export function CreateAccount() {
   const auth = useContext(AuthContext);

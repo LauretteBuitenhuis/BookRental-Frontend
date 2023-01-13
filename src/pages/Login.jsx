@@ -1,6 +1,6 @@
 import React, { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchFromApi } from "../components/FetchFromApi";
+import { fetchFromApi } from "../store/fetchFromApi";
 import AuthContext from "../store/auth-context";
 import "../styles/login.css";
 

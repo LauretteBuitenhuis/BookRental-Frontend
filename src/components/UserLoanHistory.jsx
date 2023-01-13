@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import AuthContext from "../store/auth-context";
 import "../styles/mainAdmin.css";
-import { fetchFromApi } from "./FetchFromApi";
+import { fetchFromApi } from "../store/fetchFromApi";
 
 function UserLoanHistory() {
   const auth = useContext(AuthContext);
