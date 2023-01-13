@@ -32,7 +32,7 @@ const Login = () => {
         authCtx.login(data);
         navigate("/main", { replace: true });
       })
-      .then(() => toast.success(`Welkom, ${authCtx.name}!`));
+      .then(() => toast.success(`Welkom`));
   };
 
   return (
