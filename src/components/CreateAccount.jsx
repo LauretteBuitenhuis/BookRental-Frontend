@@ -3,13 +3,11 @@ import { TextInput } from "./TextInput";
 import { CheckboxInput } from "./CheckboxInput";
 import { PasswordInput } from "./PasswordInput";
 import AuthContext from "../store/auth-context";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { fetchFromApi } from "./FetchFromApi";
 
 export function CreateAccount() {
   const auth = useContext(AuthContext);
-  const [error, setError] = useState(null);
-  const hasError = error != null;
 
   const handleSubmit = (event) => {
     event.preventDefault();

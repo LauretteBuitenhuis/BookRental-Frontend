@@ -8,6 +8,7 @@ export async function fetchFromApi(path, options = {}) {
   if (result.ok) {
     return json;
   } else if (result.status == 500) {
+    console.log(result.status, json.message);
     toast.error(`500 - Oops, something went wrong!`);
   } else {
     toast.error(`Oops! An error occured.${result.status} - ${json.message}`);

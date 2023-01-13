@@ -1,5 +1,6 @@
 import React, { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchFromApi } from "../components/FetchFromApi";
 import AuthContext from "../store/auth-context";
 import "../styles/login.css";
 
@@ -16,36 +17,19 @@ const Login = () => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
-    const options = {
-      method: "Post",
+    fetchFromApi(`user/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         email: enteredEmail,
         password: enteredPassword,
       }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/user/login`, options)
-      .then((res) => {
-        
-        if (res.ok) {
-          return res.json();
-        } else {
-          return res.json().then((data) => {
-            let errorMessage = data.message;
-            throw new Error(errorMessage);
-          });
-        }
-      })
-      .then((data) => {
-        authCtx.login(data);
-        navigate("/main", { replace: true });
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+    }).then((data) => {
+      authCtx.login(data);
+      navigate("/main", { replace: true });
+    });
   };
 
   return (
