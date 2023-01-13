@@ -1,153 +1,137 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import AuthContext from "../store/auth-context";
 import "../styles/mainAdmin.css";
-import React, { useState, useEffect } from "react";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { BsFillXCircleFill } from "react-icons/bs";
-import { render } from "@testing-library/react";
-import AdminLoanOverview from '../components/AdminLoanOverview';
+import { fetchFromApi } from "../store/fetchFromApi";
+import { toast } from "react-toastify";
 
 function ReservationOverview() {
-    const auth = useContext(AuthContext);
+  const auth = useContext(AuthContext);
 
-    const [reservationData, setReservationData] = useState([]);
-    const [copies, setCopies] = useState([]);
-    const [reservation, setReservation] = useState();
-    const [loan, setLoan] = useState();
-    const [chooseCopyModus, setchooseCopyModus] = useState(false);
+  const [reservationData, setReservationData] = useState([]);
+  const [copies, setCopies] = useState([]);
+  const [reservation, setReservation] = useState();
+  const [loan, setLoan] = useState();
+  const [chooseCopyModus, setchooseCopyModus] = useState(false);
 
-    function getPendingReservations() {
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/reservation/pending`, {
-            method: "get",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: auth.token,
-            },
-        })
-            .then((res) => res.json())
-            .then((data) => setReservationData(data));
+  function getPendingReservations() {
+    fetchFromApi("reservation/pending", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token,
+      },
+    }).then((data) => setReservationData(data));
+  }
+
+  function leaveScreen() {
+    setchooseCopyModus(false);
+  }
+
+  function approveReservation(reservation, toApprove) {
+    if (toApprove === true) {
+      fetchFromApi(`book/copy/${reservation.book.id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token,
+        },
+      }).then((copies) => {
+        setCopies(copies);
+
+        setchooseCopyModus(true);
+        setReservation(reservation);
+      });
+    } else {
+      fetchFromApi(`reservation/deny/${reservation.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token,
+        },
+      })
+        .then(() => toast.success(`Reservering geweigerd.`))
+        .then((reservation) => {
+          setReservation(reservation);
+          getPendingReservations();
+        });
     }
+  }
 
-    function leaveScreen() {
-        setchooseCopyModus(false);
-    }
-
-    function approveReservation(reservation, toApprove) {
-        if (toApprove === true) {
-            // Get all copies
-            fetch(
-                `${process.env.REACT_APP_BACKEND_URL}/book/copy/${reservation.book.id}`,
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: auth.token,
-                    },
-                }
-            )
-                .then((res) => res.json())
-                .then((copies) => {
-                    setCopies(copies);
-
-                    setchooseCopyModus(true);
-                    setReservation(reservation);
-                });
-        } else {
-            // Approve / deny reservation with given copy
-            fetch(
-                `${process.env.REACT_APP_BACKEND_URL}/reservation/deny/${reservation.id}`,
-                {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: auth.token,
-                    },
-                }
-            )
-                .then((res) => res.json())
-                .then((reservation) => {
-                    setReservation(reservation);
-                    getPendingReservations();
-                });
-        }
-    }
-
-    function createLoan(reservation, copy) {
-        fetch(
-            `${process.env.REACT_APP_BACKEND_URL}/reservation/approve/${reservation.id}/${copy.id}`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: auth.token,
-                },
-            }
-        )
-            .then((res) => res.json())
-            .then((loan) => {
-                setLoan(loan);
-                leaveScreen();
-                getPendingReservations();
-
-                // TODO: Call refresh of active loans upon creating new loan
-                // AdminLoanOverview.getActiveLoans();
-            })
-    }
-
-    useEffect(() => {
+  function createLoan(reservation, copy) {
+    fetchFromApi(`reservation/approve/${reservation.id}/${copy.id}/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token,
+      },
+    })
+      .then(() => toast.success(`Reservering goedgekeurd.`))
+      .then((loan) => {
+        setLoan(loan);
+        leaveScreen();
         getPendingReservations();
-    }, []);
 
-    const listItemsTable =
-        reservationData &&
-        reservationData.map((reservation) => (
-            <tr key={reservation.id}>
-                <td>{reservation.book.title}</td>
-                <td>{reservation.book.author}</td>
-                <td>{reservation.user.firstName + " " + reservation.user.lastName}</td>
-                <td className="table-buttons">
-                    <span onClick={() => approveReservation(reservation, true)}>
-                        <BsFillCheckCircleFill className="icon" />
-                    </span>
-                    <span onClick={() => approveReservation(reservation, false)}>
-                        <BsFillXCircleFill className="icon" />
-                    </span>
-                </td>
+        // TODO: Call refresh of active loans upon creating new loan
+        // AdminLoanOverview.getActiveLoans();
+      });
+  }
+
+  useEffect(() => {
+    getPendingReservations();
+  }, []);
+
+  const listItemsTable =
+    reservationData &&
+    reservationData.map((reservation) => (
+      <tr key={reservation.id}>
+        <td>{reservation.book.title}</td>
+        <td>{reservation.book.author}</td>
+        <td>{reservation.user.firstName + " " + reservation.user.lastName}</td>
+        <td className="table-buttons">
+          <span onClick={() => approveReservation(reservation, true)}>
+            <BsFillCheckCircleFill className="icon" />
+          </span>
+          <span onClick={() => approveReservation(reservation, false)}>
+            <BsFillXCircleFill className="icon" />
+          </span>
+        </td>
+      </tr>
+    ));
+
+  const listCopies =
+    copies &&
+    copies.map((copy) => (
+      <tr key={copy.id}>
+        <td>{copy.id}</td>
+        <td>{copy.book.title}</td>
+        <td>{copy.book.author}</td>
+        <td className="table-buttons">
+          <span onClick={() => createLoan(reservation, copy)}>
+            <BsFillCheckCircleFill className="icon" />
+          </span>
+        </td>
+      </tr>
+    ));
+
+  return (
+    <div className="inventaris-container">
+      <div className="bookoverview-container">
+        <table className="bookoverview-table">
+          <thead>
+            <tr className="red">
+              <th>Boek titel</th>
+              <th>Auteur</th>
+              <th>Medewerker</th>
+              <th>
+                <center>Update</center>
+              </th>
             </tr>
-        ));
-
-    const listCopies =
-        copies &&
-        copies.map((copy) => (
-            <tr key={copy.id}>
-                <td>{copy.id}</td>
-                <td>{copy.book.title}</td>
-                <td>{copy.book.author}</td>
-                <td className="table-buttons">
-                    <span onClick={() => createLoan(reservation, copy)}>
-                        <BsFillCheckCircleFill className="icon" />
-                    </span>
-                </td>
-            </tr>
-        ));
-
-    return (
-        <div className="inventaris-container">
-            <div className="bookoverview-container">
-                <table className="bookoverview-table">
-                    <thead>
-                        <tr className="red">
-                            <th>Boek titel</th>
-                            <th>Auteur</th>
-                            <th>Medewerker</th>
-                            <th>
-                                <center>Update</center>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>{listItemsTable}</tbody>
-                </table>
-            </div>
+          </thead>
+          <tbody>{listItemsTable}</tbody>
+        </table>
+      </div>
 
             {
                 chooseCopyModus && (

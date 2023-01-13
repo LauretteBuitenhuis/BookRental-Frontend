@@ -13,7 +13,6 @@ function Header() {
   const navigate = useNavigate();
   const name = auth.name;
 
-
   const logoutHandler = () => {
     auth.logout();
     navigate("/", { replace: true });

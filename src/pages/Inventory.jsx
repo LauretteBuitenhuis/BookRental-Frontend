@@ -7,6 +7,8 @@ import { useContext } from "react";
 import { TextInput } from "../components/TextInput";
 import { SortedTable } from "../components/SortedTable";
 import { AdminButton } from "../components/AdminButton";
+import { fetchFromApi } from "../store/fetchFromApi";
+import { toast } from "react-toastify";
 
 export function Inventory() {
   const auth = useContext(AuthContext);
@@ -23,18 +25,15 @@ export function Inventory() {
   const [reservation, setReservation] = useState();
 
   function createReservation(book) {
-    fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/reservation/create/${book.id}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth.token,
-        },
-        body: JSON.stringify(book.id, auth.token),
-      }
-    )
-      .then((res) => res.json())
+    fetchFromApi(`reservation/create/${book.id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token,
+      },
+      body: JSON.stringify(book.id, auth.token),
+    })
+      .then(() => toast.success(`Reservering aangevraagd!`))
       .then((reservation) => {
         setReservation(reservation);
         getAllNonReservedByUserBooks();
@@ -42,21 +41,20 @@ export function Inventory() {
   }
 
   function getAllBooks() {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all`)
-      .then((response) => response.json())
-      .then((data) => setBooks(data));
+    fetchFromApi(`book/all`).then((data) => setBooks(data));
   }
 
+  // TODO - fix books reloading at refresh
   function getAllNonReservedByUserBooks() {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/all/user`, {
-      method: 'GET',
+    fetchFromApi(`book/all/user`, {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': auth.token,
-      }
-    }).then(res => res.json()).then(data => {
-      setBooks(data)
-    })
+        "Content-Type": "application/json",
+        Authorization: auth.token,
+      },
+    }).then((data) => {
+      setBooks(data);
+    });
   }
 
   function addBook() {
@@ -68,15 +66,17 @@ export function Inventory() {
     setTitle("");
     setAuthor("");
     setIsbn("");
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/create`, {
+
+    fetchFromApi(`book/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
       body: JSON.stringify(newBook),
-    }).then(() => getAllBooks());
-    // TODO - succes and error messages
+    })
+      .then(() => toast.success(`Boek toegevoegd.`))
+      .then(() => getAllBooks());
     setAddModus(false);
   }
 
@@ -87,13 +87,15 @@ export function Inventory() {
   }
 
   function deleteBook(id) {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${id}/delete`, {
+    fetchFromApi(`book/${id}/delete`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
-    }).then(() => getAllBooks());
+    })
+      .then(() => toast.success(`Boek verwijderd.`))
+      .then(() => getAllBooks());
     setTitle("");
     setDeleteId();
     setDeleteModus(false);
@@ -115,14 +117,17 @@ export function Inventory() {
       author,
       isbn,
     };
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/book/${newBook.id}/edit`, {
+
+    fetchFromApi(`book/${newBook.id}/edit`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
       body: JSON.stringify(newBook),
-    }).then(() => getAllBooks());
+    })
+      .then(() => toast.success(`Boek geüpdatet.`))
+      .then(() => getAllBooks());
     setTitle("");
     setAuthor("");
     setIsbn("");

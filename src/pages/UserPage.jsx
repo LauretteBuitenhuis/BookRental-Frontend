@@ -1,5 +1,5 @@
 import "../styles/mainUser.css";
-import UserLoanOverview from '../components/UserLoanOverview';
+import UserLoanOverview from "../components/UserLoanOverview";
 import UserLoanHistory from "../components/UserLoanHistory";
 import UserPendingReservations from "../components/UserPendingReservations";
 
