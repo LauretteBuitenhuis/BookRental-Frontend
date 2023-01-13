@@ -1,14 +1,9 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import AuthContext from "../store/auth-context";
 import "../styles/mainUser.css";
-import { MdLibraryAdd } from "react-icons/md";
-import UserLoanOverview from '../components/UserLoanOverview';
+import UserLoanOverview from "../components/UserLoanOverview";
 import UserLoanHistory from "../components/UserLoanHistory";
 import UserPendingReservations from "../components/UserPendingReservations";
 
 function UserPage() {
-
   return (
     <div className="userPage">
       <div className="adminheader-container">
