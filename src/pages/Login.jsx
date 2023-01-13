@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchFromApi } from "../store/fetchFromApi";
 import AuthContext from "../store/auth-context";
 import "../styles/login.css";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,10 +27,12 @@ const Login = () => {
         email: enteredEmail,
         password: enteredPassword,
       }),
-    }).then((data) => {
-      authCtx.login(data);
-      navigate("/main", { replace: true });
-    });
+    })
+      .then(() => toast.success(`Welkom, ${authCtx.name}!`))
+      .then((data) => {
+        authCtx.login(data);
+        navigate("/main", { replace: true });
+      });
   };
 
   return (

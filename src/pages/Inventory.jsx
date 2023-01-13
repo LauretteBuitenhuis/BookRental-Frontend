@@ -8,6 +8,7 @@ import { TextInput } from "../components/TextInput";
 import { SortedTable } from "../components/SortedTable";
 import { AdminButton } from "../components/AdminButton";
 import { fetchFromApi } from "../store/fetchFromApi";
+import { toast } from "react-toastify";
 
 export function Inventory() {
   const auth = useContext(AuthContext);
@@ -31,16 +32,19 @@ export function Inventory() {
         Authorization: auth.token,
       },
       body: JSON.stringify(book.id, auth.token),
-    }).then((reservation) => {
-      setReservation(reservation);
-      getAllNonReservedByUserBooks();
-    });
+    })
+      .then(() => toast.success(`Reservering aangevraagd!`))
+      .then((reservation) => {
+        setReservation(reservation);
+        getAllNonReservedByUserBooks();
+      });
   }
 
   function getAllBooks() {
     fetchFromApi(`book/all`).then((data) => setBooks(data));
   }
 
+  // TODO - fix books reloading at refresh
   function getAllNonReservedByUserBooks() {
     fetchFromApi(`book/all/user`, {
       method: "GET",
@@ -70,7 +74,9 @@ export function Inventory() {
         Authorization: auth.token,
       },
       body: JSON.stringify(newBook),
-    }).then(() => getAllBooks());
+    })
+      .then(() => toast.success(`Boek toegevoegd.`))
+      .then(() => getAllBooks());
     setAddModus(false);
   }
 
@@ -87,7 +93,9 @@ export function Inventory() {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
-    }).then(() => getAllBooks());
+    })
+      .then(() => toast.success(`Boek verwijderd.`))
+      .then(() => getAllBooks());
     setTitle("");
     setDeleteId();
     setDeleteModus(false);
@@ -117,7 +125,9 @@ export function Inventory() {
         Authorization: auth.token,
       },
       body: JSON.stringify(newBook),
-    }).then(() => getAllBooks());
+    })
+      .then(() => toast.success(`Boek geüpdatet.`))
+      .then(() => getAllBooks());
     setTitle("");
     setAuthor("");
     setIsbn("");

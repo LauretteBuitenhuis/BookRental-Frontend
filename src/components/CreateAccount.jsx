@@ -5,6 +5,7 @@ import { PasswordInput } from "./PasswordInput";
 import AuthContext from "../store/auth-context";
 import { useContext } from "react";
 import { fetchFromApi } from "../store/fetchFromApi";
+import { toast } from "react-toastify";
 
 export function CreateAccount() {
   const auth = useContext(AuthContext);
@@ -30,7 +31,7 @@ export function CreateAccount() {
         Authorization: auth.token,
       },
       body: JSON.stringify(userDto),
-    });
+    }).then(() => toast.success(`Nieuwe gebruiker aangemaakt.`));
   };
 
   return (

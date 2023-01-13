@@ -25,9 +25,11 @@ function AdminLoanOverview() {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
-    }).then(() => {
-      getActiveLoans();
-    });
+    })
+      .then(() => toast.success(`Uitlening beëindigd.`))
+      .then(() => {
+        getActiveLoans();
+      });
   }
 
   useEffect(() => {

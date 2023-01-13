@@ -6,6 +6,7 @@ import "../styles/employees.css";
 import { TextInput } from "../components/TextInput";
 import { SortedTable } from "../components/SortedTable";
 import { fetchFromApi } from "../store/fetchFromApi";
+import { toast } from "react-toastify";
 
 function Employees() {
   const auth = useContext(AuthContext);
@@ -53,7 +54,7 @@ function Employees() {
         Authorization: auth.token,
       },
       body: JSON.stringify(newUser),
-    });
+    }).then(() => toast.success(`Gebruiker geüpdatet.`));
     setFirstName("");
     setLastName("");
     setEmail("");
@@ -88,7 +89,9 @@ function Employees() {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
-    }).then(() => getAllUsers());
+    })
+      .then(() => toast.success(`Gebruiker verwijderd.`))
+      .then(() => getAllUsers());
     setFirstName("");
     setDeleteId();
     setDeleteModus(false);

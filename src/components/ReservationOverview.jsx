@@ -4,6 +4,7 @@ import "../styles/mainAdmin.css";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { BsFillXCircleFill } from "react-icons/bs";
 import { fetchFromApi } from "../store/fetchFromApi";
+import { toast } from "react-toastify";
 
 function ReservationOverview() {
   const auth = useContext(AuthContext);
@@ -49,10 +50,12 @@ function ReservationOverview() {
           "Content-Type": "application/json",
           Authorization: auth.token,
         },
-      }).then((reservation) => {
-        setReservation(reservation);
-        getPendingReservations();
-      });
+      })
+        .then(() => toast.success(`Reservering geweigerd.`))
+        .then((reservation) => {
+          setReservation(reservation);
+          getPendingReservations();
+        });
     }
   }
 
@@ -63,14 +66,16 @@ function ReservationOverview() {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
-    }).then((loan) => {
-      setLoan(loan);
-      leaveScreen();
-      getPendingReservations();
+    })
+      .then(() => toast.success(`Reservering goedgekeurd.`))
+      .then((loan) => {
+        setLoan(loan);
+        leaveScreen();
+        getPendingReservations();
 
-      // TODO: Call refresh of active loans upon creating new loan
-      // AdminLoanOverview.getActiveLoans();
-    });
+        // TODO: Call refresh of active loans upon creating new loan
+        // AdminLoanOverview.getActiveLoans();
+      });
   }
 
   useEffect(() => {
