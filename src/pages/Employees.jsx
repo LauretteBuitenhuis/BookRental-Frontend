@@ -3,13 +3,12 @@ import { useNavigate } from "react-router";
 import { MdLibraryAdd } from "react-icons/md";
 import AuthContext from "../store/auth-context";
 import "../styles/employees.css";
-import { TextInput } from "./TextInput";
-import { SortedTable } from "./SortedTable";
+import { TextInput } from "../components/TextInput";
+import { SortedTable } from "../components/SortedTable";
 
 function Employees() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const authCtx = useContext(AuthContext);
 
   const [users, setUsers] = useState([]);
   const [firstName, setFirstName] = useState("");
@@ -68,15 +67,6 @@ function Employees() {
     setUpdateModus(false);
     setAddModus(false);
   }
-
-  const logoutHandler = () => {
-    authCtx.logout();
-    navigate("/", { replace: true });
-  };
-
-  const bookInventoryHandler = () => {
-    navigate("/books", { replace: true });
-  };
 
   const createUserHandler = () => {
     navigate("/register", { replace: true });
