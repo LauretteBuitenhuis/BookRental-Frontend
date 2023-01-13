@@ -11,7 +11,7 @@ import AuthContext from "../store/auth-context";
 function Header() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const name=auth.name;
+  const name = auth.name;
 
   const logoutHandler = () => {
     auth.logout();
@@ -67,7 +67,12 @@ function Header() {
         </button>
       </div>
       <button>
-        <img src={logo} className="logo" onClick={redirectMainHandler} />
+        <img
+          src={logo}
+          alt="logo"
+          className="logo"
+          onClick={redirectMainHandler}
+        />
       </button>
     </div>
   );
