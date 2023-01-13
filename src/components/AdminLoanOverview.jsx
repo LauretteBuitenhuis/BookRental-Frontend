@@ -52,25 +52,25 @@ function AdminLoanOverview() {
       </tr>
     ));
 
-  return (
-    <div className="inventaris-container">
-      <div className="bookoverview-container">
-        <table className="bookoverview-table">
-          <thead>
-            <tr className="red">
-              <th>Titel</th>
-              <th>Kopie id</th>
-              <th>Werknemer</th>
-              <th>
-                <center>Beëindig lening</center>
-              </th>
-            </tr>
-          </thead>
-          <tbody>{listItemsTable}</tbody>
-        </table>
-      </div>
-    </div>
-  );
+    return (
+        <div className="inventaris-container red">
+            <div className="bookoverview-container">
+                <table className="bookoverview-table">
+                    <thead>
+                        <tr className="red">
+                            <th>Titel</th>
+                            <th>Kopie id</th>
+                            <th>Werknemer</th>
+                            <th>
+                                <center>Beëindig lening</center>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>{listItemsTable}</tbody>
+                </table>
+            </div>
+        </div>
+    )
 }
 
 export default AdminLoanOverview;

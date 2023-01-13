@@ -67,6 +67,7 @@ function Employees() {
     setUpdateModus(false);
     setAddModus(false);
   }
+
   const createUserHandler = () => {
     navigate("register", { replace: true });
   };

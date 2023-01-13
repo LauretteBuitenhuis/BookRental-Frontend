@@ -133,47 +133,50 @@ function ReservationOverview() {
         </table>
       </div>
 
-      {chooseCopyModus && (
-        <div className="inventory-container">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            {" "}
-            <div className="inventaris-container">
-              <div className="bookoverview-container">
-                <center>
-                  <table className="bookoverview-table">
-                    <thead>
-                      <tr className="red">
-                        <th>Kopie id</th>
-                        <th>Boek titel</th>
-                        <th>Autheur</th>
-                        <th>
-                          <center>Leen uit</center>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>{listCopies}</tbody>
-                  </table>
-                </center>
-              </div>
-            </div>
-            <center>
-              <button
-                type="submit"
-                className="button"
-                onClick={() => leaveScreen()}
-              >
-                Annuleren
-              </button>
-            </center>
-          </form>
+            {
+                chooseCopyModus && (
+                    <div className="inventory-container red">
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                            }}
+                        >
+                            {" "}
+                            <div className="inventaris-container red">
+                                <div className="bookoverview-container">
+                                    <center>
+                                        <table className="bookoverview-table">
+                                            <thead>
+                                                <tr className="red">
+                                                    <th>Kopie id</th>
+                                                    <th>Boek titel</th>
+                                                    <th>Autheur</th>
+                                                    <th>
+                                                        <center>Leen uit</center>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>{listCopies}</tbody>
+                                        </table>
+                                    </center>
+                                </div>
+                            </div>
+
+                            <center>
+                                <button
+                                    type="submit"
+                                    className="button"
+                                    onClick={() => leaveScreen()}
+                                >
+                                    Annuleren
+                                </button>
+                            </center>
+                        </form>
+                    </div>
+                )
+            }
         </div>
-      )}
-    </div>
-  );
+    )
 }
 
 export default ReservationOverview;

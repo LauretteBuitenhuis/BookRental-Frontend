@@ -146,11 +146,11 @@ export function Inventory() {
 
   useEffect(() => {
     auth.isAdmin ? getAllBooks() : getAllNonReservedByUserBooks();
-  }, []);
+  }, );
 
   return (
     <div>
-      <div className="inventory-container">
+      <div className={auth.isAdmin ? "inventory-container red" : "inventory-container green"}>
         <div className="bookoverview-container">
           <div>
             <h4>BEKIJK INVENTARIS</h4>
@@ -187,7 +187,7 @@ export function Inventory() {
       </div>
 
       {addModus && (
-        <div className="inventory-container">
+        <div className={auth.isAdmin ? "inventory-container red" : "inventory-container green"}>
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -236,7 +236,7 @@ export function Inventory() {
         </div>
       )}
       {deleteModus && (
-        <div className="inventory-container">
+        <div className={auth.isAdmin ? "inventory-container red" : "inventory-container green"}>
           <div className="pop-up">
             <h3>Weet je zeker dat je {title} uit het systeem wil halen?</h3>
             <div>

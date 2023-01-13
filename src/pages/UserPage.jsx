@@ -4,6 +4,7 @@ import UserLoanHistory from "../components/UserLoanHistory";
 import UserPendingReservations from "../components/UserPendingReservations";
 
 function UserPage() {
+
   return (
     <div className="userPage">
       <div className="adminheader-container">
