@@ -5,11 +5,12 @@ import AuthContext from "../store/auth-context";
 import "../styles/employees.css";
 import { TextInput } from "../components/TextInput";
 import { SortedTable } from "../components/SortedTable";
+import { fetchFromApi } from "../store/fetchFromApi";
+import { toast } from "react-toastify";
 
 function Employees() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const authCtx = useContext(AuthContext);
 
   const [users, setUsers] = useState([]);
   const [firstName, setFirstName] = useState("");
@@ -22,9 +23,7 @@ function Employees() {
   const [updatedId, setUpdatedId] = useState();
 
   function getAllUsers() {
-    fetch("http://localhost:8082/user/all")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
+    fetchFromApi(`user/all`).then((data) => setUsers(data));
   }
 
   useEffect(() => {
@@ -41,21 +40,21 @@ function Employees() {
   }
 
   function sendUserUpdate() {
-    console.log("Send update");
     let newUser = {
       id: updatedId,
       firstName,
       lastName,
       email,
     };
-    fetch(`http://localhost:8082/user/${newUser.id}/edit`, {
+
+    fetchFromApi(`user/${newUser.id}/edit`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
       body: JSON.stringify(newUser),
-    });
+    }).then(() => toast.success(`Gebruiker geüpdatet.`));
     setFirstName("");
     setLastName("");
     setEmail("");
@@ -68,18 +67,8 @@ function Employees() {
     setUpdateModus(false);
     setAddModus(false);
   }
-
-  const logoutHandler = () => {
-    authCtx.logout();
-    navigate("/", { replace: true });
-  };
-
-  const bookInventoryHandler = () => {
-    navigate("/books", { replace: true });
-  };
-
   const createUserHandler = () => {
-    navigate("/register", { replace: true });
+    navigate("register", { replace: true });
   };
 
   // TODO - filtering
@@ -94,13 +83,15 @@ function Employees() {
   }
 
   function deleteUser(id) {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/user/${id}/delete`, {
+    fetchFromApi(`user/${id}/delete`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token,
       },
-    }).then(() => getAllUsers());
+    })
+      .then(() => toast.success(`Gebruiker verwijderd.`))
+      .then(() => getAllUsers());
     setFirstName("");
     setDeleteId();
     setDeleteModus(false);
@@ -149,7 +140,6 @@ function Employees() {
               onSubmit={(e) => {
                 e.preventDefault();
                 if (updateModus === false) {
-                  //addUser();
                 } else {
                   sendUserUpdate();
                 }
