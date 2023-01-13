@@ -28,11 +28,11 @@ const Login = () => {
         password: enteredPassword,
       }),
     })
-      .then(() => toast.success(`Welkom, ${authCtx.name}!`))
       .then((data) => {
         authCtx.login(data);
         navigate("/main", { replace: true });
-      });
+      })
+      .then(() => toast.success(`Welkom, ${authCtx.name}!`));
   };
 
   return (
