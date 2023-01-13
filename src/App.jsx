@@ -2,12 +2,13 @@ import "./styles/index.css";
 import { CreateAccount } from "./components/CreateAccount";
 import { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./components/Login";
-import Main from "./components/Main";
+import Login from "./pages/Login";
+import Main from "./pages/Main";
 import Header from "./components/Header";
 import AuthContext from "./store/auth-context";
-import { Inventory } from "./components/Inventory";
-import Employees from "./components/Employees";
+import { Inventory } from "./pages/Inventory";
+import Employees from "./pages/Employees";
+import Footer from "./components/Footer";
 
 function App() {
   const authCtx = useContext(AuthContext);
