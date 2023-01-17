@@ -16,7 +16,7 @@ export function Inventory() {
   const [books, setBooks] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState([]);
   const [isbn, setIsbn] = useState("");
   const [updateModus, setUpdateModus] = useState(false);
   const [updatedId, setUpdatedId] = useState();
@@ -70,7 +70,7 @@ export function Inventory() {
     setTitle("");
     setAuthor("");
     setIsbn("");
-    setTags("");
+    setTags([]);
 
     fetchFromApi(`book/create`, {
       method: "POST",
@@ -229,7 +229,7 @@ export function Inventory() {
                 setIsbn(e.target.value);
               }}
             />
-            <label>Tags:</label>
+            <label>Tags: <i>tag1,tag2,...,tagN</i></label>
             <input
               type="text"
               value={tags}
