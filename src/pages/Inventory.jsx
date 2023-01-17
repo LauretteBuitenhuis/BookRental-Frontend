@@ -146,7 +146,7 @@ export function Inventory() {
 
   useEffect(() => {
     auth.isAdmin ? getAllBooks() : getAllNonReservedByUserBooks();
-  }, );
+  }, []);
 
   return (
     <div>
