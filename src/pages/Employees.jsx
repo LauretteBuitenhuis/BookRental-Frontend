@@ -69,7 +69,7 @@ function Employees() {
   }
 
   const createUserHandler = () => {
-    navigate("register", { replace: true });
+    navigate("../register", { replace: true });
   };
 
   // TODO - filtering
