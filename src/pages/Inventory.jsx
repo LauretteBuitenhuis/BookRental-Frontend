@@ -23,6 +23,7 @@ export function Inventory() {
   const [deleteModus, setDeleteModus] = useState(false);
   const [deleteId, setDeleteId] = useState();
   const [reservation, setReservation] = useState();
+  const [searchTerm, setSearchTerm] = useState('');
 
   function createReservation(book) {
     fetchFromApi(`reservation/create/${book.id}`, {
@@ -145,7 +146,21 @@ export function Inventory() {
   }
 
   // TODO - searching
-  function search() {}
+  function search(e) {
+    console.log('hoi')
+    setSearchTerm(e.target.value);
+    console.log(e.target.value);
+    
+    // const searchedBooks = books.filter(book => {
+    //   if (e.target.value === '') return books
+    //   return book.tags === e.target.value
+    // })
+
+    // setSearchTerm(e.target.value);
+    // console.log(searchedBooks);
+    // console.log(searchTerm);
+
+  }
 
   useEffect(() => {
     auth.isAdmin ? getAllBooks() : getAllNonReservedByUserBooks();
@@ -160,7 +175,7 @@ export function Inventory() {
             <h3>Boeken</h3>
           </div>
         </div>
-        <TextInput name="search" placeholder="Zoek..." onChange={search} />
+          <input type="search" placeholder="Zoek..." value={searchTerm} onChange={search} />
         <div className="table-options">
           {/* 
           TODO - how to check if book is available
