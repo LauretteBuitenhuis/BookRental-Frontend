@@ -113,7 +113,7 @@ export function Inventory() {
     setTitle(book.title);
     setAuthor(book.author);
     setIsbn(book.isbn);
-    setTags(book.tags);
+    setTags(book.tags.map(tag => tag.name));
   }
 
   function sendBookUpdate() {
@@ -139,6 +139,7 @@ export function Inventory() {
     setAuthor("");
     setIsbn("");
     setUpdatedId();
+    setTags([]);
     setUpdateModus(false);
     setAddModus(false);
   }
