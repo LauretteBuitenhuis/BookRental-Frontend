@@ -23,7 +23,7 @@ function Employees() {
   const [updatedId, setUpdatedId] = useState();
 
   function getAllUsers() {
-    fetchFromApi(`user/all`).then((data) => setUsers(data));
+    fetchFromApi(`user/all/inservice`).then((data) => setUsers(data));
   }
 
   useEffect(() => {
@@ -120,11 +120,11 @@ function Employees() {
             data={users}
             columns={[
               {
-                key: "lastName",
+                key: "firstName",
                 sortable: true,
               },
               {
-                key: "firstName",
+                key: "lastName",
                 sortable: true,
               },
               {
