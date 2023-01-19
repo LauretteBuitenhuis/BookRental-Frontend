@@ -37,7 +37,10 @@ export function Inventory() {
       .then(() => toast.success(`Reservering aangevraagd!`))
       .then((reservation) => {
         setReservation(reservation);
-        getAllNonReservedByUserBooks();
+
+        if (!auth.isAdmin) {
+          getAllNonReservedByUserBooks();
+        }
       });
   }
 
@@ -154,7 +157,7 @@ export function Inventory() {
 
   useEffect(() => {
     auth.isAdmin ? getAllBooks() : getAllNonReservedByUserBooks();
-  }, );
+  }, []);
 
   return (
     <div>
