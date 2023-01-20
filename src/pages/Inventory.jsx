@@ -156,7 +156,9 @@ export function Inventory() {
   function search(e) {
     const searchBooks = allBooks.filter(book => {
       if (e.target.value === '') return allBooks
-      return book.title.toLowerCase().includes(e.target.value.toLowerCase())      
+      return (book.author.toLowerCase().includes(e.target.value.toLowerCase()) || 
+      book.title.toLowerCase().includes(e.target.value.toLowerCase())) ||
+      book.isbn.toLowerCase().includes(e.target.value.toLowerCase())  
     })
 
     setSearchTerm(e.target.value);
