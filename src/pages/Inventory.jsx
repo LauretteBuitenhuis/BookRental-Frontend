@@ -12,7 +12,8 @@ import { toast } from "react-toastify";
 export function Inventory() {
   const auth = useContext(AuthContext);
 
-  const [books, setBooks] = useState([]);
+  const [allBooks, setAllBooks] = useState([]);
+  const [searchedBooks, setSearchedBooks] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [tags, setTags] = useState([]);
@@ -45,7 +46,7 @@ export function Inventory() {
   }
 
   function getAllBooks() {
-    fetchFromApi(`book/all`).then((data) => setBooks(data));
+    fetchFromApi(`book/all`).then((data) => setAllBooks(data));
   }
 
   // TODO - fix books reloading at refresh
@@ -57,7 +58,7 @@ export function Inventory() {
         Authorization: auth.token,
       },
     }).then((data) => {
-      setBooks(data);
+      setAllBooks(data);
     });
   }
 
@@ -153,14 +154,13 @@ export function Inventory() {
   }
 
   function search(e) {
-    const searchedBooks = books.filter(book => {
-      if (e.target.value === '') return books
-      return book.title.includes(e.target.value.toLowerCase())      
+    const searchBooks = allBooks.filter(book => {
+      if (e.target.value === '') return allBooks
+      return book.title.toLowerCase().includes(e.target.value.toLowerCase())      
     })
 
     setSearchTerm(e.target.value);
-    console.log(searchedBooks);
-    console.log(searchTerm);
+    setSearchedBooks(searchBooks)
   }
 
   useEffect(() => {
@@ -187,7 +187,7 @@ export function Inventory() {
           showDeleteModal={showDeletePopUp}
           updateBook={updateBook}
           createReservation={createReservation}
-          data={books}
+          data={searchedBooks}
           columns={[
             {
               key: "title",
