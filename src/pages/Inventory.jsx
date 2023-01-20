@@ -15,6 +15,7 @@ export function Inventory() {
   const [books, setBooks] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+  const [tags, setTags] = useState([]);
   const [isbn, setIsbn] = useState("");
   const [updateModus, setUpdateModus] = useState(false);
   const [updatedId, setUpdatedId] = useState();
@@ -65,10 +66,14 @@ export function Inventory() {
       title,
       author,
       isbn,
+      tags,
     };
+
+
     setTitle("");
     setAuthor("");
     setIsbn("");
+    setTags([]);
 
     fetchFromApi(`book/create`, {
       method: "POST",
@@ -111,6 +116,7 @@ export function Inventory() {
     setTitle(book.title);
     setAuthor(book.author);
     setIsbn(book.isbn);
+    setTags(book.tags.map(tag => tag.name));
   }
 
   function sendBookUpdate() {
@@ -119,6 +125,7 @@ export function Inventory() {
       title,
       author,
       isbn,
+      tags,
     };
 
     fetchFromApi(`book/${newBook.id}/edit`, {
@@ -135,6 +142,7 @@ export function Inventory() {
     setAuthor("");
     setIsbn("");
     setUpdatedId();
+    setTags([]);
     setUpdateModus(false);
     setAddModus(false);
   }
@@ -231,6 +239,14 @@ export function Inventory() {
               value={isbn}
               onChange={(e) => {
                 setIsbn(e.target.value);
+              }}
+            />
+            <label>Tags: <i>tag1,tag2,...,tagN</i></label>
+            <input
+              type="text"
+              value={tags}
+              onChange={(e) => {
+                setTags(e.target.value.split(","));
               }}
             />
             <button type="submit" className="button">
