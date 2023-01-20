@@ -68,25 +68,6 @@ input[type="search"] {
   padding: 10px 10px;
   background-color: #a1a1aa;
 }
-/* 
-.bookoverview-searchbar ::placeholder {
-  font-size: 18px;
-}
-
-.bookoverview-searchbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 900px;
-  margin-left: 100px;
-  font-family: euclid-semibold;
-} 
-
-.bookoverview-searchbar input[type="text"], input[type="search"] {
-  padding: 10px;
-  width: 200px;
-  margin: 0;
-} */
 
 .bookoverview-table {
   border-collapse: collapse;

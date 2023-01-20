@@ -4,7 +4,6 @@ import "../styles/inventory.css";
 import AuthContext from "../store/auth-context";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { TextInput } from "../components/TextInput";
 import { SortedTable } from "../components/SortedTable";
 import { AdminButton } from "../components/AdminButton";
 import { fetchFromApi } from "../store/fetchFromApi";
@@ -145,21 +144,15 @@ export function Inventory() {
     setAddModus(false);
   }
 
-  // TODO - searching
   function search(e) {
-    console.log('hoi')
+    const searchedBooks = books.filter(book => {
+      if (e.target.value === '') return books
+      return book.title.includes(e.target.value.toLowerCase())      
+    })
+
     setSearchTerm(e.target.value);
-    console.log(e.target.value);
-    
-    // const searchedBooks = books.filter(book => {
-    //   if (e.target.value === '') return books
-    //   return book.tags === e.target.value
-    // })
-
-    // setSearchTerm(e.target.value);
-    // console.log(searchedBooks);
-    // console.log(searchTerm);
-
+    console.log(searchedBooks);
+    console.log(searchTerm);
   }
 
   useEffect(() => {
