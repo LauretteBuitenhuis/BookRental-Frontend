@@ -46,7 +46,19 @@ export function Inventory() {
   }
 
   function getAllBooks() {
-    fetchFromApi(`book/all`).then((data) => setAllBooks(data));
+    fetchFromApi(`book/all`).then((data) => {
+      
+      // create array of max 3 tags from the tags object
+      Object.values(data).map(item => {
+        return item.tags.map(key => key.name).length<=3 ?
+          item.labels = item.tags.map(key => key.name).join(' , ') 
+              : item.labels = item.tags.map(key => key.name).slice(0,3).join(' , ')
+      })
+
+      setAllBooks(data);
+      setSearchedBooks(data);
+    });
+    
   }
 
   // TODO - fix books reloading at refresh
@@ -155,13 +167,6 @@ export function Inventory() {
 
   function search(e) {
     const searchBooks = allBooks.filter(book => {
-      // book.labels = book.tags.map(key => key.name).join(' , ')
-      
-      // create array from tags object
-      book.tags.map(key => key.name).length<=3 ? 
-        book.labels = book.tags.map(key => key.name).join(' , ') 
-          : book.labels = book.tags.map(key => key.name).slice(0,3).join(' , ')
-      
 
       if (e.target.value === '') return allBooks
       
