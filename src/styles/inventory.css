@@ -1,3 +1,8 @@
+input[type="search"] {
+  outline: none;
+  width: 400px;
+}
+
 .bookoverview-container {
   display: flex;
 }
@@ -62,16 +67,6 @@
 .bookoverview-navbar button:hover {
   padding: 10px 10px;
   background-color: #a1a1aa;
-}
-
-.bookoverview-searchbar ::placeholder {
-  font-size: 18px;
-}
-
-.bookoverview-searchbar input[type="text"] {
-  padding: 10px;
-  width: 200px;
-  margin: 0;
 }
 
 .bookoverview-table {

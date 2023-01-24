@@ -56,7 +56,7 @@
   padding: 25px;
 }
 
-.inventory-container input[type="text"] {
+.inventory-container input[type="text"], input[type="search"] {
   border: none;
   border-bottom: 2px solid rgb(117, 117, 117);
   background-color: transparent;

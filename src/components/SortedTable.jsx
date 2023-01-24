@@ -21,6 +21,7 @@ function SortedTableHeader(props) {
 }
 
 export function SortedTable(props) {
+
   const {
     showDeleteModal,
     updateBook,
@@ -28,6 +29,7 @@ export function SortedTable(props) {
     data,
     columns = [],
   } = props;
+
 
   const [sortKey, setSortKey] = useState(columns[0].key);
   const [isSortAscending, setIsSortAscending] = useState(true);

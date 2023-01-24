@@ -4,7 +4,6 @@ import "../styles/inventory.css";
 import AuthContext from "../store/auth-context";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { TextInput } from "../components/TextInput";
 import { SortedTable } from "../components/SortedTable";
 import { AdminButton } from "../components/AdminButton";
 import { fetchFromApi } from "../store/fetchFromApi";
@@ -13,7 +12,8 @@ import { toast } from "react-toastify";
 export function Inventory() {
   const auth = useContext(AuthContext);
 
-  const [books, setBooks] = useState([]);
+  const [allBooks, setAllBooks] = useState([]);
+  const [searchedBooks, setSearchedBooks] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [tags, setTags] = useState([]);
@@ -24,6 +24,7 @@ export function Inventory() {
   const [deleteModus, setDeleteModus] = useState(false);
   const [deleteId, setDeleteId] = useState();
   const [reservation, setReservation] = useState();
+  const [searchTerm, setSearchTerm] = useState('');
 
   function createReservation(book) {
     fetchFromApi(`reservation/create/${book.id}`, {
@@ -45,7 +46,19 @@ export function Inventory() {
   }
 
   function getAllBooks() {
-    fetchFromApi(`book/all`).then((data) => setBooks(data));
+    fetchFromApi(`book/all`).then((data) => {
+      
+      // create array of max 3 tags from the tags object
+      Object.values(data).map(item => {
+        return item.tags.map(key => key.name).length<=3 ?
+          item.labels = item.tags.map(key => key.name).join(' , ') 
+              : item.labels = item.tags.map(key => key.name).slice(0,3).join(' , ')
+      })
+
+      setAllBooks(data);
+      setSearchedBooks(data);
+    });
+    
   }
 
   // TODO - fix books reloading at refresh
@@ -57,7 +70,7 @@ export function Inventory() {
         Authorization: auth.token,
       },
     }).then((data) => {
-      setBooks(data);
+      setAllBooks(data);
     });
   }
 
@@ -152,8 +165,21 @@ export function Inventory() {
     setAddModus(false);
   }
 
-  // TODO - searching
-  function search() {}
+  function search(e) {
+    const searchBooks = allBooks.filter(book => {
+
+      if (e.target.value === '') return allBooks
+      
+      if(book.tags.filter(tag => {return tag.name.includes(e.target.value.toLowerCase())}).length>0) return book.tags
+
+      return (book.author.toLowerCase().includes(e.target.value.toLowerCase()) || 
+            book.title.toLowerCase().includes(e.target.value.toLowerCase()) ||
+            book.isbn.toLowerCase().includes(e.target.value.toLowerCase())) 
+    })
+
+    setSearchTerm(e.target.value);
+    setSearchedBooks(searchBooks);
+  }
 
   useEffect(() => {
     auth.isAdmin ? getAllBooks() : getAllNonReservedByUserBooks();
@@ -168,7 +194,7 @@ export function Inventory() {
             <h3>Boeken</h3>
           </div>
         </div>
-        <TextInput name="search" placeholder="Zoek..." onChange={search} />
+          <input type="search" placeholder="Zoek..." value={searchTerm} onChange={search} />
         <div className="table-options">
           {/* 
           TODO - how to check if book is available
@@ -179,7 +205,7 @@ export function Inventory() {
           showDeleteModal={showDeletePopUp}
           updateBook={updateBook}
           createReservation={createReservation}
-          data={books}
+          data={searchedBooks}
           columns={[
             {
               key: "title",
@@ -193,6 +219,10 @@ export function Inventory() {
               key: "isbn",
               sortable: false,
             },
+            {
+              key: "labels",
+              sortable: false,
+            }
           ]}
         />
       </div>
