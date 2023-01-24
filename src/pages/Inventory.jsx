@@ -155,18 +155,25 @@ export function Inventory() {
 
   function search(e) {
     const searchBooks = allBooks.filter(book => {
+      // book.labels = book.tags.map(key => key.name).join(' , ')
+      
+      // create array from tags object
+      book.tags.map(key => key.name).length<=3 ? 
+        book.labels = book.tags.map(key => key.name).join(' , ') 
+          : book.labels = book.tags.map(key => key.name).slice(0,3).join(' , ')
+      
+
       if (e.target.value === '') return allBooks
       
       if(book.tags.filter(tag => {return tag.name.includes(e.target.value.toLowerCase())}).length>0) return book.tags
-      
+
       return (book.author.toLowerCase().includes(e.target.value.toLowerCase()) || 
             book.title.toLowerCase().includes(e.target.value.toLowerCase()) ||
-            book.isbn.toLowerCase().includes(e.target.value.toLowerCase()))
-
+            book.isbn.toLowerCase().includes(e.target.value.toLowerCase())) 
     })
 
     setSearchTerm(e.target.value);
-    setSearchedBooks(searchBooks)
+    setSearchedBooks(searchBooks);
   }
 
   useEffect(() => {
@@ -207,6 +214,10 @@ export function Inventory() {
               key: "isbn",
               sortable: false,
             },
+            {
+              key: "labels",
+              sortable: false,
+            }
           ]}
         />
       </div>
