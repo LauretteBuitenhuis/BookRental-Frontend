@@ -156,9 +156,13 @@ export function Inventory() {
   function search(e) {
     const searchBooks = allBooks.filter(book => {
       if (e.target.value === '') return allBooks
+      
+      if(book.tags.filter(tag => {return tag.name.includes(e.target.value.toLowerCase())}).length>0) return book.tags
+      
       return (book.author.toLowerCase().includes(e.target.value.toLowerCase()) || 
-      book.title.toLowerCase().includes(e.target.value.toLowerCase())) ||
-      book.isbn.toLowerCase().includes(e.target.value.toLowerCase())  
+            book.title.toLowerCase().includes(e.target.value.toLowerCase()) ||
+            book.isbn.toLowerCase().includes(e.target.value.toLowerCase()))
+
     })
 
     setSearchTerm(e.target.value);
